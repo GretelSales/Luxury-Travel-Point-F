@@ -1,0 +1,96 @@
+{
+  "brand": "Luxury Travel Point",
+  "nav.destinations": "Destinos",
+  "nav.contact": "Contacto",
+  "nav.services": "Otros servicios",
+  "hero.title": "Viajes de lujo. Momentos inolvidables.",
+  "hero.subtitle": "Encuentra destinos exclusivos, experiencias hechas a medida y las mejores fechas para viajar.",
+  "search.destination.label": "Destino",
+  "search.destination.placeholder": "elige tu pais de destino",
+  "search.noresults": "No hay ningún resultado con “{{query}}”",
+  "search.date.label": "Fecha (mes y año)",
+  "search.date.hint": "Selecciona el mes y año de salida",
+  "cta.button": "Ver viajes",
+  "lang.es": "Español",
+  "lang.en": "Inglés",
+  "lang.title": "Idioma",
+  "month": "Mes",
+  "year": "Año",
+  "selected": "Seleccionado:",
+  "nothing": "Nada",
+"auth": {
+    "loginTitle": "Iniciar sesión",
+    "registerTitle": "Crear cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "name": "Nombre completo",
+    "phone": "Número de teléfono",
+    "login": "Ingresar",
+    "createAccount": "Crear cuenta",
+    "noAccount": "¿No tienes cuenta?",
+    "haveAccount": "¿Ya tienes cuenta?",
+    "errorRequired": "Completa todos los campos.",
+    "errorInvalid": "Credenciales incorrectas.",
+    "errorExists": "El usuario ya existe."
+  },
+"ourCircuitsTitle": "Nuestros Circuitos",
+
+  "whyChooseUsTitle": "¿Por qué elegirnos?",
+  "whyGuaranteedDepartures": "Salidas Garantizadas",
+  "whyGuaranteedDeparturesDesc": "Puede planificar sus vacaciones con confianza. Todas las fechas están garantizadas.",
+  "whyBestPrices": "Mejores Precios",
+  "whyBestPricesDesc": "Nuestros precios están garantizados. Sin suplementos inesperados.",
+  "whyYearAvailability": "Disponibilidad Anual",
+  "whyYearAvailabilityDesc": "Planifique su viaje con flexibilidad. Catálogo disponible todo el año.",
+  "whySafety": "Seguridad Garantizada",
+  "whySafetyDesc": "Más de 25 años de experiencia ofreciendo tranquilidad en cada viaje.",
+
+  "reviewsTitle": "Otra razón para elegirnos: qué opinan nuestros clientes",
+  "review1Name": "María López",
+  "review1Text": "El viaje superó mis expectativas. Excelente organización y atención.",
+  "review2Name": "Carlos Ramírez",
+  "review2Text": "Las rutas fueron increíbles y el soporte durante todo el proceso fue impecable.",
+  "review3Name": "Sofía Martínez",
+  "review3Text": "Una experiencia inolvidable. Totalmente recomendable.",
+  "starsLabel": "Estrellas",
+  
+  "monthNames": {
+    "01": "Enero",
+    "02": "Febrero",
+    "03": "Marzo",
+    "04": "Abril",
+    "05": "Mayo",
+    "06": "Junio",
+    "07": "Julio",
+    "08": "Agosto",
+    "09": "Septiembre",
+    "10": "Octubre",
+    "11": "Noviembre",
+    "12": "Diciembre"
+  },
+  "countries": {
+    "Spain": "España",
+    "Italy": "Italia",
+    "France": "Francia",
+    "Greece": "Grecia",
+    "Portugal": "Portugal",
+    "Germany": "Alemania",
+    "Netherlands": "Países Bajos",
+    "Switzerland": "Suiza",
+    "United Kingdom": "Reino Unido",
+    "Ireland": "Irlanda",
+    "Croatia": "Croacia",
+    "Norway": "Noruega",
+    "Sweden": "Suecia",
+    "Iceland": "Islandia",
+    "Austria": "Austria",
+    "Hungary": "Hungría"
+  }
+  ,
+  "circuits": {
+  "title": "Circuitos disponibles"
+}
+
+
+}
+

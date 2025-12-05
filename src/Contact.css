@@ -1,0 +1,118 @@
+/* Página completa */
+.contact-container {
+  width: 100vw;
+  min-height: 100vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #c2d5f0 0%, #93abce 40%, #d4ce94 100%);
+  color: #ffffff;
+  padding-top: 5rem;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+/* Contenido interno */
+.contact-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .contact-inner {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+/* Sección izquierda (info) */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .contact-info {
+    width: 50%;
+  }
+}
+
+/* Título principal */
+.contact-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.5px;
+}
+
+/* Tarjetas */
+.contact-card {
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.05)
+  );
+  border: 1px solid rgba(231, 196, 37, 0.25);
+  backdrop-filter: blur(8px);
+  padding: 1.2rem 1.4rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+  transition: all 0.25s ease-in-out;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  border-color: #e7c429;
+}
+
+/* Subtítulos */
+.contact-subtitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.contact-subtitle i {
+  color: #e7c429;
+  font-size: 1.3rem;
+}
+
+/* Texto */
+.contact-text {
+  font-size: 0.98rem;
+  color: #f7f6f6;
+  line-height: 1.45;
+}
+
+/* Mapa */
+.contact-map {
+  min-width: 450px;
+  min-height: 350px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid #e7c429;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.3);
+  background: #00000015;
+}
+
+@media (min-width: 1024px) {
+  .contact-map {
+    flex: 1;
+  }
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

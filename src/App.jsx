@@ -1,35 +1,448 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useMemo, useRef, useEffect } from "react";
+import "./App.css";
+import axios from "axios";
+import Contact from "./Contact.jsx";
+import AuthModal from "./AuthModal";
+import MonthYearPicker from "./MonthYearPicker";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faGlobe,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
+import CircuitsGrid from "./CircuitsGrid";
+import { Link, Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [showAuth, setShowAuth] = useState(false);
+  const { t, i18n } = useTranslation();
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [fecha, setFecha] = useState({ month: "", year: "" });
+  const [query, setQuery] = useState("");
+  const [openList, setOpenList] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [circuits, setCircuits] = useState([]);
+  const [filteredCircuits, setFilteredCircuits] = useState([]);
+  const [monthYear, setMonthYear] = useState("");
+  const [langOpen, setLangOpen] = useState(false);
+  const inputRef = useRef(null);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  // 🔥 Nueva lista REAL desde backend
+  const [backendCountries, setBackendCountries] = useState([]);
+
+  // 🟦 Obtener países del backend una sola vez
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const res = await axios.get(
+          "http://localhost:4000/api/cities/countries"
+        );
+
+        // Si existe traducción, úsala; sino, muestra tal cual
+        const translated = res.data.map((c) => {
+          const translatedKey = t(`countries.${c}`);
+          return translatedKey !== `countries.${c}` ? translatedKey : c;
+        });
+
+        setBackendCountries(translated);
+      } catch (err) {
+        console.error("Error fetching backend countries:", err);
+      }
+    };
+
+    fetchCountries();
+  }, [t]); // <- Se vuelve a traducir si cambia idioma
+
+  useEffect(() => {
+    const token = localStorage.getItem("ltp_token");
+    if (token) {
+      // pedir endpoint /api/auth/me
+      fetch("http://localhost:4000/api/auth/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((j) => {
+          if (j.user) setUser(j.user);
+          else localStorage.removeItem("ltp_token");
+        })
+        .catch(() => localStorage.removeItem("ltp_token"));
+    }
+  }, []);
+
+  const handleIconClick = () => {
+    if (user) setDropdownOpen((s) => !s);
+    else setAuthOpen(true);
+  };
+
+  const handleAuthSuccess = (userData, token) => {
+    setUser(userData);
+    setDropdownOpen(false);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("ltp_token");
+    setUser(null);
+    setDropdownOpen(false);
+  };
+
+  const handleFilterByCountry = () => {
+    if (!selectedCountry) {
+      setFilteredCircuits(circuits);
+      return;
+    }
+    const handleFilterByDate = () => {
+      if (!selectedDate) {
+        setFilteredCircuits(circuits);
+        return;
+      }
+
+      const filtered = circuits.filter((c) =>
+        c.schedules.some((s) => s.start_date === selectedDate)
+      );
+
+      setFilteredCircuits(filtered);
+    };
+
+    const filtered = circuits.filter((c) =>
+      c.countries.includes(selectedCountry)
+    );
+
+    setFilteredCircuits(filtered);
+  };
+
+  const applyFilters = () => {
+    let tmp = [...circuits];
+
+    // =====================
+    //  FILTRO POR PAÍS
+    // =====================
+    if (selectedCountry) {
+      tmp = tmp.filter((c) => (c.countries || []).includes(selectedCountry));
+    }
+
+    // =====================
+    //  FILTRO POR FECHA (mes y año)
+    // =====================
+    if (fecha.month && fecha.year) {
+      tmp = tmp.filter((c) =>
+        c.schedules?.some((s) => {
+          if (!s.start_date) return false;
+
+          const d = new Date(s.start_date);
+          const m = String(d.getMonth() + 1).padStart(2, "0"); // "03"
+          const y = d.getFullYear().toString(); // "2025"
+
+          return m === fecha.month && y === fecha.year;
+        })
+      );
+    }
+
+    setFilteredCircuits(tmp);
+  };
+
+  // 🔎 Filtrado dinámico del backend
+  const filtered = useMemo(() => {
+    if (!query) return backendCountries;
+    const q = query.toLowerCase();
+    return backendCountries.filter((c) => c.toLowerCase().includes(q));
+  }, [query, backendCountries]);
+
+  const handleFilter = async () => {
+    if (!selectedCountry) return;
+
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_API_URL
+        }/api/circuits/by-country/${selectedCountry}`
+      );
+      const filteredCircuits = await res.json();
+
+      setCircuits(filteredCircuits);
+    } catch (error) {
+      console.error("Error fetching circuits by country", error);
+    }
+  };
+
+  // Cerrar lista al hacer clic fuera
+  useEffect(() => {
+    const onDoc = (e) => {
+      if (inputRef.current && !inputRef.current.contains(e.target)) {
+        setOpenList(false);
+      }
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  const onSelectCountry = (c) => {
+    setSelectedCountry(c);
+    setQuery(c);
+    setOpenList(false);
+  };
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+
+  useEffect(() => {
+    const loadCircuits = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/api/circuits/full");
+
+        console.log("🚀 Backend circuits response:", res.data);
+
+        setCircuits(res.data); // Lista completa
+        setFilteredCircuits(res.data); // Mostrar todo al inicio
+      } catch (error) {
+        console.error("Error loading circuits:", error);
+      }
+    };
+
+    loadCircuits();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="ltp-app">
+      {/* Topbar */}
+      <header className="ltp-topbar">
+        <div className="ltp-left">
+          <div className="ltp-logo">
+            <span className="ltp-logo-mark">✦</span>
+            <span className="ltp-brand">{t("brand")}</span>
+          </div>
+        </div>
 
-export default App
+        <nav className="ltp-right">
+          <Link to="/contact" className="ltp-link">
+            {t("nav.contact")}
+          </Link>
+          <a href="#otros" className="ltp-link">
+            {t("nav.services")}
+          </a>
+
+          {/* Selector de idioma */}
+          <div className="ltp-icon" title={t("lang.title")}>
+            <FontAwesomeIcon
+              icon={faGlobe}
+              onClick={() => setLangOpen(!langOpen)}
+              style={{ cursor: "pointer" }}
+            />
+
+            {langOpen && (
+              <div className="user-dropdown">
+                <div className="user-dropdown-item">
+                  <button
+                    onClick={() => {
+                      changeLanguage("es");
+                      setLangOpen(false);
+                    }}
+                    className={i18n.language === "es" ? "active" : ""}
+                  >
+                    {t("lang.es")}
+                  </button>
+                </div>
+                <div className="user-dropdown-item">
+                  <button
+                    onClick={() => {
+                      changeLanguage("en");
+                      setLangOpen(false);
+                    }}
+                    className={i18n.language === "en" ? "active" : ""}
+                  >
+                    {t("lang.en")}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="user-icon" onClick={handleIconClick}>
+            <div className="ltp-user" style={{ cursor: "pointer" }}>
+              <FontAwesomeIcon icon={faUser} />
+            </div>
+          </div>
+
+          {dropdownOpen && user && (
+            <div className="user-dropdown">
+              <div className="user-dropdown-header">
+                {user.full_name || user.email}
+              </div>
+
+              <div
+                className="user-dropdown-item"
+                onClick={() => {
+                  setAuthOpen(true);
+                  setDropdownOpen(false);
+                }}
+              >
+                {t("auth.loginTitle")}
+              </div>
+
+              <div className="user-dropdown-item" onClick={logout}>
+                {t("auth.createAccount")}
+              </div>
+            </div>
+          )}
+
+          <AuthModal
+            visible={authOpen}
+            onClose={() => setAuthOpen(false)}
+            onAuthSuccess={handleAuthSuccess}
+          />
+        </nav>
+      </header>
+
+      {/* Hero */}
+      <main className="ltp-hero">
+        <div className="ltp-hero-overlay">
+          <h1 className="ltp-hero-title">{t("hero.title")}</h1>
+
+          <p className="ltp-hero-sub">{t("hero.subtitle")}</p>
+
+          <div className="ltp-search-panel" ref={inputRef}>
+            <div className="ltp-search-left">
+              <label className="ltp-label">
+                {t("search.destination.label")}
+              </label>
+
+              <div className="ltp-autocomplete">
+                <div className="ltp-input-with-icon">
+                  <FontAwesomeIcon
+                    icon={faMagnifyingGlass}
+                    className="search-icon"
+                  />
+                  <input
+                    type="text"
+                    placeholder={t("search.destination.placeholder")}
+                    value={query}
+                    onFocus={() => setOpenList(true)}
+                    onChange={(e) => {
+                      setQuery(e.target.value);
+                      setSelectedCountry("");
+                      setOpenList(true);
+                    }}
+                    aria-label={t("search.destination.label")}
+                  />
+                </div>
+
+                {openList && (
+                  <div className="ltp-list">
+                    {filtered.length > 0 ? (
+                      filtered.map((c) => (
+                        <div
+                          key={c}
+                          className="ltp-list-item"
+                          onClick={() => onSelectCountry(c)}
+                        >
+                          {c}
+                        </div>
+                      ))
+                    ) : (
+                      <div className="ltp-no-results">
+                        {t("search.noresults", { query })}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="ltp-search-right">
+              <label className="ltp-label">{t("search.date.label")}</label>
+              <MonthYearPicker
+                value={fecha}
+                onChange={(value) => setFecha(value)}
+              />
+
+              <p className="fecha-seleccionada">
+                {t("selected")}{" "}
+                {fecha.month && fecha.year
+                  ? `${t(`monthNames.${fecha.month}`)} ${fecha.year}`
+                  : t("nothing")}
+              </p>
+              <small className="ltp-hint">{t("search.date.hint")}</small>
+            </div>
+          </div>
+
+          <div className="ltp-cta">
+            <button className="ltp-btn" onClick={applyFilters}>
+              {t("cta.button")}
+            </button>
+          </div>
+        </div>
+      </main>
+
+      {/* CIRCUITOS */}
+      <div className="ltp-circuits-section">
+        <h2 className="section-title">{t("ourCircuitsTitle")}</h2>
+
+        <div className="circuits-scroll-container">
+          <CircuitsGrid circuits={filteredCircuits} />
+        </div>
+
+        <div className="ltp-why-us">
+          <h2 className="section-title">{t("whyChooseUsTitle")}</h2>
+
+          <div className="why-us-cards">
+            <div className="why-us-card">
+              <h3>{t("whyGuaranteedDepartures")}</h3>
+              <p>{t("whyGuaranteedDeparturesDesc")}</p>
+            </div>
+
+            <div className="why-us-card">
+              <h3>{t("whyBestPrices")}</h3>
+              <p>{t("whyBestPricesDesc")}</p>
+            </div>
+
+            <div className="why-us-card">
+              <h3>{t("whyYearAvailability")}</h3>
+              <p>{t("whyYearAvailabilityDesc")}</p>
+            </div>
+
+            <div className="why-us-card">
+              <h3>{t("whySafety")}</h3>
+              <p>{t("whySafetyDesc")}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Opiniones */}
+        <section className="ltp-testimonials">
+          <h2 className="testimonials-title">{t("reviewsTitle")}</h2>
+
+          <div className="testimonials-wrapper">
+            <div className="testimonial-card">
+              <p className="testimonial-text">{t("review1Text")}</p>
+              <div className="testimonial-author">
+                <span className="name">{t("review1Name")}</span>
+                <span className="stars">★★★★★</span>
+              </div>
+            </div>
+
+            <div className="testimonial-card">
+              <p className="testimonial-text">{t("review2Text")}</p>
+              <div className="testimonial-author">
+                <span className="name">{t("review2Name")}</span>
+                <span className="stars">★★★★★</span>
+              </div>
+            </div>
+
+            <div className="testimonial-card">
+              <p className="testimonial-text">{t("review3Text")}</p>
+              <div className="testimonial-author">
+                <span className="name">{t("review3Name")}</span>
+                <span className="stars">★★★★★</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
+    </div>
+  );
+}

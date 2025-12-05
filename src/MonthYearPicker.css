@@ -1,0 +1,33 @@
+.month-year-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.month-year-select {
+  padding: 10px 14px;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 0px solid #98c1eb; /* azul oscuro */
+  background-color: #ffffff;
+  opacity: 0.9;
+  color: #0b3866;
+  outline: none;
+  width: 150px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.month-year-select:hover {
+  border-color: #d4a017; /* dorado */
+  box-shadow: 0 0 8px rgba(212, 160, 23, 0.3);
+}
+.month-year-select:focus {
+  border-color: #d4a017;
+  box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.25);
+}
+
+.month-year-select option {
+  color: #777;
+  background-color: #ffffff;
+}
