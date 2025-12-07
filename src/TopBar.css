@@ -1,0 +1,230 @@
+
+/* Topbar: compacta en móvil */
+.ltp-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  
+   background: rgba(255, 255, 255, 0.15); /* muy transparente */
+  backdrop-filter: blur(10px);          /* efecto vidrio */
+  -webkit-backdrop-filter: blur(10px);  /* soporte Safari */
+  border-bottom: 1px solid rgba(11,37,69,0.06);
+  z-index: 100;
+}
+
+.mobile-dropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  z-index: 1000;
+}
+
+.mobile-dropdown a {
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #000b1b;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.mobile-dropdown a:hover {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+}
+
+.ltp-home-icon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--blue-dark);
+  cursor: pointer;
+  margin-right: 8px; /* separa un poco del logo */
+  transition: 0.25s;
+  margin-right: 10px;
+}
+
+.ltp-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Alineamos todo a la izquierda */
+  justify-content: flex-start;
+}
+
+.ltp-home-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+}
+
+/* Logo reducido */
+.ltp-logo {
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.ltp-logo-mark {
+  width:40px;
+  height:40px;
+  display:inline-grid;
+  place-items:center;
+  border-radius:10px;
+  background: linear-gradient(135deg,var(--gold), #ffd966);
+  color: var(--blue-dark);
+  font-weight:700;
+  font-size:1.05rem;
+}
+.ltp-brand {
+  display: inline-block; /* o flex, según tu layout */
+  font-weight: 700;
+  color: var(--blue-dark);
+  font-size: 1rem;
+}
+@media (max-width: 768px) {
+  .ltp-brand {
+    display: none;
+  }
+
+}
+
+.ltp-link:hover {
+  background: rgba(11,37,69,0.05);
+}
+
+/* Right nav compacta: solo iconos en móvil */
+.ltp-right {
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+/* Iconos y usuario */
+.ltp-icon, .ltp-user {
+  width:40px;
+  height:40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background: transparent;
+  color: var(--blue-dark);
+  cursor: pointer;
+}
+
+.language-selector {
+  position: relative;
+}
+
+.ltp-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+}
+.ltp-user:hover {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+}
+
+.language-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: transparent; 
+  box-shadow: none;
+  padding: 0;
+  z-index: 1000;
+}
+
+.language-menu button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(6px);
+  color: var(--blue-dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: .3s;
+}
+.language-menu button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* === DESPLEGABLE USUARIO === */
+
+.user-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  padding: 10px;
+  z-index: 1000;
+
+  /* 🔥 EFECTO VIDRIO FLOTANTE */
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* === HEADER (nombre/email) === */
+.user-dropdown-header {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px;
+  color: #000b1b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+/* === OPCIONES === */
+.user-dropdown-item {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  color: #000b1b;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* 🔥 HOVER LUXURY EFECTO */
+.user-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+}
+.mobile-menu {
+  display: none; /* por defecto oculto */
+}
+
+@media (max-width: 768px) {
+  .mobile-menu {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+}
