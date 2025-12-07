@@ -1,4 +1,4 @@
-/* Página completa */
+/* Página completa: mobile-first */
 .contact-container {
   width: 100vw;
   min-height: 100vh;
@@ -12,19 +12,12 @@
 /* Contenido interno */
 .contact-inner {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* base mobile: columna */
   gap: 2rem;
   padding: 2rem;
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-}
-
-@media (min-width: 1024px) {
-  .contact-inner {
-    flex-direction: row;
-    align-items: stretch;
-  }
 }
 
 /* Sección izquierda (info) */
@@ -35,15 +28,9 @@
   width: 100%;
 }
 
-@media (min-width: 1024px) {
-  .contact-info {
-    width: 50%;
-  }
-}
-
 /* Título principal */
 .contact-title {
-  font-size: 2rem;
+  font-size: 1.8rem; /* un poco más pequeño en móviles */
   font-weight: 700;
   color: #ffffff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
@@ -73,7 +60,7 @@
 
 /* Subtítulos */
 .contact-subtitle {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #ffffff;
   margin-bottom: 0.4rem;
@@ -84,20 +71,20 @@
 
 .contact-subtitle i {
   color: #e7c429;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 /* Texto */
 .contact-text {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: #f7f6f6;
   line-height: 1.45;
 }
 
 /* Mapa */
 .contact-map {
-  min-width: 450px;
-  min-height: 350px;
+  width: 100%;       /* base mobile: full width */
+  min-height: 300px; /* más pequeño para móviles */
   border-radius: 16px;
   overflow: hidden;
   border: 2px solid #e7c429;
@@ -105,14 +92,26 @@
   background: #00000015;
 }
 
-@media (min-width: 1024px) {
-  .contact-map {
-    flex: 1;
-  }
-}
-
 .contact-map iframe {
   width: 100%;
   height: 100%;
   border: none;
+}
+
+/* === Media Queries: pantallas más grandes === */
+@media (min-width: 768px) {
+  .contact-title { font-size: 2rem; }
+  .contact-subtitle { font-size: 1.15rem; }
+  .contact-subtitle i { font-size: 1.3rem; }
+  .contact-text { font-size: 0.98rem; }
+  .contact-map { min-height: 350px; }
+}
+
+@media (min-width: 1024px) {
+  .contact-inner {
+    flex-direction: row;  /* cambia a fila */
+    align-items: stretch;
+  }
+  .contact-info { width: 50%; }
+  .contact-map { flex: 1; min-width: 450px; min-height: 350px; }
 }

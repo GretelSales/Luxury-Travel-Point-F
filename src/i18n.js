@@ -5,7 +5,7 @@ import es from "./locales/es/translation.json";
 import en from "./locales/en/translation.json";
 
 i18n.use(initReactI18next).init({
-  lng: "es",
+  lng: "en",
   fallbackLng: "es",
   interpolation: { escapeValue: false },
   resources: {

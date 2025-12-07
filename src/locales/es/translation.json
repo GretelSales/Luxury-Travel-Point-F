@@ -6,7 +6,7 @@
   "hero.title": "Viajes de lujo. Momentos inolvidables.",
   "hero.subtitle": "Encuentra destinos exclusivos, experiencias hechas a medida y las mejores fechas para viajar.",
   "search.destination.label": "Destino",
-  "search.destination.placeholder": "  Elige tu pais de destino",
+  "search.destination.placeholder": "Elige tu pais de destino",
   "search.noresults": "No hay ningún resultado con “{{query}}”",
   "search.date.label": "Fecha (mes y año)",
   "search.date.hint": "Selecciona el mes y año de salida",
@@ -18,6 +18,19 @@
   "year": "Año",
   "selected": "Seleccionado:",
   "nothing": "Nada",
+  "contact": {
+    "title": "Contáctanos",
+    "phoneTitle": "Teléfono",
+    "phone": "+1 (239) 265-7294",
+    "emailTitle": "Correo electrónico",
+    "email": "luxurytravelpoint@gmail.com",
+    "addressTitle": "Dirección para retiro",
+    "address": "12450 SW 190 St, Miami, Florida 33177, USA",
+    "hoursTitle": "Horarios disponibles",
+    "weekdays": "Lunes a Viernes: 9:00 AM – 5:00 PM",
+    "saturday": "Sábado: 10:00 AM – 2:00 PM",
+    "mapTitle": "Ubicación ProPlants"
+  },
 "auth": {
     "loginTitle": "Iniciar sesión",
     "registerTitle": "Crear cuenta",

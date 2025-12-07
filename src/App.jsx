@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
-import Contact from "./Contact.jsx";
 import AuthModal from "./AuthModal";
 import MonthYearPicker from "./MonthYearPicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +8,9 @@ import {
   faUser,
   faGlobe,
   faMagnifyingGlass,
+  faCalendarCheck,
+  faTags,
+  faShieldHalved,
 } from "@fortawesome/free-solid-svg-icons";
 import CircuitsGrid from "./CircuitsGrid";
 import { Link, Routes, Route } from "react-router-dom";
@@ -185,10 +187,6 @@ export default function App() {
     setOpenList(false);
   };
 
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-  };
-
   useEffect(() => {
     const loadCircuits = async () => {
       try {
@@ -208,95 +206,6 @@ export default function App() {
 
   return (
     <div className="ltp-app">
-      {/* Topbar */}
-      <header className="ltp-topbar">
-        <div className="ltp-left">
-          <div className="ltp-logo">
-            <span className="ltp-logo-mark">✦</span>
-            <span className="ltp-brand">{t("brand")}</span>
-          </div>
-        </div>
-
-        <nav className="ltp-right">
-          <Link to="/contact" className="ltp-link">
-            {t("nav.contact")}
-          </Link>
-          <a href="#otros" className="ltp-link">
-            {t("nav.services")}
-          </a>
-
-          {/* Selector de idioma */}
-          <div className="ltp-icon" title={t("lang.title")}>
-            <FontAwesomeIcon
-              icon={faGlobe}
-              onClick={() => setLangOpen(!langOpen)}
-              style={{ cursor: "pointer" }}
-            />
-
-            {langOpen && (
-              <div className="user-dropdown">
-                <div className="user-dropdown-item">
-                  <button
-                    onClick={() => {
-                      changeLanguage("es");
-                      setLangOpen(false);
-                    }}
-                    className={i18n.language === "es" ? "active" : ""}
-                  >
-                    {t("lang.es")}
-                  </button>
-                </div>
-                <div className="user-dropdown-item">
-                  <button
-                    onClick={() => {
-                      changeLanguage("en");
-                      setLangOpen(false);
-                    }}
-                    className={i18n.language === "en" ? "active" : ""}
-                  >
-                    {t("lang.en")}
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <div className="user-icon" onClick={handleIconClick}>
-            <div className="ltp-user" style={{ cursor: "pointer" }}>
-              <FontAwesomeIcon icon={faUser} />
-            </div>
-          </div>
-
-          {dropdownOpen && user && (
-            <div className="user-dropdown">
-              <div className="user-dropdown-header">
-                {user.full_name || user.email}
-              </div>
-
-              <div
-                className="user-dropdown-item"
-                onClick={() => {
-                  setAuthOpen(true);
-                  setDropdownOpen(false);
-                }}
-              >
-                {t("auth.loginTitle")}
-              </div>
-
-              <div className="user-dropdown-item" onClick={logout}>
-                {t("auth.createAccount")}
-              </div>
-            </div>
-          )}
-
-          <AuthModal
-            visible={authOpen}
-            onClose={() => setAuthOpen(false)}
-            onAuthSuccess={handleAuthSuccess}
-          />
-        </nav>
-      </header>
-
       {/* Hero */}
       <main className="ltp-hero">
         <div className="ltp-hero-overlay">
@@ -370,7 +279,15 @@ export default function App() {
           </div>
 
           <div className="ltp-cta">
-            <button className="ltp-btn" onClick={applyFilters}>
+            <button
+              className="ltp-btn"
+              onClick={() => {
+                applyFilters(); // <-- lo que ya tenías
+                document.getElementById("circuitos-section")?.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
+            >
               {t("cta.button")}
             </button>
           </div>
@@ -378,7 +295,7 @@ export default function App() {
       </main>
 
       {/* CIRCUITOS */}
-      <div className="ltp-circuits-section">
+      <div className="ltp-circuits-section" id="circuitos-section">
         <h2 className="section-title">{t("ourCircuitsTitle")}</h2>
 
         <div className="circuits-scroll-container">
@@ -390,21 +307,25 @@ export default function App() {
 
           <div className="why-us-cards">
             <div className="why-us-card">
+              <FontAwesomeIcon icon={faCalendarCheck} className="why-icon" />
               <h3>{t("whyGuaranteedDepartures")}</h3>
               <p>{t("whyGuaranteedDeparturesDesc")}</p>
             </div>
 
             <div className="why-us-card">
+              <FontAwesomeIcon icon={faTags} className="why-icon" />
               <h3>{t("whyBestPrices")}</h3>
               <p>{t("whyBestPricesDesc")}</p>
             </div>
 
             <div className="why-us-card">
+              <FontAwesomeIcon icon={faGlobe} className="why-icon" />
               <h3>{t("whyYearAvailability")}</h3>
               <p>{t("whyYearAvailabilityDesc")}</p>
             </div>
 
             <div className="why-us-card">
+              <FontAwesomeIcon icon={faShieldHalved} className="why-icon" />
               <h3>{t("whySafety")}</h3>
               <p>{t("whySafetyDesc")}</p>
             </div>
