@@ -104,7 +104,7 @@ html, body {
 }
 
 /* Dropdowns - full width on mobile */
-.user-dropdown, .ltp-lang-menu {
+.user-dropdown{
   position: absolute;
   right: 8px;
   top: 64px;
@@ -116,6 +116,55 @@ html, body {
   z-index: 1000;
   -webkit-tap-highlight-color: transparent;
 }
+/* === LANG MENU FLOATING CHIPS === */
+.ltp-lang-menu {
+  position: absolute;
+  right: 0;
+  top: 46px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 6px;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none;
+  z-index: 1000;
+}
+
+/* Chips (botones burbuja elegante) */
+.ltp-lang-menu button {
+  padding: 10px 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.25); /* glass flotante */
+  color: #fff;
+  border: 1.4px solid rgba(212,175,55,0.35); /* dorado suave */
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.15px;
+  cursor: pointer;
+  min-width: 110px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px) saturate(1.2);
+  transition: background .25s ease, transform .15s ease, border .2s ease;
+  box-shadow: 0 4px 16px rgba(11,37,69,0.22);
+}
+
+/* Hover gold shimmer */
+.ltp-lang-menu button:hover {
+  background: rgba(212,175,55,0.22);
+  border-color: rgba(212,175,55,0.6);
+  transform: translateY(-2px);
+}
+
+/* Botón activo más fuerte */
+.ltp-lang-menu button.active {
+  background: rgba(212,175,55,0.32);
+  border-color: rgba(212,175,55,0.9);
+  color: #fff;
+}
+
+
+
 
 /* Hero - adaptativo */
 .ltp-hero {
