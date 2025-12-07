@@ -6,7 +6,7 @@
   "hero.title": "Luxury trips. Unforgettable moments.",
   "hero.subtitle": "Find exclusive destinations, tailor-made experiences and the best travel dates.",
   "search.destination.label": "Destination",
-  "search.destination.placeholder": "choose your destination country",
+  "search.destination.placeholder": "  Choose your destination country",
   "search.noresults": "No results for “{{query}}”",
   "search.date.label": "Date (month and year)",
   "search.date.hint": "Select the departure month and year",

@@ -6,7 +6,7 @@
   "hero.title": "Viajes de lujo. Momentos inolvidables.",
   "hero.subtitle": "Encuentra destinos exclusivos, experiencias hechas a medida y las mejores fechas para viajar.",
   "search.destination.label": "Destino",
-  "search.destination.placeholder": "elige tu pais de destino",
+  "search.destination.placeholder": "  Elige tu pais de destino",
   "search.noresults": "No hay ningún resultado con “{{query}}”",
   "search.date.label": "Fecha (mes y año)",
   "search.date.hint": "Selecciona el mes y año de salida",

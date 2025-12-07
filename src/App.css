@@ -103,66 +103,84 @@ html, body {
   cursor: pointer;
 }
 
-/* Dropdowns - full width on mobile */
-.user-dropdown{
-  position: absolute;
-  right: 8px;
-  top: 64px;
-  min-width: 180px;
-  background: var(--white);
-  border-radius: 12px;
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-  z-index: 1000;
-  -webkit-tap-highlight-color: transparent;
+.language-selector {
+  position: relative;
 }
-/* === LANG MENU FLOATING CHIPS === */
-.ltp-lang-menu {
+
+.language-menu {
   position: absolute;
+  top: 40px;
   right: 0;
-  top: 46px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 6px;
-  background: transparent !important;
-  box-shadow: none !important;
-  backdrop-filter: none;
+  gap: 6px;
+  background: transparent;  /* ⚠️ Sin fondo */
+  box-shadow: none;
+  padding: 0;
   z-index: 1000;
 }
 
-/* Chips (botones burbuja elegante) */
-.ltp-lang-menu button {
-  padding: 10px 18px;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.25); /* glass flotante */
-  color: #fff;
-  border: 1.4px solid rgba(212,175,55,0.35); /* dorado suave */
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.15px;
+.language-menu button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.5);
+  backdrop-filter: blur(6px);
+  color: transparent;
+  font-weight: 500;
   cursor: pointer;
-  min-width: 110px;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
-  backdrop-filter: blur(6px) saturate(1.2);
-  transition: background .25s ease, transform .15s ease, border .2s ease;
-  box-shadow: 0 4px 16px rgba(11,37,69,0.22);
+  transition: .3s;
+}
+.language-menu button:hover {
+  background: rgba(255,255,255,0.3);
 }
 
-/* Hover gold shimmer */
-.ltp-lang-menu button:hover {
-  background: rgba(212,175,55,0.22);
-  border-color: rgba(212,175,55,0.6);
-  transform: translateY(-2px);
+/* === DESPLEGABLE USUARIO === */
+
+.user-dropdown {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 14px;
+  padding: 10px;
+  z-index: 1000;
+
+  /* 🔥 EFECTO VIDRIO FLOTANTE */
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
-/* Botón activo más fuerte */
-.ltp-lang-menu button.active {
-  background: rgba(212,175,55,0.32);
-  border-color: rgba(212,175,55,0.9);
-  color: #fff;
+/* === HEADER (nombre/email) === */
+.user-dropdown-header {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px;
+  color: #000b1b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  margin-bottom: 8px;
+  text-align: center;
 }
 
+/* === OPCIONES === */
+.user-dropdown-item {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  color: #000b1b;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* 🔥 HOVER LUXURY EFECTO */
+.user-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(14px);
+}
 
 
 
@@ -327,13 +345,28 @@ html, body {
 
 /* Circuits scroll - change to vertical single column on mobile */
 .circuits-scroll-container {
-  width: 100%;
-  max-width: 960px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
   margin: 0 auto;
+  padding: 0 12px;
+  overflow-y: auto;
+  max-height: 550px;
+  scrollbar-width: thin;
+  scrollbar-color: #b4c2d1 transparent;
+  
+}
+/* Scrollbar personalizado */
+.circuits-scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+.circuits-scroll-container::-webkit-scrollbar-thumb {
+  background-color: #b4c2d1;
+  border-radius: 10px;
+}
+.circuits-scroll-container::-webkit-scrollbar-track {
   background: transparent;
-  padding: 8px 0;
-  overflow: visible;
-  box-shadow: none;
 }
 
 /* Why-us cards stacked */
@@ -431,7 +464,6 @@ img { max-width: 100%; height: auto; display:block; }
 
 /* Fix iPhone safari forced dark inputs/buttons */
 input, button, select, textarea {
-  -webkit-appearance: none !important;
   background-color: #fff !important;
   color: var(--blue-dark) !important;
   border: 1px solid rgba(11,37,69,0.18) !important;
