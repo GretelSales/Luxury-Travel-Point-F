@@ -1,5 +1,5 @@
 import Topbar from "./TopBar";
-import "./app.css";
+import "./App.css";
 
 export default function Layout({ children, user, logout, handleAuthSuccess }) {
   return (

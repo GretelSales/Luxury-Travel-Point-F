@@ -4,6 +4,7 @@ import App from "./App";
 import Contact from "./Contact";
 import AuthModal from "./AuthModal";
 import Layout from "./Layout";
+import TopBar from "./TopBar";
 
 export default function AppRoutes() {
   const [user, setUser] = useState(null);
