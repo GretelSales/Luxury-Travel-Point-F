@@ -41,7 +41,7 @@ export default function App() {
     const fetchCountries = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:4000/api/cities/countries"
+          "https://luxury-travel-point-frontend.onrender.com/api/cities/countries"
         );
 
         // Si existe traducción, úsala; sino, muestra tal cual
@@ -63,7 +63,7 @@ export default function App() {
     const token = localStorage.getItem("ltp_token");
     if (token) {
       // pedir endpoint /api/auth/me
-      fetch("http://localhost:4000/api/auth/me", {
+      fetch("https://luxury-travel-point-frontend.onrender.com/api/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
@@ -190,7 +190,9 @@ export default function App() {
   useEffect(() => {
     const loadCircuits = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/circuits/full");
+        const res = await axios.get(
+          "https://luxury-travel-point-frontend.onrender.com/api/circuits/full"
+        );
 
         console.log("🚀 Backend circuits response:", res.data);
 
