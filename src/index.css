@@ -83,6 +83,7 @@ body {
   overflow-x: hidden;
   width: 100%;
   background: transparent;
+  background-color: #f6f8fb;
 }
 html {
   margin: 0;
@@ -90,4 +91,5 @@ html {
   overflow-x: hidden;
   width: 100%;
   background: transparent;
+  background-color: #f6f8fb;
 }

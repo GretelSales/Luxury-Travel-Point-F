@@ -25,10 +25,13 @@ export default function AuthModal({
     setLoading(true);
     setError("");
     try {
-      const res = await axios.post("http://localhost:4000/api/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        "https://luxury-travel-point-frontend.onrender.com/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
       const { token, user } = res.data;
       localStorage.setItem("ltp_token", token);
       onAuthSuccess(user, token);
@@ -44,12 +47,15 @@ export default function AuthModal({
     setLoading(true);
     setError("");
     try {
-      const res = await axios.post("http://localhost:4000/api/auth/register", {
-        full_name: fullName,
-        email,
-        phone,
-        password,
-      });
+      const res = await axios.post(
+        "https://luxury-travel-point-frontend.onrender.com/api/auth/register",
+        {
+          full_name: fullName,
+          email,
+          phone,
+          password,
+        }
+      );
       const { token, user } = res.data;
       localStorage.setItem("ltp_token", token);
       onAuthSuccess(user, token);
