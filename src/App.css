@@ -170,14 +170,13 @@ html, body {
 
 /* Hero - adaptativo */
 .ltp-hero {
-  width: 100%;
-  min-height: calc(100vh - 64px);
-  padding-top: 64px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background-color: #eef4fb;
-  background-image: none; /* por defecto sin imagen en móvil para performance */
+  background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative; /* para overlay */
+  z-index: 0;
 }
 
 /* Si quieres imagen en mobile, descomenta la siguiente regla y ajusta la URL */
