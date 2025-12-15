@@ -44,9 +44,9 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         <Link to="/contact" className="ltp-link">
           {t("nav.contact")}
         </Link>
-        <a href="#otros" className="ltp-link">
+        <Link to="/other-services" className="ltp-link">
           {t("nav.services")}
-        </a>
+        </Link>
 
         <div className="ltp-icon" title={t("lang.title")}>
           <FontAwesomeIcon
@@ -122,9 +122,12 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
               <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                 {t("nav.contact")}
               </Link>
-              <a href="#otros" onClick={() => setMobileMenuOpen(false)}>
+              <Link
+                to="/other-services"
+                onClick={() => setMobileMenuOpen(false)}
+              >
                 {t("nav.services")}
-              </a>
+              </Link>
             </div>
           )}
         </div>

@@ -1,0 +1,210 @@
+:root {
+  --ink: #0b2545;
+  --ink-soft: rgba(11,37,69,0.65);
+  --gold: #d4af37;
+  --gold-soft: rgba(212,175,55,0.18);
+
+  --glass-bg: rgba(255,255,255,0.55);
+  --glass-border: rgba(255,255,255,0.35);
+  --shadow-soft: 0 20px 45px rgba(2,6,23,0.12);
+}
+.services-page {
+  padding: 120px 20px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+}
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.services-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.services-subtitle {
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 8px;
+}
+
+.lang-switch button {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(11,37,69,0.15);
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.lang-switch button.active {
+  background: var(--gold);
+  color: #0b2545;
+}
+
+.services-grid {
+  align-items: start;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 48px 32px;
+  margin-top: 48px;
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 22px;
+  border-radius: 18px;
+  --card-bg: rgba(255,255,255,0.7);
+  background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+  transition: transform .35s ease, box-shadow .35s ease;
+  min-height: 220px;
+}
+
+.service-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.service-card-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.service-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 35px 70px rgba(2,6,23,0.18);
+}
+
+.service-card.open:hover {
+  transform: none;
+}
+
+.service-card:nth-child(4n+1) {
+  transform: translateY(-18px);
+  --card-bg: linear-gradient(
+    135deg,
+    rgba(11,37,69,0.08),
+    rgba(255,255,255,0.85)
+  );
+}
+.service-card:nth-child(4n+2) {
+  transform: translateY(10px) scale(1.02);
+  --card-bg: linear-gradient(
+    135deg,
+    rgba(212,175,55,0.12),
+    rgba(255,255,255,0.85)
+  );
+}
+.service-card:nth-child(4n+3) {
+  transform: translateY(-6px);
+  --card-bg: linear-gradient(
+    135deg,
+    rgba(11,37,69,0.05),
+    rgba(212,175,55,0.08)
+  );
+}
+.service-card:nth-child(4n) {
+  --card-bg: rgba(255,255,255,0.75);
+}
+
+.service-card::before {
+  content: "✦";
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 1.2rem;
+  color: rgba(212,175,55,0.35);
+}
+
+.service-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--gold), #f5e29f);
+  color: #3a2e00;
+}
+
+.service-summary {
+  margin: 14px 0;
+  color: rgba(11,37,69,0.75);
+  font-size: 0.95rem;
+}
+
+.service-details {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  animation: fadeSlide .4s cubic-bezier(.22,.61,.36,1);
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-details ul {
+  padding-left: 18px;
+}
+
+.service-details li {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  padding-left: 14px;
+  position: relative;
+}
+
+.service-details li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.service-toggle {
+  margin-top: auto;
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  color: var(--gold);
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .services-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+}

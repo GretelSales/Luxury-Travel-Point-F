@@ -5,6 +5,7 @@ import Contact from "./Contact";
 import AuthModal from "./AuthModal";
 import Layout from "./Layout";
 import TopBar from "./TopBar";
+import OtrosServicios from "./OtrosServicios";
 
 export default function AppRoutes() {
   const [user, setUser] = useState(null);
@@ -18,6 +19,7 @@ export default function AppRoutes() {
         <Route path="/" element={<App />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/authModal" element={<AuthModal />} />
+        <Route path="/other-services" element={<OtrosServicios />} />
       </Routes>
     </Layout>
   );

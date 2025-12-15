@@ -25,7 +25,7 @@
     "emailTitle": "Correo electrónico",
     "email": "luxurytravelpoint@gmail.com",
     "addressTitle": "Dirección para retiro",
-    "address": "12450 SW 190 St, Miami, Florida 33177, USA",
+    "address": "3418 51st ST W, Lehigh Acres, FL, USA",
     "hoursTitle": "Horarios disponibles",
     "weekdays": "Lunes a Viernes: 9:00 AM – 5:00 PM",
     "saturday": "Sábado: 10:00 AM – 2:00 PM",
@@ -102,8 +102,96 @@
   ,
   "circuits": {
   "title": "Circuitos disponibles"
+},
+
+"services": {
+"title": "Otros servicios",
+"subtitle": "Soluciones integrales diseñadas para acompañarte en cada etapa",
+"more": "Ver más",
+"less": "Ver menos",
+"blocks": [
+{
+"title": "Envíos a Cuba",
+"badge": "24/7",
+"summary": "Servicios aéreos y marítimos a todas las provincias",
+"details": [
+"Aéreo – Todo – Habana, Artemisa y Mayabeque: $3.99 / lb",
+"Aéreo – Aseo, comida, medicina y estaciones de energía – Todas las provincias (excepto Isla de la Juventud): $3.99 / lb",
+"Aéreo – Miscelánea y duraderos – Todas las provincias (excepto Isla de la Juventud): $4.49 / lb",
+"Marítimo – Miscelánea y duraderos: $2.49 / lb",
+"Marítimo – Alimentos, aseo, medicina y estaciones de energía (+100 lbs): $1.99 / lb",
+"Recogida gratuita en su domicilio (jueves y viernes)",
+"Servicio express 24–72 hrs desde $4.99"
+]
+},
+{
+"title": "Renta de autos en Cuba",
+"summary": "Vehículos disponibles según sus necesidades",
+"details": [
+"Autos mecánicos",
+"Autos automáticos"
+]
+},
+{
+"title": "Remesas a Cuba",
+"badge": "Rápido",
+"summary": "Envíos seguros y rápidos a todo el país",
+"details": [
+"Entrega en municipios cabecera en 24 hrs",
+"Resto del país en 48–72 hrs",
+"Monedas disponibles: USD efectivo, MLC, CUP efectivo y CUP transferencia",
+"Comisión del 10%"
+]
+},
+{
+"title": "Recargas",
+"summary": "Servicios financieros desde el exterior",
+"details": [
+"Recarga de tarjetas Clásicas",
+"Recarga de tarjetas Bandec"
+]
+},
+{
+"title": "Renovación de pasaporte cubano",
+"badge": "Desde casa",
+"summary": "Gestión completa sin salir de su hogar",
+"details": [
+"Pasaporte para adultos: $250",
+"Pasaporte para niños: $210"
+]
+},
+{
+"title": "Servicios migratorios y legales",
+"summary": "Acompañamiento profesional y personalizado",
+"details": [
+"Preparación de documentos de inmigración",
+"Residencia y reclamación familiar",
+"Permisos de trabajo",
+"Traducción y notarización de documentos"
+]
+},
+{
+"title": "Servicios empresariales y financieros",
+"summary": "Soluciones para individuos y empresas",
+"details": [
+"Preparación de impuestos (Taxes)",
+"Creación de compañías",
+"Obtención de EIN",
+"Registro DOT / MC"
+]
+},
+{
+"title": "Viajes y turismo",
+"summary": "Experiencias diseñadas a su medida",
+"details": [
+"Viajes en grupo o privados alrededor del mundo",
+"Reunificación familiar en Punta Cana",
+"Tickets aéreos a cualquier destino",
+"Hoteles en Cuba y en el resto del mundo",
+"Renta de autos en Cuba"
+]
 }
-
-
+]
+}
 }
 
