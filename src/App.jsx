@@ -32,6 +32,7 @@ export default function App() {
   const [authOpen, setAuthOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
 
   // 🔥 Nueva lista REAL desde backend
   const [backendCountries, setBackendCountries] = useState([]);
@@ -115,6 +116,18 @@ export default function App() {
 
     setFilteredCircuits(filtered);
   };
+
+  const resetFilters = () => {
+    setSelectedCountry("");
+    setQuery("");
+    setFecha({ month: "", year: "" });
+    setOpenList(false);
+
+    // volver a mostrar todos los circuitos
+    setFilteredCircuits(circuits);
+    setResetKey((k) => k + 1);
+  };
+  const hasActiveFilters = selectedCountry || fecha.month || fecha.year;
 
   const applyFilters = () => {
     let tmp = [...circuits];
@@ -266,6 +279,7 @@ export default function App() {
             <div className="ltp-search-right">
               <label className="ltp-label">{t("search.date.label")}</label>
               <MonthYearPicker
+                key={resetKey}
                 value={fecha}
                 onChange={(value) => setFecha(value)}
               />
@@ -292,6 +306,11 @@ export default function App() {
             >
               {t("cta.button")}
             </button>
+            {hasActiveFilters && (
+              <button className="ltp-clear-filters" onClick={resetFilters}>
+                {t("filters.clear")}
+              </button>
+            )}
           </div>
         </div>
       </main>

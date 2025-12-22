@@ -21,7 +21,15 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
   const [authOpen, setAuthOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const handleIconClick = () => setDropdownOpen(!dropdownOpen);
+  const closeAllMenus = () => {
+    setLangOpen(false);
+    setDropdownOpen(false);
+    setMobileMenuOpen(false);
+  };
+  const handleIconClick = () => {
+    closeAllMenus();
+    setDropdownOpen((prev) => !prev);
+  };
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -41,7 +49,13 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         </Link>
       </div>
       <nav className="ltp-right">
-        <Link to="/contact" className="ltp-link">
+        <Link
+          className="ltp-link"
+          to="/contact"
+          onClick={() => {
+            closeAllMenus();
+          }}
+        >
           {t("nav.contact")}
         </Link>
         <Link to="/other-services" className="ltp-link">
@@ -51,7 +65,10 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         <div className="ltp-icon" title={t("lang.title")}>
           <FontAwesomeIcon
             icon={faGlobe}
-            onClick={() => setLangOpen(!langOpen)}
+            onClick={() => {
+              closeAllMenus();
+              setLangOpen((prev) => !prev);
+            }}
             style={{ cursor: "pointer" }}
           />
           {langOpen && (
@@ -97,6 +114,7 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
               <div
                 className="user-dropdown-item"
                 onClick={() => {
+                  closeAllMenus();
                   setAuthOpen(true);
                   setDropdownOpen(false);
                 }}
@@ -113,7 +131,10 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         )}
         <div
           className="mobile-menu"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          onClick={() => {
+            closeAllMenus();
+            setMobileMenuOpen((prev) => !prev);
+          }}
         >
           <FontAwesomeIcon icon={faBars} size="lg" />
 

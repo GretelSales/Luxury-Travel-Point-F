@@ -18,6 +18,9 @@
   "year": "Año",
   "selected": "Seleccionado:",
   "nothing": "Nada",
+  "filters": {
+  "clear": "Limpiar filtros"
+},
   "contact": {
     "title": "Contáctanos",
     "phoneTitle": "Teléfono",

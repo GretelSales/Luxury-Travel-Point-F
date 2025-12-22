@@ -18,6 +18,9 @@
   "nothing": "Nothing",
   "month": "Month",
   "year": "Year",
+  "filters": {
+  "clear": "Clear filters"
+},
 "contact": {
     "title": "Contact Us",
     "phoneTitle": "Phone",
