@@ -86,6 +86,7 @@
 .ltp-logo-mark {
   width: 70px; /* aumentar tamaño del contenedor */
   height: 70px;
+  background-image:url('../public/images/paisajeContact.png');
   display: inline-grid;
   place-items: center;
   border-radius: 10px;

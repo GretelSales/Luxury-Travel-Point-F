@@ -61,7 +61,7 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         <div className="ltp-logo">
           <img
             className="ltp-logo-mark"
-            src="../public/images/iconoAvionDorado.png"
+            src="/images/iconoAvionDorado.png"
             alt="Airplane Logo"
           />
           <span className="ltp-brand">{t("brand")}</span>

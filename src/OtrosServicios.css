@@ -17,7 +17,7 @@
   position: relative;
   z-index: 1;
   font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
-  background-image: url("../public/images/deskOtherServices.png");
+  background-image: url("/images/deskOtherServices.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
