@@ -84,15 +84,18 @@
   align-items:center;
 }
 .ltp-logo-mark {
-  width:40px;
-  height:40px;
-  display:inline-grid;
-  place-items:center;
-  border-radius:10px;
-  background: linear-gradient(135deg,var(--gold), #ffd966);
-  color: var(--blue-dark);
-  font-weight:700;
-  font-size:1.05rem;
+  width: 70px; /* aumentar tamaño del contenedor */
+  height: 70px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 10px;
+  background: transparent; /* fondo transparente */
+  font-size: 0; /* ocultamos cualquier texto interno, solo usamos imagen */
+}
+.ltp-logo-mark img {
+  width: 50px; /* tamaño del icono dentro del contenedor */
+  height: 50px;
+  object-fit: contain;
 }
 .ltp-brand {
   display: inline-block; /* o flex, según tu layout */
@@ -230,3 +233,4 @@
     position: relative;
   }
 }
+

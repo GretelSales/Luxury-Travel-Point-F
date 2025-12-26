@@ -8,7 +8,7 @@ import {
   faBars,
   faHouse,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Contact from "./Contact.jsx";
 import AuthModal from "./AuthModal";
 import "./TopBar.css";
@@ -20,7 +20,8 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [authOpen, setAuthOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+  const topbarRef = useRef(null);
+  const [darkMode, setDarkMode] = useState(false);
   const closeAllMenus = () => {
     setLangOpen(false);
     setDropdownOpen(false);
@@ -34,11 +35,35 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang);
   };
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (topbarRef.current && !topbarRef.current.contains(e.target)) {
+        closeAllMenus();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setDarkMode(true);
+  }, []);
+
   return (
     <header className="ltp-topbar">
       <div className="ltp-left">
         <div className="ltp-logo">
-          <span className="ltp-logo-mark">✦</span>
+          <img
+            className="ltp-logo-mark"
+            src="../public/images/iconoAvionDorado.png"
+            alt="Airplane Logo"
+          />
           <span className="ltp-brand">{t("brand")}</span>
         </div>
 
@@ -48,7 +73,7 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
           </div>
         </Link>
       </div>
-      <nav className="ltp-right">
+      <nav className="ltp-right" ref={topbarRef}>
         <Link
           className="ltp-link"
           to="/contact"
@@ -106,7 +131,7 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         </div>
 
         {dropdownOpen && (
-          <div className="user-dropdown">
+          <div className={`user-dropdown ${darkMode ? "dark-dropdown" : ""}`}>
             <div className="user-dropdown-header">
               {user ? user.full_name || user.email : t("auth.guest")}
             </div>

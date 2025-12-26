@@ -28,7 +28,7 @@ export default function App() {
   const [filteredCircuits, setFilteredCircuits] = useState([]);
   const [monthYear, setMonthYear] = useState("");
   const [langOpen, setLangOpen] = useState(false);
-  const inputRef = useRef(null);
+  const uiRef = useRef(null);
   const [authOpen, setAuthOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -37,6 +37,11 @@ export default function App() {
   // 🔥 Nueva lista REAL desde backend
   const [backendCountries, setBackendCountries] = useState([]);
 
+  const closeAllMenus = () => {
+    setOpenList(false);
+    setLangOpen(false);
+    setDropdownOpen(false);
+  };
   // 🟦 Obtener países del backend una sola vez
   useEffect(() => {
     const fetchCountries = async () => {
@@ -185,13 +190,19 @@ export default function App() {
 
   // Cerrar lista al hacer clic fuera
   useEffect(() => {
-    const onDoc = (e) => {
-      if (inputRef.current && !inputRef.current.contains(e.target)) {
-        setOpenList(false);
+    const handleClickOutside = (e) => {
+      if (uiRef.current && !uiRef.current.contains(e.target)) {
+        closeAllMenus();
       }
     };
-    document.addEventListener("mousedown", onDoc);
-    return () => document.removeEventListener("mousedown", onDoc);
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
   }, []);
 
   const onSelectCountry = (c) => {
@@ -228,7 +239,7 @@ export default function App() {
 
           <p className="ltp-hero-sub">{t("hero.subtitle")}</p>
 
-          <div className="ltp-search-panel" ref={inputRef}>
+          <div className="ltp-search-panel" ref={uiRef}>
             <div className="ltp-search-left">
               <label className="ltp-label">
                 {t("search.destination.label")}
@@ -316,7 +327,10 @@ export default function App() {
       </main>
 
       {/* CIRCUITOS */}
-      <div className="ltp-circuits-section" id="circuitos-section">
+      <div
+        className="ltp-circuits-section ltp-section ltp-section-narrow"
+        id="circuitos-section"
+      >
         <h2 className="section-title">{t("ourCircuitsTitle")}</h2>
 
         <div className="circuits-scroll-container">
@@ -354,7 +368,7 @@ export default function App() {
         </div>
 
         {/* Opiniones */}
-        <section className="ltp-testimonials">
+        <section className="ltp-testimonials ltp-section ltp-section-narrow">
           <h2 className="testimonials-title">{t("reviewsTitle")}</h2>
 
           <div className="testimonials-wrapper">

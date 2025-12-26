@@ -331,6 +331,35 @@ html, body {
   margin-top:6px;
 }
 
+.ltp-section {
+  padding: 60px 20px;
+}
+
+.ltp-section-narrow {
+  max-width: 60vw;      
+  margin: 0 auto;       
+}
+
+/* Para pantallas grandes, evita que se vuelva exagerado */
+@media (min-width: 1400px) {
+  .ltp-section-narrow {
+    max-width: 860px;
+  }
+}
+
+/* En móviles usamos casi todo el ancho */
+@media (max-width: 768px) {
+  .ltp-section-narrow {
+    max-width: 100%;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.ltp-section:nth-child(even) {
+  background: #fafafa;
+}
+
 /* CTA */
 .ltp-cta {
   margin-top:12px;
@@ -403,29 +432,27 @@ html, body {
 }
 
 .why-us-card {
-  background: rgba(255, 255, 255, 0.9); 
-  border: 1px solid #e5e7eb; 
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
-  backdrop-filter: blur(6px);
+  background-color: rgba(248, 248, 248, 0.95); /* gris muy claro, no blanco puro */
+  border-radius: 16px;
+  padding: 2rem;
   text-align: center;
-  transition: 0.3s ease;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18), 0 6px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease-in-out;
 }
 .why-us-card h3 {
-  font-size: clamp(1.05rem, 3.6vw, 1.25rem);
-  margin-bottom: 10px;
-  color: var(--blue-dark);
-  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: #333; /* tono oscuro sin ser negro puro */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 .why-us-card p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: rgba(11,37,69,0.8);
+  color: #555; /* gris medio para buen contraste */
+  line-height: 1.5;
 }
+
 .why-us-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 26px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0,0,0,0.15);
 }
 .why-icon {
   font-size: 32px;
@@ -441,14 +468,32 @@ html, body {
   padding: 0;
 }
 .testimonial-card {
-  padding: 16px;
-  background-color: white;
-  border-radius: 12px;
-  box-shadow: var(--soft-shadow);
+  background-color: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+  padding: 1.8rem;
+  margin: 0 1rem;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16), 0 5px 10px rgba(0,0,0,0.1);
+  transition: all 0.3s ease-in-out;
 }
-.testimonial-text { font-size: 0.95rem; }
-.testimonial-author .name { font-weight: 600; font-size: 0.95rem; }
-.testimonial-author .stars { color: var(--gold); font-size: 1rem; }
+.testimonial-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.24), 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.testimonial-text {
+  color: #333; 
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.testimonial-author .name {
+  font-weight: 600;
+  color: #222;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+}
+.testimonial-author .stars {
+  color: #f1c40f;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
 
 /* Small helpers */
 img { max-width: 100%; height: auto; display:block; }

@@ -1,12 +1,24 @@
-/* Página completa: mobile-first */
 .contact-container {
   width: 100vw;
   min-height: 100vh;
   overflow-y: auto;
-  background: linear-gradient(180deg, #c2d5f0 0%, #93abce 40%, #d4ce94 100%);
+  /* Imagen de fondo */
+  background-image: url('../public/images/paisajeContact.png');
+  background-size: cover;       /* Ajusta la imagen al contenedor */
+  background-position: center;  /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita repetición */
   color: #ffffff;
   padding-top: 5rem;
   font-family: "Helvetica Neue", sans-serif;
+  position: relative;
+}
+.contact-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 14, 36, 0.137); /* capa semitransparente */
+  backdrop-filter: blur(6px);           /* efecto borroso */
+  z-index: 0;
 }
 
 /* Contenido interno */
@@ -19,6 +31,8 @@
   min-height: 300px;
   max-width: 1400px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* Sección izquierda (info) */
