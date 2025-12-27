@@ -12,11 +12,11 @@ export default function CircuitsGrid({ circuits }) {
 
     const uniq = [...new Set(names)];
     const firstThree = uniq.slice(0, 3);
-    const navigate = useNavigate();
+
     if (uniq.length > 3) return `${firstThree.join(", ")} y más`;
     return firstThree.join(", ");
   };
-
+  const navigate = useNavigate();
   const fmt = (d) => {
     if (!d) return "—";
     const date = new Date(d);
