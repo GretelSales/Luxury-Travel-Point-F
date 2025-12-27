@@ -1,0 +1,95 @@
+.circuit-detail-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #111;
+  background-color: #fff;
+  line-height: 1.5;
+}
+
+.back-btn {
+  background-color: transparent;
+  border: none;
+  color: #003366;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.circuit-header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #003366;
+}
+
+.circuit-base-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.circuit-images {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  margin: 16px 0;
+  scroll-snap-type: x mandatory;
+}
+
+.circuit-images img {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  scroll-snap-align: start;
+}
+
+.circuit-days,
+.circuit-includes {
+  margin: 24px 0;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.circuit-days h2,
+.circuit-includes h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 12px;
+}
+
+.circuit-days ul,
+.circuit-includes ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.circuit-days li,
+.circuit-includes li {
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.circuit-days li p {
+  font-size: 0.85rem;
+  color: #444;
+  margin-top: 4px;
+}
+
+.circuit-loading,
+.circuit-error {
+  text-align: center;
+  margin: 50px 0;
+  font-size: 1.2rem;
+  color: #003366;
+}

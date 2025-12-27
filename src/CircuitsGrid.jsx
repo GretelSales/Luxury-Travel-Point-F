@@ -1,5 +1,6 @@
 import React from "react";
 import "./CircuitsGrid.css";
+import { useNavigate } from "react-router-dom";
 
 export default function CircuitsGrid({ circuits }) {
   // Helper: build cities summary (unique ordered names) and cut to 3
@@ -11,7 +12,7 @@ export default function CircuitsGrid({ circuits }) {
 
     const uniq = [...new Set(names)];
     const firstThree = uniq.slice(0, 3);
-
+    const navigate = useNavigate();
     if (uniq.length > 3) return `${firstThree.join(", ")} y más`;
     return firstThree.join(", ");
   };
@@ -71,7 +72,12 @@ export default function CircuitsGrid({ circuits }) {
                     </div>
 
                     <div className="meta-right">
-                      <button className="btn-cta">Ver detalles</button>
+                      <button
+                        className="btn-cta"
+                        onClick={() => navigate(`/circuit/${circuit.id}`)}
+                      >
+                        Ver detalles
+                      </button>
                     </div>
                   </div>
                 </div>
