@@ -21,6 +21,7 @@ export default function CircuitDetailPage() {
         const res = await fetch(`${API_URL}/${id}/fullById`);
         if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText}`);
         const data = await res.json();
+        console.log("📦 CIRCUIT FROM API:", data);
         setCircuit(data);
       } catch (err) {
         setError(err.message || "Error al cargar circuito");
@@ -52,37 +53,20 @@ export default function CircuitDetailPage() {
       </header>
 
       <section className="circuit-images">
-        {circuit.images && circuit.images.length > 0 ? (
-          circuit.images.map((img) => (
-            <img
-              key={img.id}
-              src={img.image_url}
-              alt={circuit.name}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src =
-                  "https://placehold.co/1200x800?text=Imagen+no+disponible";
-              }}
-            />
-          ))
+        {circuit.daysData?.[0]?.images?.length > 0 ? (
+          <img src={circuit.daysData[0].images[0]} alt={circuit.name} />
         ) : (
-          <img
-            src="https://placehold.co/1200x800?text=Sin+imagen"
-            alt="Sin imagen"
-          />
+          <img src="https://placehold.co/1200x800?text=Sin+imagen" />
         )}
       </section>
-
       <section className="circuit-days">
         <h2>Días del circuito</h2>
         {circuit.daysData && circuit.daysData.length > 0 ? (
           <ul>
-            {circuit.daysData.map((day) => (
-              <li key={day.id}>
-                <strong>Día {day.day_number}:</strong>{" "}
-                {day.city ? day.city.name || day.city : "Sin ciudad"}{" "}
-                {day.city?.country ? `(${day.city.country})` : ""}
-                <p>{day.city?.description}</p>
+            {circuit.daysData.map((day, index) => (
+              <li key={index}>
+                <strong>Día {day.day}:</strong> {day.city} ({day.country})
+                <p>{day.description}</p>
               </li>
             ))}
           </ul>
@@ -95,8 +79,8 @@ export default function CircuitDetailPage() {
         <h2>Incluye</h2>
         {circuit.includes && circuit.includes.length > 0 ? (
           <ul>
-            {circuit.includes.map((item) => (
-              <li key={item.id}>{item.label}</li>
+            {circuit.includes.map((item, index) => (
+              <li key={index}>{item}</li>
             ))}
           </ul>
         ) : (
