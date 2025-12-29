@@ -18,7 +18,6 @@ export default function CircuitDetailPage() {
         const res = await fetch(`${API_URL}/${id}/fullById`);
         if (!res.ok) throw new Error("Error al cargar circuito");
         const data = await res.json();
-        console.log("📦 CIRCUIT:", data);
         setCircuit(data);
       } catch (err) {
         setError(err.message);
@@ -34,58 +33,73 @@ export default function CircuitDetailPage() {
   if (error) return <div className="circuit-error">{error}</div>;
   if (!circuit) return null;
 
-  // Todas las imágenes del circuito
   const allImages = circuit.daysData?.flatMap((day) => day.images || []) || [];
 
   return (
-    <div className="circuit-detail-bg">
-      <div className="circuit-detail-wrapper">
-        {/* Header */}
-        <header className="circuit-header">
+    <div className="circuit-page">
+      {/* HERO */}
+      <section className="circuit-hero">
+        <div className="hero-content">
           <h1>{circuit.name}</h1>
-          <div className="circuit-meta">
-            <span>{circuit.days} días</span>
-            <span>Desde ${circuit.base_price}</span>
-            <span>Inicio: {circuit.starting_point}</span>
-          </div>
-        </header>
+        </div>
+      </section>
 
-        {/* Galería */}
-        <section className="circuit-gallery">
+      {/* INFO CLAVE */}
+      <section className="circuit-key-info">
+        <div className="price">
+          <span>Desde</span>
+          <strong>${circuit.base_price}</strong>
+        </div>
+
+        <div className="meta">
+          <div>
+            <strong>{circuit.days}</strong>
+            <span>días</span>
+          </div>
+          <div>
+            <span>Inicio</span>
+            <strong>{circuit.starting_point}</strong>
+          </div>
+        </div>
+      </section>
+
+      {/* GALERÍA */}
+      <section className="circuit-carousel">
+        <div className="carousel-track">
           {allImages.length > 0 ? (
             allImages.map((img, i) => (
-              <img key={i} src={img} alt={`Circuito ${i + 1}`} />
+              <img key={i} src={img} alt={`Vista ${i + 1}`} />
             ))
           ) : (
-            <img src="https://placehold.co/800x500?text=Sin+imagen" />
+            <img src="https://placehold.co/1200x700?text=Sin+imagen" />
           )}
-        </section>
+        </div>
+      </section>
 
-        {/* Días */}
-        <section className="circuit-section">
-          <h2>Itinerario</h2>
-          <ul className="days-list">
-            {circuit.daysData.map((day, i) => (
-              <li key={i}>
-                <div className="day-title">
-                  Día {day.day} · {day.city}, {day.country}
-                </div>
-                <p>{day.description}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
+      {/* ITINERARIO */}
+      <section className="circuit-section">
+        <h2>Itinerario</h2>
+        <ul className="days-list">
+          {circuit.daysData.map((day, i) => (
+            <li key={i}>
+              <div className="day-title">
+                Día {day.day} · {day.city}, {day.country}
+              </div>
+              <p>{day.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-        {/* Incluye */}
-        <section className="circuit-section">
-          <h2>Incluye</h2>
-          <ul className="includes-list">
-            {circuit.includes.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        </section>
-      </div>
+      {/* INCLUYE */}
+      <section className="circuit-section">
+        <h2>Incluye</h2>
+        <ul className="includes-list">
+          {circuit.includes.map((item, i) => (
+            <li key={i}>{item}</li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }
