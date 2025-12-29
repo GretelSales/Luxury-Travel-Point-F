@@ -29,7 +29,7 @@ export default function CircuitsGrid({ circuits }) {
       <div className="circuits-section-inner">
         <div className="circuits-grid">
           {circuits?.length === 0 && (
-            <p className="no-results">No hay circuitos para mostrar.</p>
+            <p className="no-results">There are no circuits to display.</p>
           )}
 
           {circuits?.map((circuit) => {

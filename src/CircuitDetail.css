@@ -1,95 +1,122 @@
-.circuit-detail-page {
-  max-width: 1000px;
+/* Fondo general */
+.circuit-detail-bg {
+  min-height: 100vh;
+  padding-top: 88px; /* espacio para la barra superior */
+  background-image: url("/images/cieloCircuitDetail.png"); /* tu imagen generada */
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* Oscurecer + suavizar fondo */
+.circuit-detail-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+}
+
+/* Card principal */
+.circuit-detail-wrapper {
+  position: relative;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 16px;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  color: #111;
-  background-color: #fff;
-  line-height: 1.5;
+  padding: 24px;
+  background: #ffffffee;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  font-family: "Inter", "Helvetica Neue", sans-serif;
 }
 
-.back-btn {
-  background-color: transparent;
-  border: none;
-  color: #003366;
-  font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 16px;
-  cursor: pointer;
-}
-
+/* Header */
 .circuit-header h1 {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 700;
+  color: #0b2a45;
   margin-bottom: 8px;
-  color: #003366;
 }
 
-.circuit-base-info {
+.circuit-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   font-size: 0.9rem;
-  color: #666;
+  color: #555;
 }
 
-.circuit-images {
+/* Galería */
+.circuit-gallery {
   display: flex;
+  gap: 14px;
   overflow-x: auto;
-  gap: 12px;
-  margin: 16px 0;
+  margin: 24px 0;
   scroll-snap-type: x mandatory;
 }
 
-.circuit-images img {
-  flex: 0 0 auto;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.circuit-gallery img {
+  width: 85%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   scroll-snap-align: start;
 }
 
-.circuit-days,
-.circuit-includes {
-  margin: 24px 0;
-  padding: 16px;
-  border-radius: 12px;
-  background-color: #f5f5f5;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+/* Secciones */
+.circuit-section {
+  margin-top: 32px;
 }
 
-.circuit-days h2,
-.circuit-includes h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #003366;
-  margin-bottom: 12px;
+.circuit-section h2 {
+  font-size: 1.3rem;
+  color: #0b2a45;
+  margin-bottom: 16px;
+  border-left: 4px solid #c9a24d; /* dorado */
+  padding-left: 12px;
 }
 
-.circuit-days ul,
-.circuit-includes ul {
-  list-style-type: none;
+/* Días */
+.days-list {
+  list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.circuit-days li,
-.circuit-includes li {
-  padding: 8px 0;
-  border-bottom: 1px solid #ddd;
+.days-list li {
+  margin-bottom: 20px;
 }
 
-.circuit-days li p {
-  font-size: 0.85rem;
+.day-title {
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 4px;
+}
+
+.days-list p {
   color: #444;
-  margin-top: 4px;
+  font-size: 0.95rem;
 }
 
+/* Incluye */
+.includes-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.includes-list li {
+  background: #f5f7fa;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+/* Estados */
 .circuit-loading,
 .circuit-error {
   text-align: center;
-  margin: 50px 0;
+  margin-top: 120px;
   font-size: 1.2rem;
-  color: #003366;
+  color: #0b2a45;
 }
