@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "./CircuitDetail.css";
 
 const API_URL =
@@ -7,6 +8,8 @@ const API_URL =
 
 export default function CircuitDetailPage() {
   const { id } = useParams();
+  const { t } = useTranslation();
+
   const [circuit, setCircuit] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +19,7 @@ export default function CircuitDetailPage() {
     const fetchCircuit = async () => {
       try {
         const res = await fetch(`${API_URL}/${id}/fullById`);
-        if (!res.ok) throw new Error("Error al cargar circuito");
+        if (!res.ok) throw new Error(t("circuit.errorLoad"));
         const data = await res.json();
         setCircuit(data);
       } catch (err) {
@@ -26,9 +29,9 @@ export default function CircuitDetailPage() {
       }
     };
     fetchCircuit();
-  }, [id]);
+  }, [id, t]);
 
-  if (loading) return <div className="loading">Cargando…</div>;
+  if (loading) return <div className="loading">{t("common.loading")}</div>;
   if (error) return <div className="error">{error}</div>;
   if (!circuit) return null;
 
@@ -49,12 +52,16 @@ export default function CircuitDetailPage() {
           <h1 className="circuit-title">{circuit.name}</h1>
 
           <div className="hero-price">
-            Desde <strong>${circuit.base_price}</strong>
+            {t("circuitos.from")} <strong>${circuit.base_price}</strong>
           </div>
 
           <div className="hero-meta">
-            <span>{circuit.days} días</span>
-            <span>Inicio: {circuit.starting_point}</span>
+            <span>
+              {circuit.days} {t("circuitos.days")}
+            </span>
+            <span>
+              {t("circuitos.start")}: {circuit.starting_point}
+            </span>
           </div>
         </div>
       </section>
@@ -68,7 +75,7 @@ export default function CircuitDetailPage() {
             </button>
             <img
               src={images[currentImage]}
-              alt={`Imagen ${currentImage + 1}`}
+              alt={`${t("common.image")} ${currentImage + 1}`}
               className="gallery-image"
             />
             <button className="nav right" onClick={nextImage}>
@@ -81,12 +88,12 @@ export default function CircuitDetailPage() {
       {/* ITINERARY */}
       <section className="content-section">
         <div className="floating-frame">
-          <h2>Itinerario</h2>
+          <h2>{t("circuitos.itinerary")}</h2>
           <ul className="itinerary">
             {circuit.daysData.map((day, i) => (
               <li key={i}>
                 <strong>
-                  Día {day.day} · {day.city}, {day.country}
+                  {t("circuitos.day")} {day.day} · {day.city}, {day.country}
                 </strong>
                 <p>{day.description}</p>
               </li>
@@ -98,7 +105,7 @@ export default function CircuitDetailPage() {
       {/* INCLUDES */}
       <section className="content-section">
         <div className="floating-frame">
-          <h2>Incluye</h2>
+          <h2>{t("circuitos.includes")}</h2>
           <ul className="includes">
             {circuit.includes.map((item, i) => (
               <li key={i}>{item}</li>

@@ -1,4 +1,17 @@
 {
+  "common": {
+    "loading": "Cargando…",
+    "image": "Imagen"
+  },
+  "circuitos": {
+    "errorLoad": "Error al cargar circuito",
+    "from": "Desde",
+    "days": "días",
+    "start": "Inicio",
+    "itinerary": "Itinerario",
+    "day": "Día",
+    "includes": "Incluye"
+  },
   "brand": "Luxury Travel Point",
   "nav.destinations": "Destinos",
   "nav.contact": "Contacto",
