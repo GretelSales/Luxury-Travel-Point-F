@@ -18,6 +18,14 @@
   "nothing": "Nothing",
   "month": "Month",
   "year": "Year",
+   "circuitsCarousel": {
+    "from": "From",
+    "days": "days",
+    "viewDetails": "View details",
+    "noResults": "There are no circuits to display.",
+    "andMore": "{{cities}} and more",
+    "defaultAlt": "Travel circuit"
+  },
   "filters": {
   "clear": "Clear filters"
 },
@@ -104,7 +112,7 @@
     "Austria": "Austria",
     "Hungary": "Hungary"
   },
-  "circuits": {
+  "circuit": {
   "title": "Available Circuits"
 },
 "services": {

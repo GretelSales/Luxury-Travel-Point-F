@@ -18,7 +18,7 @@
   "year": "Año",
   "selected": "Seleccionado:",
   "nothing": "Nada",
-  "circuitsCarousel": {
+  "circuits": {
     "from": "Desde",
     "days": "días",
     "viewDetails": "Ver detalles",
@@ -111,7 +111,7 @@
     "Hungary": "Hungría"
   }
   ,
-  "circuits": {
+  "circuit": {
   "title": "Circuitos disponibles"
 },
 

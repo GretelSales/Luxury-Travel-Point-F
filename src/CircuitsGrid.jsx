@@ -18,7 +18,7 @@ export default function CircuitsGrid({ circuits }) {
     const firstThree = uniq.slice(0, 3);
 
     if (uniq.length > 3) {
-      return t("circuitsCarousel.andMore", {
+      return t("circuits.andMore", {
         cities: firstThree.join(", "),
       });
     }
@@ -31,7 +31,7 @@ export default function CircuitsGrid({ circuits }) {
       <div className="circuits-section-inner">
         <div className="circuits-grid">
           {circuits?.length === 0 && (
-            <p className="no-results">{t("circuitsCarousel.noResults")}</p>
+            <p className="no-results">{t("circuits.noResults")}</p>
           )}
 
           {circuits?.map((circuit) => {
@@ -46,7 +46,7 @@ export default function CircuitsGrid({ circuits }) {
                   <img
                     src={imageUrl}
                     className="circuit-img"
-                    alt={circuit.name || t("circuitsCarousel.defaultAlt")}
+                    alt={circuit.name || t("circuits.defaultAlt")}
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src =
@@ -68,14 +68,13 @@ export default function CircuitsGrid({ circuits }) {
                   <div className="circuit-meta">
                     <div className="meta-left">
                       <div className="meta-price">
-                        {t("circuitsCarousel.from")} $
+                        {t("circuits.from")} $
                         {circuit.base_price ??
                           circuit.price ??
                           circuit.basePrice}
                       </div>
                       <div className="meta-days">
-                        {circuit.days ?? circuit.totalDays}{" "}
-                        {t("circuitsCarousel.days")}
+                        {circuit.days ?? circuit.totalDays} {t("circuits.days")}
                       </div>
                     </div>
 
@@ -84,7 +83,7 @@ export default function CircuitsGrid({ circuits }) {
                         className="btn-cta"
                         onClick={() => navigate(`/circuit/${circuit.id}`)}
                       >
-                        {t("circuitsCarousel.viewDetails")}
+                        {t("circuits.viewDetails")}
                       </button>
                     </div>
                   </div>
