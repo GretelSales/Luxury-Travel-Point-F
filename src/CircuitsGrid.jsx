@@ -1,8 +1,12 @@
 import React from "react";
 import "./CircuitsGrid.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function CircuitsGrid({ circuits }) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
   // Helper: build cities summary (unique ordered names) and cut to 3
   const buildCitiesSummary = (circuit) => {
     const daysArr = circuit.daysData || circuit.days || [];
@@ -13,15 +17,13 @@ export default function CircuitsGrid({ circuits }) {
     const uniq = [...new Set(names)];
     const firstThree = uniq.slice(0, 3);
 
-    if (uniq.length > 3) return `${firstThree.join(", ")} y más`;
+    if (uniq.length > 3) {
+      return t("circuitsCarousel.andMore", {
+        cities: firstThree.join(", "),
+      });
+    }
+
     return firstThree.join(", ");
-  };
-  const navigate = useNavigate();
-  const fmt = (d) => {
-    if (!d) return "—";
-    const date = new Date(d);
-    if (isNaN(date)) return d;
-    return date.toLocaleDateString();
   };
 
   return (
@@ -29,7 +31,7 @@ export default function CircuitsGrid({ circuits }) {
       <div className="circuits-section-inner">
         <div className="circuits-grid">
           {circuits?.length === 0 && (
-            <p className="no-results">There are no circuits to display.</p>
+            <p className="no-results">{t("circuitsCarousel.noResults")}</p>
           )}
 
           {circuits?.map((circuit) => {
@@ -44,7 +46,7 @@ export default function CircuitsGrid({ circuits }) {
                   <img
                     src={imageUrl}
                     className="circuit-img"
-                    alt={circuit.name || "Circuito"}
+                    alt={circuit.name || t("circuitsCarousel.defaultAlt")}
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src =
@@ -58,16 +60,22 @@ export default function CircuitsGrid({ circuits }) {
                     {circuit.name || circuit.title}
                   </h3>
 
+                  {/* 👇 TEXTO DE CIUDADES (más pequeño + traducible) */}
+                  <p className="circuit-cities">
+                    {buildCitiesSummary(circuit)}
+                  </p>
+
                   <div className="circuit-meta">
                     <div className="meta-left">
                       <div className="meta-price">
-                        Desde $
+                        {t("circuitsCarousel.from")} $
                         {circuit.base_price ??
                           circuit.price ??
                           circuit.basePrice}
                       </div>
                       <div className="meta-days">
-                        {circuit.days ?? circuit.totalDays} días
+                        {circuit.days ?? circuit.totalDays}{" "}
+                        {t("circuitsCarousel.days")}
                       </div>
                     </div>
 
@@ -76,7 +84,7 @@ export default function CircuitsGrid({ circuits }) {
                         className="btn-cta"
                         onClick={() => navigate(`/circuit/${circuit.id}`)}
                       >
-                        Ver detalles
+                        {t("circuitsCarousel.viewDetails")}
                       </button>
                     </div>
                   </div>

@@ -18,6 +18,14 @@
   "year": "Año",
   "selected": "Seleccionado:",
   "nothing": "Nada",
+  "circuitsCarousel": {
+    "from": "Desde",
+    "days": "días",
+    "viewDetails": "Ver detalles",
+    "noResults": "No hay circuitos para mostrar.",
+    "andMore": "{{cities}} y más",
+    "defaultAlt": "Circuito turístico"
+  },
   "filters": {
   "clear": "Limpiar filtros"
 },
