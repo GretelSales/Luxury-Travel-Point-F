@@ -56,7 +56,7 @@ export default function CircuitsGrid({ circuits }) {
                 </div>
 
                 <div className="circuit-info">
-                  <h3 className="circuit-title">
+                  <h3 className="circuits-title">
                     {circuit.name || circuit.title}
                   </h3>
 
