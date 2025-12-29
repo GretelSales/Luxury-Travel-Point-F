@@ -7,10 +7,10 @@ const API_URL =
 
 export default function CircuitDetailPage() {
   const { id } = useParams();
-
   const [circuit, setCircuit] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
     const fetchCircuit = async () => {
@@ -25,81 +25,83 @@ export default function CircuitDetailPage() {
         setLoading(false);
       }
     };
-
     fetchCircuit();
   }, [id]);
 
-  if (loading) return <div className="circuit-loading">Cargando…</div>;
-  if (error) return <div className="circuit-error">{error}</div>;
+  if (loading) return <div className="loading">Cargando…</div>;
+  if (error) return <div className="error">{error}</div>;
   if (!circuit) return null;
 
-  const allImages = circuit.daysData?.flatMap((day) => day.images || []) || [];
+  const images = circuit.daysData?.flatMap((d) => d.images || []) || [];
+
+  const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length);
+
+  const prevImage = () =>
+    setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   return (
-    <div className="circuit-page">
+    <main className="circuit-page">
       {/* HERO */}
       <section className="circuit-hero">
+        <div className="hero-overlay" />
+
         <div className="hero-content">
-          <h1>{circuit.name}</h1>
-        </div>
-      </section>
+          <h1 className="circuit-title">{circuit.name}</h1>
 
-      {/* INFO CLAVE */}
-      <section className="circuit-key-info">
-        <div className="price">
-          <span>Desde</span>
-          <strong>${circuit.base_price}</strong>
-        </div>
-
-        <div className="meta">
-          <div>
-            <strong>{circuit.days}</strong>
-            <span>días</span>
+          <div className="hero-price">
+            Desde <strong>${circuit.base_price}</strong>
           </div>
-          <div>
-            <span>Inicio</span>
-            <strong>{circuit.starting_point}</strong>
+
+          <div className="hero-meta">
+            <span>{circuit.days} días</span>
+            <span>Inicio: {circuit.starting_point}</span>
           </div>
         </div>
       </section>
 
-      {/* GALERÍA */}
-      <section className="circuit-carousel">
-        <div className="carousel-track">
-          {allImages.length > 0 ? (
-            allImages.map((img, i) => (
-              <img key={i} src={img} alt={`Vista ${i + 1}`} />
-            ))
-          ) : (
-            <img src="https://placehold.co/1200x700?text=Sin+imagen" />
-          )}
-        </div>
+      {/* GALLERY */}
+      <section className="gallery-frame">
+        {images.length > 0 && (
+          <>
+            <button className="nav left" onClick={prevImage}>
+              ‹
+            </button>
+            <img
+              src={images[currentImage]}
+              alt={`Imagen ${currentImage + 1}`}
+              className="gallery-image"
+            />
+            <button className="nav right" onClick={nextImage}>
+              ›
+            </button>
+          </>
+        )}
       </section>
 
-      {/* ITINERARIO */}
-      <section className="circuit-section">
+      {/* ITINERARY */}
+      <section className="content-section">
         <h2>Itinerario</h2>
-        <ul className="days-list">
+        <ul className="itinerary">
           {circuit.daysData.map((day, i) => (
             <li key={i}>
-              <div className="day-title">
+              <strong>
                 Día {day.day} · {day.city}, {day.country}
-              </div>
+              </strong>
               <p>{day.description}</p>
             </li>
           ))}
         </ul>
       </section>
 
-      {/* INCLUYE */}
-      <section className="circuit-section">
+      {/* INCLUDES */}
+      <section className="content-section">
         <h2>Incluye</h2>
-        <ul className="includes-list">
+        <ul className="includes">
           {circuit.includes.map((item, i) => (
             <li key={i}>{item}</li>
           ))}
         </ul>
       </section>
-    </div>
+    </main>
   );
 }
