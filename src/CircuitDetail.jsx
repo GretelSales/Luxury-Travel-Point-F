@@ -80,27 +80,31 @@ export default function CircuitDetailPage() {
 
       {/* ITINERARY */}
       <section className="content-section">
-        <h2>Itinerario</h2>
-        <ul className="itinerary">
-          {circuit.daysData.map((day, i) => (
-            <li key={i}>
-              <strong>
-                Día {day.day} · {day.city}, {day.country}
-              </strong>
-              <p>{day.description}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="floating-frame">
+          <h2>Itinerario</h2>
+          <ul className="itinerary">
+            {circuit.daysData.map((day, i) => (
+              <li key={i}>
+                <strong>
+                  Día {day.day} · {day.city}, {day.country}
+                </strong>
+                <p>{day.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* INCLUDES */}
       <section className="content-section">
-        <h2>Incluye</h2>
-        <ul className="includes">
-          {circuit.includes.map((item, i) => (
-            <li key={i}>{item}</li>
-          ))}
-        </ul>
+        <div className="floating-frame">
+          <h2>Incluye</h2>
+          <ul className="includes">
+            {circuit.includes.map((item, i) => (
+              <li key={i}>{item}</li>
+            ))}
+          </ul>
+        </div>
       </section>
     </main>
   );
