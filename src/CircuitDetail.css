@@ -1,8 +1,14 @@
 /* RESET BASE */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #dfe9f7; /* Fondo general */
+}
+
 .circuit-page {
   font-family: "Inter", sans-serif;
   color: #0e1b2a;
-  background: #dfe9f7;
+  background: #d9f0ff; /* Fondo azul claro para la vista */
 }
 
 /* LOADING */
@@ -122,7 +128,9 @@
 }
 
 .itinerary li {
-  padding-bottom: 18px;
+  margin-top: 8px; /* margen superior */
+  margin-bottom: 4px; /* margen inferior reducido */
+  padding: 10px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
@@ -147,22 +155,29 @@
 .includes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
+  gap: 12px;
   list-style: none;
   padding: 0;
+  margin-bottom: 20px; /* margen inferior del bloque completo */
 }
 
 .includes li {
-  background: linear-gradient(
-    180deg,
-    #ffffff,
-    #f9fbff
-  );
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
   font-size: 0.95rem;
-  padding: 14px 16px;
+  padding: 10px 14px;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  background: linear-gradient(180deg, #ffffff, #f9fbff);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  border: none; /* quita frame individual */
+  margin: 4px 0; /* espacio pequeño entre elementos */
+}
+
+.includes li::before {
+  content: "◆"; /* diamante a la izquierda */
+  color: #0b3866;
+  margin-right: 10px;
+  font-size: 0.8rem;
 }
 
 /* DESKTOP */
@@ -197,4 +212,3 @@
       0 6px 16px rgba(15, 30, 60, 0.06);
   }
 }
-
