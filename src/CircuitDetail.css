@@ -1,14 +1,7 @@
-/* RESET BASE */
-html, body {
-  margin: 0;
-  padding: 0;
-  background-color: #dfe9f7; /* Fondo general */
-}
-
 .circuit-page {
   font-family: "Inter", sans-serif;
   color: #0e1b2a;
-  background: #d9f0ff; /* Fondo azul claro para la vista */
+  background: #dae3e9; 
 }
 
 /* LOADING */
