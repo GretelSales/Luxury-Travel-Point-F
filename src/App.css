@@ -33,7 +33,7 @@ html, body {
   font-size: 16px;
   line-height: 1.45;
   background-color: #f6f8fb;
-  background: #dae3e9;
+  background: #e2e8ec;
 }
 
 /* Utility */
@@ -334,11 +334,13 @@ html, body {
 
 .ltp-section {
   padding: 60px 20px;
+  background: #e2e8ec;
 }
 
 .ltp-section-narrow {
   max-width: 60vw;      
   margin: 0 auto;       
+  background: #e2e8ec;
 }
 
 /* Para pantallas grandes, evita que se vuelva exagerado */
@@ -358,7 +360,7 @@ html, body {
 }
 
 .ltp-section:nth-child(even) {
-  background: #fafafa;
+  background: #e2e8ec;
 }
 
 /* CTA */
@@ -390,6 +392,7 @@ html, body {
   padding: 28px 12px;
   background: transparent;
   position: relative;
+  background: #e2e8ec;
 }
 .section-title {
   font-size: clamp(1.25rem, 4vw, 1.6rem);
