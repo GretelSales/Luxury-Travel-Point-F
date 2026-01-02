@@ -215,20 +215,25 @@ export default function App() {
     const loadCircuits = async () => {
       try {
         const res = await axios.get(
-          "https://luxury-travel-point-frontend.onrender.com/api/circuits/full"
+          "https://luxury-travel-point-frontend.onrender.com/api/circuits/full",
+          {
+            params: {
+              langCode: i18n.language, // 👈 idioma
+            },
+          }
         );
 
         console.log("🚀 Backend circuits response:", res.data);
 
-        setCircuits(res.data); // Lista completa
-        setFilteredCircuits(res.data); // Mostrar todo al inicio
+        setCircuits(res.data);
+        setFilteredCircuits(res.data);
       } catch (error) {
         console.error("Error loading circuits:", error);
       }
     };
 
     loadCircuits();
-  }, []);
+  }, [i18n.language]);
 
   return (
     <div className="ltp-app">
