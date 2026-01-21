@@ -33,6 +33,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [resetKey, setResetKey] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   // 🔥 Nueva lista REAL desde backend
   const [backendCountries, setBackendCountries] = useState([]);
@@ -42,6 +43,7 @@ export default function App() {
     setLangOpen(false);
     setDropdownOpen(false);
   };
+
   // 🟦 Obtener países del backend una sola vez
   useEffect(() => {
     const fetchCountries = async () => {
@@ -214,21 +216,17 @@ export default function App() {
   useEffect(() => {
     const loadCircuits = async () => {
       try {
+        setIsLoading(true); // 🔹 Inicio carga
         const res = await axios.get(
           "https://luxury-travel-point-frontend.onrender.com/api/circuits/full",
-          {
-            params: {
-              langCode: i18n.language, // 👈 idioma
-            },
-          }
+          { params: { langCode: i18n.language } }
         );
-
-        console.log("🚀 Backend circuits response:", res.data);
-
         setCircuits(res.data);
         setFilteredCircuits(res.data);
       } catch (error) {
         console.error("Error loading circuits:", error);
+      } finally {
+        setIsLoading(false); // 🔹 Fin carga
       }
     };
 
@@ -369,7 +367,11 @@ export default function App() {
         <h2 className="section-title">{t("ourCircuitsTitle")}</h2>
 
         <div className="circuits-scroll-container">
-          <CircuitsGrid circuits={filteredCircuits} />
+          <CircuitsGrid
+            circuits={filteredCircuits}
+            isLoading={isLoading}
+            hasActiveFilters={hasActiveFilters}
+          />
         </div>
 
         <div className="ltp-why-us">

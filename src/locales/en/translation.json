@@ -41,13 +41,15 @@
   "month": "Month",
   "year": "Year",
    "circuits": {
-    "from": "From",
-    "days": "days",
-    "viewDetails": "View details",
-    "noResults": "There are no circuits to display.",
-    "andMore": "{{cities}} and more",
-    "defaultAlt": "Travel circuit"
-  },
+  "loading": "Loading circuits...",
+  "noCircuitsAvailable": "No circuits available",
+  "noResults": "There are no circuits to display",
+  "noResultsHelp": "If you are looking for a trip that is not listed, you can contact us to ask about it:",
+  "contactEmail": "Contact by email",
+  "contactWhatsapp": "Contact via WhatsApp",
+  "contactEmailSubject": "Inquiry about an unavailable circuit",
+  "contactMessage": "Hello, I would like to inquire about a circuit that is not listed."
+},
   "filters": {
   "clear": "Clear filters"
 },

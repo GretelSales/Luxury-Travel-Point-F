@@ -41,13 +41,15 @@
   "selected": "Seleccionado:",
   "nothing": "Nada",
   "circuits": {
-    "from": "Desde",
-    "days": "días",
-    "viewDetails": "Ver detalles",
-    "noResults": "No hay circuitos para mostrar.",
-    "andMore": "{{cities}} y más",
-    "defaultAlt": "Circuito turístico"
-  },
+  "loading": "Cargando circuitos...",
+  "noCircuitsAvailable": "No hay circuitos disponibles",
+  "noResults": "No hay circuitos para mostrar",
+  "noResultsHelp": "Si buscas un viaje que no aparece en la lista, puedes contactarnos para consultarlo:",
+  "contactEmail": "Escribir por correo",
+  "contactWhatsapp": "Escribir por WhatsApp",
+  "contactEmailSubject": "Consulta sobre un circuito no disponible",
+  "contactMessage": "Hola, me gustaría consultar por un circuito que no aparece en la lista."
+},
   "filters": {
   "clear": "Limpiar filtros"
 },
