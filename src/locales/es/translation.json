@@ -13,6 +13,14 @@
     "day": "Día",
     "includes": "Incluye"
   },
+  "search": {
+    "noresults": "No hay circuitos para mostrar",
+    "noresultsHelp": "Si buscas un viaje que no aparece en la lista, puedes consultarnos directamente:",
+    "contactEmail": "Escribir por correo",
+    "contactWhatsapp": "Escribir por WhatsApp",
+    "contactEmailSubject": "Consulta sobre un circuito no disponible",
+    "contactMessage": "Hola, estoy buscando un circuito que no aparece en la lista. Mi búsqueda fue: \"{{query}}\"."
+  },
   "brand": "Luxury Travel Point",
   "nav.destinations": "Destinos",
   "nav.contact": "Contacto",
@@ -48,12 +56,12 @@
     "phoneTitle": "Teléfono",
     "phone": "+1 (239) 265-7294",
     "emailTitle": "Correo electrónico",
-    "email": "luxurytravelpoint@gmail.com",
+    "email": "gretel@luxurytravelpoint.com / sales@luxurytravelpoint.com",
     "addressTitle": "Dirección para retiro",
     "address": "3418 51st ST W, Lehigh Acres, FL, USA",
     "hoursTitle": "Horarios disponibles",
-    "weekdays": "Lunes a Viernes: 9:00 AM – 5:00 PM",
-    "saturday": "Sábado: 10:00 AM – 2:00 PM",
+    "hoursRegular": "Lunes a sábado: 9:00 AM – 6:00 PM",
+    "hoursAppointment": "Atención con cita previa disponible 24/7",
     "mapTitle": "Ubicación ProPlants"
   },
 "auth": {

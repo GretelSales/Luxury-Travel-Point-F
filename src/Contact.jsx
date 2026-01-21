@@ -1,6 +1,13 @@
 import React from "react";
 import "./Contact.css";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPhone,
+  faEnvelope,
+  faMapMarkerAlt,
+  faClock,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -14,32 +21,42 @@ export default function Contact() {
 
           <div className="contact-card">
             <h3 className="contact-subtitle">
-              <i className="fas fa-phone"></i> {t("contact.phoneTitle")}
+              <FontAwesomeIcon icon={faPhone} /> {t("contact.phoneTitle")}
             </h3>
             <p className="contact-text">{t("contact.phone")}</p>
           </div>
 
           <div className="contact-card">
             <h3 className="contact-subtitle">
-              <i className="fas fa-envelope"></i> {t("contact.emailTitle")}
+              <FontAwesomeIcon icon={faEnvelope} /> {t("contact.emailTitle")}
             </h3>
             <p className="contact-text">{t("contact.email")}</p>
           </div>
 
           <div className="contact-card">
             <h3 className="contact-subtitle">
-              <i className="fas fa-map-marker-alt"></i>{" "}
+              <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
               {t("contact.addressTitle")}
             </h3>
-            <p className="contact-text">{t("contact.address")}</p>
+
+            <a
+              href="https://maps.app.goo.gl/k6HnPFpBgfqXh1NKA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-address-link"
+            >
+              {t("contact.address")}
+            </a>
           </div>
 
           <div className="contact-card">
             <h3 className="contact-subtitle">
-              <i className="fas fa-clock"></i> {t("contact.hoursTitle")}
+              <FontAwesomeIcon icon={faClock} /> {t("contact.hoursTitle")}
             </h3>
-            <p className="contact-text">{t("contact.weekdays")}</p>
-            <p className="contact-text">{t("contact.saturday")}</p>
+
+            <p className="contact-text">{t("contact.hoursRegular")}</p>
+
+            <p className="contact-text">{t("contact.hoursAppointment")}</p>
           </div>
         </div>
 

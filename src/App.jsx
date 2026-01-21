@@ -284,7 +284,37 @@ export default function App() {
                       ))
                     ) : (
                       <div className="ltp-no-results">
-                        {t("search.noresults", { query })}
+                        <p className="ltp-no-results-text">
+                          {t("search.noresults", { query })}
+                        </p>
+
+                        <p className="ltp-no-results-help">
+                          {t("search.noresultsHelp")}
+                        </p>
+
+                        <div className="ltp-no-results-actions">
+                          <a
+                            href={`mailto:sales@luxurytravelpoint.com?subject=${encodeURIComponent(
+                              t("search.contactEmailSubject")
+                            )}&body=${encodeURIComponent(
+                              t("search.contactMessage", { query })
+                            )}`}
+                            className="ltp-contact-link"
+                          >
+                            {t("search.contactEmail")}
+                          </a>
+
+                          <a
+                            href={`https://wa.me/2392657294?text=${encodeURIComponent(
+                              t("search.contactMessage", { query })
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ltp-contact-link"
+                          >
+                            {t("search.contactWhatsapp")}
+                          </a>
+                        </div>
                       </div>
                     )}
                   </div>

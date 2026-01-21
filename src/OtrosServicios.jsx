@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import TopBar from "./TopBar.jsx";
 import "./OtrosServicios.css";
+
 export default function OtrosServicios() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(null);
 
   const blocks = t("services.blocks", { returnObjects: true }) || [];
@@ -12,6 +13,19 @@ export default function OtrosServicios() {
     setOpen(open === idx ? null : idx);
   };
 
+  // 👇 SOLO para el comportamiento especial inicial
+  useEffect(() => {
+    const alreadyInitialized = localStorage.getItem(
+      "otherServicesLangInitialized"
+    );
+
+    if (!alreadyInitialized) {
+      i18n.changeLanguage("es");
+      localStorage.setItem("otherServicesLangInitialized", "true");
+    }
+  }, [i18n]);
+
+  // 👇 efecto visual que ya tenías
   useEffect(() => {
     document.body.classList.add("dark-hero");
     return () => document.body.classList.remove("dark-hero");
@@ -19,8 +33,7 @@ export default function OtrosServicios() {
 
   return (
     <>
-      <TopBar darkMode={true} />{" "}
-      {/* 👈 necesario para que se vea bien la barra */}
+      <TopBar darkMode={true} />
       <section className="services-page">
         <header className="services-header">
           <h1>{t("services.title")}</h1>

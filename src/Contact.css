@@ -134,3 +134,28 @@
   .contact-info { width: 50%; }
   .contact-map { flex: 1; min-width: 450px; min-height: 350px; }
 }
+
+.contact-address-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: #1f2f4a;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.contact-address-link:hover {
+  color: #0b1f3b;
+  text-decoration: underline;
+}
+
+.contact-address-link:active {
+  opacity: 0.8;
+}
+
+.contact-text:last-child {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}

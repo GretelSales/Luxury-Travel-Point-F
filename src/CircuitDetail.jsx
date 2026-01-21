@@ -19,7 +19,7 @@ export default function CircuitDetailPage() {
     const fetchCircuit = async () => {
       try {
         // Obtener idioma actual de i18next
-        const lang = t("langCode") || "es"; // puedes definir langCode en tus traducciones
+        const lang = t("langCode") || "es";
         const res = await fetch(`${API_URL}/${id}/fullById?lang=${lang}`);
         if (!res.ok) throw new Error(t("circuit.errorLoad"));
         const data = await res.json();
