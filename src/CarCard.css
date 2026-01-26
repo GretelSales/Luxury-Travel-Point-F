@@ -1,0 +1,19 @@
+.car-card {
+  min-width: 180px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.car-card:hover {
+  transform: translateY(-2px);
+}
+
+.car-card-image img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.car-card-price {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}

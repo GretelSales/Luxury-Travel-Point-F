@@ -160,6 +160,7 @@
 ]
 },
 {
+  "type": "car-rental",
 "title": "Car rental in Cuba",
 "summary": "Vehicles available based on your needs",
 "details": [

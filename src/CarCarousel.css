@@ -1,0 +1,11 @@
+.car-carousel {
+  margin-top: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.car-carousel-track {
+  display: flex;
+  gap: 16px;
+  scroll-snap-type: x mandatory;
+}

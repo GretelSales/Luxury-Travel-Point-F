@@ -160,6 +160,7 @@
 ]
 },
 {
+  "type": "car-rental",
 "title": "Renta de autos en Cuba",
 "summary": "Vehículos disponibles según sus necesidades",
 "details": [
