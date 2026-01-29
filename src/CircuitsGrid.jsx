@@ -39,7 +39,7 @@ export default function CircuitsGrid({
               <div className="no-results-actions">
                 <a
                   href={`mailto:info@tudominio.com?subject=${encodeURIComponent(
-                    t("circuits.contactEmailSubject")
+                    t("circuits.contactEmailSubject"),
                   )}&body=${encodeURIComponent(t("circuits.contactMessage"))}`}
                   className="no-results-link"
                 >
@@ -47,7 +47,7 @@ export default function CircuitsGrid({
                 </a>
                 <a
                   href={`https://wa.me/1234567890?text=${encodeURIComponent(
-                    t("circuits.contactMessage")
+                    t("circuits.contactMessage"),
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -76,7 +76,7 @@ export default function CircuitsGrid({
                     <img
                       src={imageUrl}
                       className="circuit-img"
-                      alt={circuit.name || t("circuits.defaultAlt")}
+                      alt={circuit.name || t("circuitos.defaultAlt")}
                       onError={(e) => {
                         e.target.onerror = null;
                         e.target.src =
@@ -95,14 +95,14 @@ export default function CircuitsGrid({
                     <div className="circuit-meta">
                       <div className="meta-left">
                         <div className="meta-price">
-                          {t("circuits.from")} $
+                          {t("circuitos.from")} $
                           {circuit.base_price ??
                             circuit.price ??
                             circuit.basePrice}
                         </div>
                         <div className="meta-days">
                           {circuit.days ?? circuit.totalDays}{" "}
-                          {t("circuits.days")}
+                          {t("circuitos.days")}
                         </div>
                       </div>
                       <div className="meta-right">
@@ -110,7 +110,7 @@ export default function CircuitsGrid({
                           className="btn-cta"
                           onClick={() => navigate(`/circuit/${circuit.id}`)}
                         >
-                          {t("circuits.viewDetails")}
+                          {t("circuitos.viewDetails")}
                         </button>
                       </div>
                     </div>
