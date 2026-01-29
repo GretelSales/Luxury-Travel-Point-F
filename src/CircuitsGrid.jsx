@@ -8,7 +8,7 @@ export default function CircuitsGrid({
   hasActiveFilters,
 }) {
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
   const buildCitiesSummary = (circuit) => {
     const daysArr = circuit.daysData || circuit.days || [];
     const names = daysArr
