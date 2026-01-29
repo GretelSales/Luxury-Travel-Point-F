@@ -11,7 +11,8 @@
     "start": "Start",
     "itinerary": "Itinerary",
     "day": "Day",
-    "includes": "Includes"
+    "includes": "Includes",
+    "viewDetails": "View details"
   },
   "search": {
     "noresults": "There are no circuits to display",
@@ -40,6 +41,7 @@
   "nothing": "Nothing",
   "month": "Month",
   "year": "Year",
+
    "circuits": {
   "loading": "Loading circuits...",
   "noCircuitsAvailable": "No circuits available",

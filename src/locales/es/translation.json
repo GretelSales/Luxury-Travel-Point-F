@@ -11,7 +11,8 @@
     "start": "Inicio",
     "itinerary": "Itinerario",
     "day": "Día",
-    "includes": "Incluye"
+    "includes": "Incluye",
+    "viewDetails": "Ver detalles"
   },
   "search": {
     "noresults": "No hay circuitos para mostrar",
@@ -40,6 +41,7 @@
   "year": "Año",
   "selected": "Seleccionado:",
   "nothing": "Nada",
+
   "circuits": {
   "loading": "Cargando circuitos...",
   "noCircuitsAvailable": "No hay circuitos disponibles",
