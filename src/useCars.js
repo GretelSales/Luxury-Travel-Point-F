@@ -13,6 +13,7 @@ export function useCars() {
     const fetchCars = async () => {
       try {
         setLoading(true);
+        setError(null);
 
         const res = await fetch(`${API_URL}/api/cars`);
 
@@ -20,10 +21,15 @@ export function useCars() {
           throw new Error("Failed to fetch cars");
         }
 
+        const contentType = res.headers.get("content-type");
+        if (!contentType?.includes("application/json")) {
+          throw new Error("Response is not JSON");
+        }
+
         const data = await res.json();
 
         if (isMounted) {
-          setCars(data || []);
+          setCars(Array.isArray(data) ? data : []);
         }
       } catch (err) {
         if (isMounted) {

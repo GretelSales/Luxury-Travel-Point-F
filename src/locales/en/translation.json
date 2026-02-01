@@ -2,7 +2,14 @@
   "langCode": "en",
   "common": {
     "loading": "Loading…",
-    "image": "Image"
+    "image": "Image",
+    "error": "An error occurred. Please try again."
+  },
+   "cars": {
+    "title": "Car rental in Cuba",
+    "subtitle": "Vehicles available based on your needs",
+    "noCars": "No cars available at the moment",
+    "day": "day"
   },
   "circuitos": {
     "errorLoad": "Error loading circuit",

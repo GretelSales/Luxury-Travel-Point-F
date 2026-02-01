@@ -18,6 +18,7 @@ export default function CarCard({ car, isDesktop, onHover, onSelect }) {
       className="car-card"
       onMouseEnter={handleMouseEnter}
       onClick={handleClick}
+      role="button"
     >
       <div className="car-card-image">
         <img src={car.photoUrl} alt={car.tipo} loading="lazy" />

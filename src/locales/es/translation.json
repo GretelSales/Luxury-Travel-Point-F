@@ -2,7 +2,14 @@
   "langCode": "es",
   "common": {
     "loading": "Cargando…",
-    "image": "Imagen"
+    "image": "Imagen",
+    "error": "Ha ocurrido un error. Intente nuevamente."
+  },
+  "cars": {
+    "title": "Renta de autos en Cuba",
+    "subtitle": "Vehículos disponibles según sus necesidades",
+    "noCars": "No hay autos disponibles en este momento",
+    "day": "día"
   },
   "circuitos": {
     "errorLoad": "Error al cargar circuito",
