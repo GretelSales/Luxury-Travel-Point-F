@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.REACT_APP_API_URL;
 
 export function useCars() {
   const [cars, setCars] = useState([]);
@@ -42,7 +42,6 @@ export function useCars() {
         }
       }
     };
-
     fetchCars();
 
     return () => {
