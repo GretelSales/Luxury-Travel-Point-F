@@ -42,7 +42,7 @@ export default function OtrosServicios() {
       try {
         const lang = i18n.language.startsWith("es") ? "es" : "en";
         const res = await axios.get(
-          `/api/services-content/remittances?lang=${lang}`,
+          `/api/services-content?type=remittances&lang=${lang}`,
         );
         setRemittancesData(res.data);
       } catch (error) {
