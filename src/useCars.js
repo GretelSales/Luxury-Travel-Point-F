@@ -15,7 +15,9 @@ export function useCars() {
         setLoading(true);
         setError(null);
 
-        const res = await fetch(`${API_URL}/api/cars`);
+        const res = await fetch(
+          "https://luxury-travel-point-frontend.onrender.com/api/cars",
+        );
 
         if (!res.ok) {
           throw new Error("Failed to fetch cars");
