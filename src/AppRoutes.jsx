@@ -7,6 +7,7 @@ import Layout from "./Layout";
 import TopBar from "./TopBar";
 import OtrosServicios from "./OtrosServicios";
 import CircuitDetail from "./CircuitDetail";
+import Cars from "./cars";
 
 export default function AppRoutes() {
   const [user, setUser] = useState(null);
@@ -22,6 +23,7 @@ export default function AppRoutes() {
         <Route path="/authModal" element={<AuthModal />} />
         <Route path="/other-services" element={<OtrosServicios />} />
         <Route path="/circuit/:id" element={<CircuitDetail />} />
+        <Route path="/cars" element={<Cars />} />
       </Routes>
     </Layout>
   );
