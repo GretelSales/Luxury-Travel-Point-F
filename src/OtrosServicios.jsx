@@ -42,13 +42,16 @@ export default function OtrosServicios() {
     setOtherBlocks(filtered);
   }, [i18n.language, t]);
 
-  // 🔹 Fetch backend para remesas
+  // 🔹 Fetch backend para remesas usando REACT_APP_API_URL
   useEffect(() => {
     const fetchRemittances = async () => {
       try {
+        setLoadingRemittances(true);
         const lang = i18n.language.startsWith("es") ? "es" : "en";
+        const API_URL = process.env.REACT_APP_API_URL;
+
         const res = await axios.get(
-          `/api/services-content?type=remittances&lang=${lang}`,
+          `${API_URL}/api/services-content?type=remittances&lang=${lang}`,
         );
         setRemittancesData(res.data);
       } catch (error) {
@@ -61,7 +64,7 @@ export default function OtrosServicios() {
     fetchRemittances();
   }, [i18n.language]);
 
-  // 🔹 Combinar bloques de i18n + remesas backend
+  // 🔹 Combinar bloques i18n + remesas backend
   const renderedBlocks = remittancesData
     ? [...otherBlocks, { ...remittancesData, type: "remittances" }]
     : [...otherBlocks];
