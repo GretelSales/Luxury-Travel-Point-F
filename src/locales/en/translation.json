@@ -179,7 +179,7 @@
 ]
 },
 {
-  "remittances": "remittances",
+"type": "remittances",
 "title": "Remittances to Cuba",
 "badge": "Fast",
 "summary": "Secure and fast transfers nationwide",

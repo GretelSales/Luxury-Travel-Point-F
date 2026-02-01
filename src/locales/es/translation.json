@@ -179,7 +179,7 @@
 ]
 },
 {
-  "remittances": "remittances",
+"type": "remittances",
 "title": "Remesas a Cuba",
 "badge": "Rápido",
 "summary": "Envíos seguros y rápidos a todo el país",
