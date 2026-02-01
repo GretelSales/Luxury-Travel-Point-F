@@ -1,0 +1,33 @@
+.social-icons-footer {
+  display: none; /* ocultos en desktop */
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+}
+
+.social-icons-footer a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: gold;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.social-icons-footer a:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 8px gold;
+}
+
+/* Solo se muestran en móvil */
+@media (max-width: 768px) {
+  .social-icons-footer {
+    display: flex;
+  }
+}

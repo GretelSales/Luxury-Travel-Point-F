@@ -1,13 +1,17 @@
-// src/components/Topbar.jsx
+// src/components/TopBar.jsx
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faGlobe,
-  faEllipsisV,
   faBars,
   faHouse,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFacebookF,
+  faInstagram,
+  faTiktok,
+} from "@fortawesome/free-brands-svg-icons";
 import { useState, useRef, useEffect } from "react";
 import Contact from "./Contact.jsx";
 import AuthModal from "./AuthModal";
@@ -22,26 +26,26 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const topbarRef = useRef(null);
   const [darkMode, setDarkMode] = useState(false);
+
   const closeAllMenus = () => {
     setLangOpen(false);
     setDropdownOpen(false);
     setMobileMenuOpen(false);
   };
+
   const handleIconClick = () => {
     closeAllMenus();
     setDropdownOpen((prev) => !prev);
   };
 
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-  };
+  const changeLanguage = (lang) => i18n.changeLanguage(lang);
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (topbarRef.current && !topbarRef.current.contains(e.target)) {
         closeAllMenus();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("touchstart", handleClickOutside);
 
@@ -73,59 +77,49 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
           </div>
         </Link>
       </div>
+
       <nav className="ltp-right" ref={topbarRef}>
-        <Link
-          className="ltp-link"
-          to="/contact"
-          onClick={() => {
-            closeAllMenus();
-          }}
-        >
+        <Link className="ltp-link" to="/contact" onClick={closeAllMenus}>
           {t("nav.contact")}
         </Link>
         <Link to="/other-services" className="ltp-link">
           {t("nav.services")}
         </Link>
 
+        {/* Language selector */}
         <div className="ltp-icon" title={t("lang.title")}>
           <FontAwesomeIcon
             icon={faGlobe}
-            onClick={() => {
-              closeAllMenus();
-              setLangOpen((prev) => !prev);
-            }}
+            onClick={() => setLangOpen((prev) => !prev)}
             style={{ cursor: "pointer" }}
           />
           {langOpen && (
-            <div className="user-dropdown">
-              <div className="user-dropdown-item">
-                <button
-                  onClick={() => {
-                    changeLanguage("es");
-                    setLangOpen(false);
-                  }}
-                  className={i18n.language === "es" ? "active" : ""}
-                >
-                  {t("lang.es")}
-                </button>
-              </div>
-              <div className="user-dropdown-item">
-                <button
-                  onClick={() => {
-                    changeLanguage("en");
-                    setLangOpen(false);
-                  }}
-                  className={i18n.language === "en" ? "active" : ""}
-                >
-                  {t("lang.en")}
-                </button>
-              </div>
+            <div className="user-dropdown language-menu">
+              <button
+                onClick={() => {
+                  changeLanguage("es");
+                  setLangOpen(false);
+                }}
+                className={i18n.language === "es" ? "active" : ""}
+              >
+                {t("lang.es")}
+              </button>
+              <button
+                onClick={() => {
+                  changeLanguage("en");
+                  setLangOpen(false);
+                }}
+                className={i18n.language === "en" ? "active" : ""}
+              >
+                {t("lang.en")}
+              </button>
             </div>
           )}
         </div>
 
+        {/* User auth */}
         <div className="user-icon" onClick={handleIconClick}>
-          <div className="ltp-user" style={{ cursor: "pointer" }}>
+          <div className="ltp-user">
             <FontAwesomeIcon icon={faUser} />
           </div>
         </div>
@@ -139,7 +133,6 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
               <div
                 className="user-dropdown-item"
                 onClick={() => {
-                  closeAllMenus();
                   setAuthOpen(true);
                   setDropdownOpen(false);
                 }}
@@ -154,15 +147,44 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
             )}
           </div>
         )}
+
+        {/* Social icons desktop */}
+        <div className="social-icons">
+          <a
+            href="https://www.facebook.com/yourpage"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-icon"
+            title="Facebook"
+          >
+            <FontAwesomeIcon icon={faFacebookF} />
+          </a>
+          <a
+            href="https://www.instagram.com/yourpage"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-icon"
+            title="Instagram"
+          >
+            <FontAwesomeIcon icon={faInstagram} />
+          </a>
+          <a
+            href="https://www.tiktok.com/@yourpage"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-icon"
+            title="TikTok"
+          >
+            <FontAwesomeIcon icon={faTiktok} />
+          </a>
+        </div>
+
+        {/* Mobile menu */}
         <div
           className="mobile-menu"
-          onClick={() => {
-            closeAllMenus();
-            setMobileMenuOpen((prev) => !prev);
-          }}
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
         >
           <FontAwesomeIcon icon={faBars} size="lg" />
-
           {mobileMenuOpen && (
             <div className="mobile-dropdown">
               <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>

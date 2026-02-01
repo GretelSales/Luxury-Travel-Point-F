@@ -4,6 +4,7 @@ import axios from "axios";
 import AuthModal from "./AuthModal";
 import MonthYearPicker from "./MonthYearPicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SocialIcons from "../components/SocialIcons.jsx";
 import {
   faUser,
   faGlobe,
@@ -49,7 +50,7 @@ export default function App() {
     const fetchCountries = async () => {
       try {
         const res = await axios.get(
-          "https://luxury-travel-point-frontend.onrender.com/api/cities/countries"
+          "https://luxury-travel-point-frontend.onrender.com/api/cities/countries",
         );
 
         // Si existe traducción, úsala; sino, muestra tal cual
@@ -111,14 +112,14 @@ export default function App() {
       }
 
       const filtered = circuits.filter((c) =>
-        c.schedules.some((s) => s.start_date === selectedDate)
+        c.schedules.some((s) => s.start_date === selectedDate),
       );
 
       setFilteredCircuits(filtered);
     };
 
     const filtered = circuits.filter((c) =>
-      c.countries.includes(selectedCountry)
+      c.countries.includes(selectedCountry),
     );
 
     setFilteredCircuits(filtered);
@@ -159,7 +160,7 @@ export default function App() {
           const y = d.getFullYear().toString(); // "2025"
 
           return m === fecha.month && y === fecha.year;
-        })
+        }),
       );
     }
 
@@ -180,7 +181,7 @@ export default function App() {
       const res = await fetch(
         `${
           import.meta.env.VITE_API_URL
-        }/api/circuits/by-country/${selectedCountry}`
+        }/api/circuits/by-country/${selectedCountry}`,
       );
       const filteredCircuits = await res.json();
 
@@ -219,7 +220,7 @@ export default function App() {
         setIsLoading(true); // 🔹 Inicio carga
         const res = await axios.get(
           "https://luxury-travel-point-frontend.onrender.com/api/circuits/full",
-          { params: { langCode: i18n.language } }
+          { params: { langCode: i18n.language } },
         );
         setCircuits(res.data);
         setFilteredCircuits(res.data);
@@ -293,9 +294,9 @@ export default function App() {
                         <div className="ltp-no-results-actions">
                           <a
                             href={`mailto:sales@luxurytravelpoint.com?subject=${encodeURIComponent(
-                              t("search.contactEmailSubject")
+                              t("search.contactEmailSubject"),
                             )}&body=${encodeURIComponent(
-                              t("search.contactMessage", { query })
+                              t("search.contactMessage", { query }),
                             )}`}
                             className="ltp-contact-link"
                           >
@@ -304,7 +305,7 @@ export default function App() {
 
                           <a
                             href={`https://wa.me/2392657294?text=${encodeURIComponent(
-                              t("search.contactMessage", { query })
+                              t("search.contactMessage", { query }),
                             )}`}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -436,6 +437,10 @@ export default function App() {
         </section>
       </div>
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
+
+      <footer>
+        <SocialIcons />
+      </footer>
     </div>
   );
 }
