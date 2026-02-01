@@ -51,7 +51,7 @@ export default function OtrosServicios() {
         const API_URL = process.env.REACT_APP_API_URL;
 
         const res = await axios.get(
-          `${API_URL}/api/services-content?type=remittances&lang=${lang}`,
+          "https://luxury-travel-point-frontend.onrender.com/api/services-content?type=remittances&lang=${lang}",
         );
         setRemittancesData(res.data);
       } catch (error) {
