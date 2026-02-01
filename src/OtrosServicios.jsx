@@ -55,6 +55,15 @@ export default function OtrosServicios() {
     fetchRemittances();
   }, [i18n.language]);
 
+  // 🔄 Combinar bloques, reemplazando remesas con la data del backend
+  const renderedBlocks = blocks.map((block) => {
+    if (block.type === "remittances") {
+      if (loadingRemittances) return { ...block, details: [] }; // spinner silencioso
+      if (remittancesData) return { ...block, ...remittancesData };
+    }
+    return block;
+  });
+
   return (
     <>
       <TopBar darkMode={true} />
@@ -66,66 +75,49 @@ export default function OtrosServicios() {
         </header>
 
         <div className="services-grid">
-          {blocks.map((block, idx) => {
-            const isRemittances = block.type === "remittances";
-
-            // 🧠 si es remesas, usamos backend
-            const data =
-              isRemittances && remittancesData ? remittancesData : block;
-
-            // spinner silencioso
-            if (isRemittances && loadingRemittances) return null;
-
-            return (
-              <div
-                key={idx}
-                className={`service-card ${open === idx ? "open" : ""}`}
-              >
-                <div
-                  className="service-card-header"
-                  onClick={() => toggle(idx)}
-                >
-                  <h2>{data.title}</h2>
-                  {data.badge && (
-                    <span className="service-badge">{data.badge}</span>
-                  )}
-                </div>
-
-                {data.summary && (
-                  <p className="service-summary">{data.summary}</p>
-                )}
-
-                {open === idx && data.details && (
-                  <div className="service-details">
-                    <ul>
-                      {data.details.map((item, i) => (
-                        <li key={i}>{item}</li>
-                      ))}
-                    </ul>
-
-                    {/* 👇 BOTÓN ESPECIAL SOLO PARA RENTA DE AUTOS */}
-                    {block.type === "car-rental" && (
-                      <button
-                        className="service-primary-action"
-                        onClick={() => navigate("/cars")}
-                      >
-                        {t("services.viewCars")}
-                      </button>
-                    )}
-                  </div>
-                )}
-
-                {data.details && (
-                  <button
-                    className="service-toggle"
-                    onClick={() => toggle(idx)}
-                  >
-                    {open === idx ? t("services.less") : t("services.more")}
-                  </button>
+          {renderedBlocks.map((block, idx) => (
+            <div
+              key={idx}
+              className={`service-card ${open === idx ? "open" : ""}`}
+            >
+              <div className="service-card-header" onClick={() => toggle(idx)}>
+                <h2>{block.title}</h2>
+                {block.badge && (
+                  <span className="service-badge">{block.badge}</span>
                 )}
               </div>
-            );
-          })}
+
+              {block.summary && (
+                <p className="service-summary">{block.summary}</p>
+              )}
+
+              {open === idx && block.details && (
+                <div className="service-details">
+                  <ul>
+                    {block.details.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+
+                  {/* 👇 BOTÓN ESPECIAL SOLO PARA RENTA DE AUTOS */}
+                  {block.type === "car-rental" && (
+                    <button
+                      className="service-primary-action"
+                      onClick={() => navigate("/cars")}
+                    >
+                      {t("services.viewCars")}
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {block.details && (
+                <button className="service-toggle" onClick={() => toggle(idx)}>
+                  {open === idx ? t("services.less") : t("services.more")}
+                </button>
+              )}
+            </div>
+          ))}
         </div>
       </section>
     </>
