@@ -8,12 +8,11 @@ import "./OtrosServicios.css";
 export default function OtrosServicios() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(null);
 
+  const [open, setOpen] = useState(null);
   const [remittancesData, setRemittancesData] = useState(null);
   const [loadingRemittances, setLoadingRemittances] = useState(true);
-
-  const blocks = t("services.blocks", { returnObjects: true }) || [];
+  const [otherBlocks, setOtherBlocks] = useState([]);
 
   const toggle = (idx) => {
     setOpen(open === idx ? null : idx);
@@ -36,7 +35,14 @@ export default function OtrosServicios() {
     return () => document.body.classList.remove("dark-hero");
   }, []);
 
-  // 🔥 Fetch SOLO para remesas
+  // 🔹 Filtrar bloques de i18n sin remesas
+  useEffect(() => {
+    const allBlocks = t("services.blocks", { returnObjects: true }) || [];
+    const filtered = allBlocks.filter((b) => b.type !== "remittances");
+    setOtherBlocks(filtered);
+  }, [i18n.language, t]);
+
+  // 🔹 Fetch backend para remesas
   useEffect(() => {
     const fetchRemittances = async () => {
       try {
@@ -55,14 +61,10 @@ export default function OtrosServicios() {
     fetchRemittances();
   }, [i18n.language]);
 
-  // 🔄 Combinar bloques, reemplazando remesas con la data del backend
-  const renderedBlocks = blocks.map((block) => {
-    if (block.type === "remittances") {
-      if (loadingRemittances) return { ...block, details: [] }; // spinner silencioso
-      if (remittancesData) return { ...block, ...remittancesData };
-    }
-    return block;
-  });
+  // 🔹 Combinar bloques de i18n + remesas backend
+  const renderedBlocks = remittancesData
+    ? [...otherBlocks, { ...remittancesData, type: "remittances" }]
+    : [...otherBlocks];
 
   return (
     <>
@@ -75,49 +77,61 @@ export default function OtrosServicios() {
         </header>
 
         <div className="services-grid">
-          {renderedBlocks.map((block, idx) => (
-            <div
-              key={idx}
-              className={`service-card ${open === idx ? "open" : ""}`}
-            >
-              <div className="service-card-header" onClick={() => toggle(idx)}>
-                <h2>{block.title}</h2>
-                {block.badge && (
-                  <span className="service-badge">{block.badge}</span>
-                )}
-              </div>
+          {renderedBlocks.map((block, idx) => {
+            const isRemittances = block.type === "remittances";
 
-              {block.summary && (
-                <p className="service-summary">{block.summary}</p>
-              )}
+            // spinner silencioso mientras carga remesas
+            if (isRemittances && loadingRemittances) return null;
 
-              {open === idx && block.details && (
-                <div className="service-details">
-                  <ul>
-                    {block.details.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-
-                  {/* 👇 BOTÓN ESPECIAL SOLO PARA RENTA DE AUTOS */}
-                  {block.type === "car-rental" && (
-                    <button
-                      className="service-primary-action"
-                      onClick={() => navigate("/cars")}
-                    >
-                      {t("services.viewCars")}
-                    </button>
+            return (
+              <div
+                key={idx}
+                className={`service-card ${open === idx ? "open" : ""}`}
+              >
+                <div
+                  className="service-card-header"
+                  onClick={() => toggle(idx)}
+                >
+                  <h2>{block.title}</h2>
+                  {block.badge && (
+                    <span className="service-badge">{block.badge}</span>
                   )}
                 </div>
-              )}
 
-              {block.details && (
-                <button className="service-toggle" onClick={() => toggle(idx)}>
-                  {open === idx ? t("services.less") : t("services.more")}
-                </button>
-              )}
-            </div>
-          ))}
+                {block.summary && (
+                  <p className="service-summary">{block.summary}</p>
+                )}
+
+                {open === idx && block.details && (
+                  <div className="service-details">
+                    <ul>
+                      {block.details.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+
+                    {block.type === "car-rental" && (
+                      <button
+                        className="service-primary-action"
+                        onClick={() => navigate("/cars")}
+                      >
+                        {t("services.viewCars")}
+                      </button>
+                    )}
+                  </div>
+                )}
+
+                {block.details && (
+                  <button
+                    className="service-toggle"
+                    onClick={() => toggle(idx)}
+                  >
+                    {open === idx ? t("services.less") : t("services.more")}
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
     </>
