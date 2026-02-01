@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import TopBar from "./TopBar.jsx";
 import CarCard from "./CarCard.jsx";
 import { useCars } from "./useCars";
-import "./Cars.css";
+import "./cars.css";
 
 export default function Cars() {
   const { t } = useTranslation();
