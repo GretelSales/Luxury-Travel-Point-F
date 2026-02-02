@@ -1,16 +1,12 @@
-.social-icons-footer {
-  display: none; /* ocultos en desktop */
+.social-icons-topbar {
+  display: flex;
   gap: 12px;
-  justify-content: center;
   align-items: center;
-  padding: 12px 0;
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
 }
 
-.social-icons-footer a {
-  width: 40px;
-  height: 40px;
+.social-icons-topbar a {
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,14 +16,14 @@
   transition: 0.3s;
 }
 
-.social-icons-footer a:hover {
-  transform: scale(1.1);
+.social-icons-topbar a:hover {
+  transform: scale(1.2);
   text-shadow: 0 0 8px gold;
 }
 
-/* Solo se muestran en móvil */
+/* Solo desktop, ocultar en móvil si quieres */
 @media (max-width: 768px) {
-  .social-icons-footer {
-    display: flex;
+  .social-icons-topbar {
+    display: none;
   }
 }

@@ -1,4 +1,4 @@
-// src/components/TopBar.jsx
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +12,6 @@ import {
   faInstagram,
   faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
-import { useState, useRef, useEffect } from "react";
 import Contact from "./Contact.jsx";
 import AuthModal from "./AuthModal";
 import "./TopBar.css";

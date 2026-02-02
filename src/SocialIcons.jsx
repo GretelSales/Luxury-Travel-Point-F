@@ -1,38 +1,62 @@
 // src/components/SocialIcons.jsx
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebookF,
-  faInstagram,
-  faTiktok,
-} from "@fortawesome/free-brands-svg-icons";
 import "./SocialIcons.css";
 
 export default function SocialIcons() {
   return (
-    <div className="social-icons-footer">
+    <div className="social-icons-topbar">
       <a
         href="https://www.facebook.com/yourpage"
         target="_blank"
         rel="noopener noreferrer"
         title="Facebook"
       >
-        <FontAwesomeIcon icon={faFacebookF} />
+        {/* SVG Facebook */}
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="gold"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M22.675 0h-21.35C0.594 0 0 0.593 0 1.326v21.348C0 23.406 0.594 24 1.326 24h11.495v-9.294H9.691V11.29h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.794.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.762v2.31h3.587l-.467 3.416h-3.12V24h6.116C23.406 24 24 23.406 24 22.674V1.326C24 .593 23.406 0 22.675 0z" />
+        </svg>
       </a>
+
       <a
         href="https://www.instagram.com/yourpage"
         target="_blank"
         rel="noopener noreferrer"
         title="Instagram"
       >
-        <FontAwesomeIcon icon={faInstagram} />
+        {/* SVG Instagram */}
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="gold"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.17.056 1.97.248 2.427.415a4.92 4.92 0 011.678 1.094 4.922 4.922 0 011.094 1.678c.167.457.36 1.257.415 2.427.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.056 1.17-.248 1.97-.415 2.427a4.902 4.902 0 01-1.094 1.678 4.92 4.92 0 01-1.678 1.094c-.457.167-1.257.36-2.427.415-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.17-.056-1.97-.248-2.427-.415a4.922 4.922 0 01-1.678-1.094 4.922 4.922 0 01-1.094-1.678c-.167-.457-.36-1.257-.415-2.427-.058-1.265-.07-1.645-.07-4.849s.012-3.584.07-4.849c.056-1.17.248-1.97.415-2.427a4.922 4.922 0 011.094-1.678 4.922 4.922 0 011.678-1.094c.457-.167 1.257-.36 2.427-.415 1.265-.058 1.645-.07 4.849-.07zm0-2.163C8.735 0 8.332.012 7.052.07 5.773.127 4.672.342 3.758.654a7.078 7.078 0 00-2.564 1.576A7.078 7.078 0 00.654 4.794c-.312.914-.527 2.015-.584 3.294C.012 8.332 0 8.735 0 12s.012 3.668.07 4.948c.057 1.279.272 2.38.584 3.294a7.085 7.085 0 001.54 2.564 7.085 7.085 0 002.564 1.54c.914.312 2.015.527 3.294.584C8.332 23.988 8.735 24 12 24s3.668-.012 4.948-.07c1.279-.057 2.38-.272 3.294-.584a7.085 7.085 0 002.564-1.54 7.085 7.085 0 001.54-2.564c.312-.914.527-2.015.584-3.294.058-1.28.07-1.683.07-4.948s-.012-3.668-.07-4.948c-.057-1.279-.272-2.38-.584-3.294a7.085 7.085 0 00-1.54-2.564 7.085 7.085 0 00-2.564-1.54c-.914-.312-2.015-.527-3.294-.584C15.668.012 15.265 0 12 0z" />
+          <circle cx="12" cy="12" r="3.6" />
+        </svg>
       </a>
+
       <a
         href="https://www.tiktok.com/@yourpage"
         target="_blank"
         rel="noopener noreferrer"
         title="TikTok"
       >
-        <FontAwesomeIcon icon={faTiktok} />
+        {/* SVG TikTok */}
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="gold"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M12.004 0c-.518 0-1.028.051-1.53.151v9.024c.51.048 1.018.094 1.53.094 2.626 0 4.756-2.13 4.756-4.756V0h-4.756z" />
+        </svg>
       </a>
     </div>
   );
