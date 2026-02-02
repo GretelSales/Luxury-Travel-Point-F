@@ -4,7 +4,7 @@ import axios from "axios";
 import AuthModal from "./AuthModal";
 import MonthYearPicker from "./MonthYearPicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SocialIcons from "../components/SocialIcons.jsx";
+import SocialIcons from "./SocialIcons.jsx";
 import {
   faUser,
   faGlobe,
