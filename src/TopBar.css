@@ -254,20 +254,16 @@
   transform: scale(1.1);
   text-shadow: 0 0 8px rgb(143, 122, 1);
 }
-/* Reducir espacio entre iconos en móvil */
 @media (max-width: 768px) {
   .ltp-right {
-    gap: 6px; /* antes 10px */
+    gap: 4px; /* antes era 10px, ahora más juntos */
   }
+}
+.social-icons .social-icon svg {
+  color: #b68c3f; /* dorado oscuro */
+  transition: 0.25s;
+}
 
-  .social-icons {
-    gap: 6px; /* reduce espacio entre cada icono social */
-  }
-
-  .ltp-icon,
-  .ltp-user,
-  .social-icon {
-    width: 36px;   /* iconos un poco más pequeños */
-    height: 36px;
-  }
+.social-icons .social-icon:hover svg {
+  color: #e0b84c; /* dorado más claro al hover */
 }
