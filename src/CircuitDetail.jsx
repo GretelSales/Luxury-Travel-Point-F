@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import InterestModal from "./InterestModal";
 import "./CircuitDetail.css";
 
 const API_URL =
@@ -8,21 +9,28 @@ const API_URL =
 
 export default function CircuitDetailPage() {
   const { id } = useParams();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [circuit, setCircuit] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   const [currentImage, setCurrentImage] = useState(0);
+
+  // 🔹 interest modal
+  const [interestOpen, setInterestOpen] = useState(false);
 
   useEffect(() => {
     const fetchCircuit = async () => {
       try {
-        // Obtener idioma actual de i18next
         const lang = t("langCode") || "es";
+
         const res = await fetch(`${API_URL}/${id}/fullById?lang=${lang}`);
+
         if (!res.ok) throw new Error(t("circuit.errorLoad"));
+
         const data = await res.json();
+
         setCircuit(data);
       } catch (err) {
         setError(err.message);
@@ -30,11 +38,22 @@ export default function CircuitDetailPage() {
         setLoading(false);
       }
     };
+
     fetchCircuit();
   }, [id, t]);
 
+  const handleInterestClick = () => {
+    setInterestOpen(true);
+  };
+
+  const handleCloseInterest = () => {
+    setInterestOpen(false);
+  };
+
   if (loading) return <div className="loading">{t("common.loading")}</div>;
+
   if (error) return <div className="error">{error}</div>;
+
   if (!circuit) return null;
 
   const images = circuit.daysData?.flatMap((d) => d.images || []) || [];
@@ -45,76 +64,110 @@ export default function CircuitDetailPage() {
     setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
 
   return (
-    <main className="circuit-page">
-      {/* HERO */}
-      <section className="circuit-hero">
-        <div className="hero-overlay" />
+    <>
+      <main className="circuit-page">
+        {/* HERO */}
 
-        <div className="hero-content">
-          <h1 className="circuit-title">{circuit.name}</h1>
+        <section className="circuit-hero">
+          <div className="hero-overlay" />
 
-          <div className="hero-price">
-            {t("circuitos.from")} <strong>${circuit.base_price}</strong>
+          <div className="hero-content">
+            <h1 className="circuit-title">{circuit.name}</h1>
+
+            <div className="hero-price">
+              {t("circuitos.from")} <strong>${circuit.base_price}</strong>
+            </div>
+
+            <div className="hero-meta">
+              <span>
+                {circuit.days} {t("circuitos.days")}
+              </span>
+
+              <span>
+                {t("circuitos.start")}: {circuit.starting_point}
+              </span>
+            </div>
           </div>
+        </section>
 
-          <div className="hero-meta">
-            <span>
-              {circuit.days} {t("circuitos.days")}
-            </span>
-            <span>
-              {t("circuitos.start")}: {circuit.starting_point}
-            </span>
+        {/* GALLERY */}
+
+        <section className="gallery-frame">
+          {images.length > 0 && (
+            <>
+              <button className="nav left" onClick={prevImage}>
+                ‹
+              </button>
+
+              <img
+                src={images[currentImage]}
+                alt={`${t("common.image")} ${currentImage + 1}`}
+                className="gallery-image"
+              />
+
+              <button className="nav right" onClick={nextImage}>
+                ›
+              </button>
+            </>
+          )}
+        </section>
+
+        {/* ITINERARY */}
+
+        <section className="content-section">
+          <div className="floating-frame">
+            <h2>{t("circuitos.itinerary")}</h2>
+
+            <ul className="itinerary">
+              {circuit.daysData.map((day, i) => (
+                <li key={i}>
+                  <strong>
+                    {t("circuitos.day")} {day.day} · {day.city}, {day.country}
+                  </strong>
+
+                  <p>{day.description}</p>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* GALLERY */}
-      <section className="gallery-frame">
-        {images.length > 0 && (
-          <>
-            <button className="nav left" onClick={prevImage}>
-              ‹
-            </button>
-            <img
-              src={images[currentImage]}
-              alt={`${t("common.image")} ${currentImage + 1}`}
-              className="gallery-image"
-            />
-            <button className="nav right" onClick={nextImage}>
-              ›
-            </button>
-          </>
-        )}
-      </section>
+        {/* INCLUDES */}
 
-      {/* ITINERARY */}
-      <section className="content-section">
-        <div className="floating-frame">
-          <h2>{t("circuitos.itinerary")}</h2>
-          <ul className="itinerary">
-            {circuit.daysData.map((day, i) => (
-              <li key={i}>
-                <strong>
-                  {t("circuitos.day")} {day.day} · {day.city}, {day.country}
-                </strong>
-                <p>{day.description}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        <section className="content-section">
+          <div className="floating-frame">
+            <h2>{t("circuitos.includes")}</h2>
 
-      {/* INCLUDES */}
-      <section className="content-section">
-        <div className="floating-frame">
-          <h2>{t("circuitos.includes")}</h2>
-          <ul className="includes">
-            {circuit.includes.map((item, i) => (
-              <li key={i}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    </main>
+            <ul className="includes">
+              {circuit.includes.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* 🔹 FLOATING INTEREST BUTTON */}
+
+        <button
+          className="floating-interest-button"
+          onClick={handleInterestClick}
+        >
+          {t("services.interestButton")}
+        </button>
+      </main>
+
+      {/* 🔹 MODAL */}
+
+      <InterestModal
+        open={interestOpen}
+        onClose={handleCloseInterest}
+        service={{
+          name: circuit.name,
+          type: "circuit",
+          circuitId: circuit.id,
+        }}
+        language={i18n.language}
+      />
+    </>
   );
 }

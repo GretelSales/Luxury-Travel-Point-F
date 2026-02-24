@@ -1,0 +1,36 @@
+.interest-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+}
+
+.interest-modal {
+  background: #111;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  color: white;
+}
+
+.interest-modal input,
+.interest-modal textarea {
+
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.interest-modal textarea {
+
+  height: 100px;
+}
+
+.interest-subtitle {
+
+  font-size: 14px;
+  opacity: 0.7;
+}

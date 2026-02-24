@@ -4,10 +4,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import TopBar from "./TopBar.jsx";
 import "./OtrosServicios.css";
+import InterestModal from "./InterestModal";
 
 export default function OtrosServicios() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+
+  // 🔹 interest modal state
+  const [interestOpen, setInterestOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
 
   const [open, setOpen] = useState(null);
   const [remittancesData, setRemittancesData] = useState(null);
@@ -16,6 +21,20 @@ export default function OtrosServicios() {
 
   const toggle = (idx) => {
     setOpen(open === idx ? null : idx);
+  };
+
+  // 🔹 abrir modal interés
+  const handleInterestClick = (block) => {
+    setSelectedService({
+      name: block.title,
+      type: block.type || "service",
+    });
+    setInterestOpen(true);
+  };
+
+  const handleCloseInterest = () => {
+    setInterestOpen(false);
+    setSelectedService(null);
   };
 
   // idioma inicial
@@ -35,24 +54,26 @@ export default function OtrosServicios() {
     return () => document.body.classList.remove("dark-hero");
   }, []);
 
-  // 🔹 Filtrar bloques de i18n sin remesas
+  // 🔹 Filtrar bloques i18n sin remesas
   useEffect(() => {
     const allBlocks = t("services.blocks", { returnObjects: true }) || [];
     const filtered = allBlocks.filter((b) => b.type !== "remittances");
     setOtherBlocks(filtered);
   }, [i18n.language, t]);
 
-  // 🔹 Fetch backend para remesas usando REACT_APP_API_URL
+  // 🔹 Fetch backend para remesas
   useEffect(() => {
     const fetchRemittances = async () => {
       try {
         setLoadingRemittances(true);
+
         const lang = i18n.language.startsWith("es") ? "es" : "en";
         const API_URL = process.env.REACT_APP_API_URL;
 
         const res = await axios.get(
-          "https://luxury-travel-point-frontend.onrender.com/api/services-content?type=remittances&lang=${lang}",
+          `${API_URL}/api/services-content?type=remittances&lang=${lang}`,
         );
+
         setRemittancesData(res.data);
       } catch (error) {
         console.error("Error loading remittances content", error);
@@ -64,7 +85,7 @@ export default function OtrosServicios() {
     fetchRemittances();
   }, [i18n.language]);
 
-  // 🔹 Combinar bloques i18n + remesas backend
+  // 🔹 Combinar bloques
   const renderedBlocks = remittancesData
     ? [...otherBlocks, { ...remittancesData, type: "remittances" }]
     : [...otherBlocks];
@@ -83,7 +104,6 @@ export default function OtrosServicios() {
           {renderedBlocks.map((block, idx) => {
             const isRemittances = block.type === "remittances";
 
-            // spinner silencioso mientras carga remesas
             if (isRemittances && loadingRemittances) return null;
 
             return (
@@ -96,6 +116,7 @@ export default function OtrosServicios() {
                   onClick={() => toggle(idx)}
                 >
                   <h2>{block.title}</h2>
+
                   {block.badge && (
                     <span className="service-badge">{block.badge}</span>
                   )}
@@ -113,6 +134,7 @@ export default function OtrosServicios() {
                       ))}
                     </ul>
 
+                    {/* botón existente */}
                     {block.type === "car-rental" && (
                       <button
                         className="service-primary-action"
@@ -121,6 +143,14 @@ export default function OtrosServicios() {
                         {t("services.viewCars")}
                       </button>
                     )}
+
+                    {/* 🔹 NUEVO BOTÓN ME INTERESA */}
+                    <button
+                      className="service-interest-button"
+                      onClick={() => handleInterestClick(block)}
+                    >
+                      {t("services.interestButton")}
+                    </button>
                   </div>
                 )}
 
@@ -132,11 +162,29 @@ export default function OtrosServicios() {
                     {open === idx ? t("services.less") : t("services.more")}
                   </button>
                 )}
+
+                {/* 🔹 botón visible también cuando está cerrado */}
+                {open !== idx && (
+                  <button
+                    className="service-interest-button collapsed"
+                    onClick={() => handleInterestClick(block)}
+                  >
+                    {t("services.interestButton")}
+                  </button>
+                )}
               </div>
             );
           })}
         </div>
       </section>
+
+      {/* 🔹 MODAL INTERÉS */}
+      <InterestModal
+        open={interestOpen}
+        onClose={handleCloseInterest}
+        service={selectedService}
+        language={i18n.language}
+      />
     </>
   );
 }

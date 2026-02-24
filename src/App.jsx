@@ -16,6 +16,8 @@ import {
 import CircuitsGrid from "./CircuitsGrid";
 import { Link, Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   const [showAuth, setShowAuth] = useState(false);
@@ -437,10 +439,18 @@ export default function App() {
         </section>
       </div>
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
-
       <footer>
         <SocialIcons />
       </footer>
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 }
