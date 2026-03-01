@@ -63,6 +63,8 @@ export default function OtrosServicios() {
     const allBlocks = t("services.blocks", { returnObjects: true }) || [];
     const filtered = allBlocks.filter((b) => b.type !== "remittances");
     setOtherBlocks(filtered);
+    console.log("ALL BLOCKS:", allBlocks);
+    console.log("FILTERED BLOCKS:", filtered);
   }, [i18n.language, t]);
 
   // 🔹 Fetch backend para remesas
@@ -93,7 +95,7 @@ export default function OtrosServicios() {
   const renderedBlocks = remittancesData
     ? [...otherBlocks, { ...remittancesData, type: "remittances" }]
     : [...otherBlocks];
-
+  console.log("RENDERED BLOCKS:", renderedBlocks);
   return (
     <>
       <TopBar darkMode={true} />
