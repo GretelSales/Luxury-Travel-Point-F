@@ -25,10 +25,14 @@ export default function OtrosServicios() {
 
   // 🔹 abrir modal interés
   const handleInterestClick = (block) => {
+    console.log("CLICK");
+    console.log("Servicio seleccionado:", block);
+
     setSelectedService({
       name: block.title,
       type: block.type || "service",
     });
+
     setInterestOpen(true);
   };
 
