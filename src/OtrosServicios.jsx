@@ -186,10 +186,10 @@ export default function OtrosServicios() {
 
       {/* 🔹 MODAL INTERÉS */}
       <InterestModal
-        open={interestOpen}
+        visible={interestOpen}
         onClose={handleCloseInterest}
-        service={selectedService}
-        language={i18n.language}
+        serviceType={selectedService?.type}
+        serviceName={selectedService?.name}
       />
     </>
   );
