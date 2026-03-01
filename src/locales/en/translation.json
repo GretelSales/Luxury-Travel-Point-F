@@ -148,11 +148,35 @@
   "circuit": {
   "title": "Available Circuits"
 },
+"interest": {
+
+"title": "Request information",
+
+"subtitle": "We will contact you shortly",
+
+"name": "Your name",
+
+"email": "Your email",
+
+"message": "Message (optional)",
+
+"send": "Send request",
+
+"sending": "Sending...",
+
+"success": "Request sent successfully",
+
+"error": "Error sending request",
+
+"button": "I'm interested"
+
+},
 "services": {
 "viewCars": "View available cars",
 "title": "Other services",
 "subtitle": "Comprehensive solutions designed to support you at every stage",
 "more": "View more",
+"interestButton": "I'm interested",
 "less": "View less",
 "blocks": [
 {

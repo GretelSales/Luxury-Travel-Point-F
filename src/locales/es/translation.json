@@ -147,13 +147,36 @@
   "circuit": {
   "title": "Circuitos disponibles"
 },
+"interest": {
 
+"title": "Solicitar información",
+
+"subtitle": "La dueña te contactará pronto",
+
+"name": "Tu nombre",
+
+"email": "Tu correo",
+
+"message": "Mensaje (opcional)",
+
+"send": "Enviar solicitud",
+
+"sending": "Enviando...",
+
+"success": "Solicitud enviada correctamente",
+
+"error": "Error enviando solicitud",
+
+"button": "Me interesa"
+
+},
 "services": {
 "viewCars": "Ver autos disponibles",  
 "title": "Otros servicios",
 "subtitle": "Soluciones integrales diseñadas para acompañarte en cada etapa",
 "more": "Ver más",
 "less": "Ver menos",
+"interestButton": "Estoy interesado",
 "blocks": [
 {
 "title": "Envíos a Cuba",
