@@ -30,10 +30,11 @@ export default function AuthModal({
         {
           email,
           password,
-        }
+        },
       );
       const { token, user } = res.data;
       localStorage.setItem("ltp_token", token);
+      localStorage.setItem("ltp_user", JSON.stringify(user));
       onAuthSuccess(user, token);
       onClose();
     } catch (err) {
@@ -54,10 +55,11 @@ export default function AuthModal({
           email,
           phone,
           password,
-        }
+        },
       );
       const { token, user } = res.data;
       localStorage.setItem("ltp_token", token);
+      localStorage.setItem("ltp_user", JSON.stringify(user));
       onAuthSuccess(user, token);
       onClose();
     } catch (err) {
