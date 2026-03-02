@@ -12,7 +12,7 @@ export default function InterestModal({
   circuitName,
 }) {
   const { t, i18n } = useTranslation();
-
+  console.log("LocalStorage ltp_user:", localStorage.getItem("ltp_user"));
   const user = JSON.parse(localStorage.getItem("ltp_user"));
 
   const [name, setName] = useState(""); // inicializamos vacío
@@ -22,11 +22,17 @@ export default function InterestModal({
 
   // 🔹 autocompletar nombre y email si hay usuario
   useEffect(() => {
-    if (user) {
-      setName(user.full_name || "");
-      setEmail(user.email || "");
+    try {
+      const storedUser = JSON.parse(localStorage.getItem("ltp_user"));
+      if (storedUser) {
+        setName(storedUser.full_name || "");
+        setEmail(storedUser.email || "");
+        setUserId(storedUser.id || null); // si quieres guardarlo en estado también
+      }
+    } catch (e) {
+      console.warn("No hay usuario en localStorage o es inválido");
     }
-  }, [user]);
+  }, []);
 
   if (!visible) return null;
 
