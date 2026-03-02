@@ -12,7 +12,6 @@ export default function InterestModal({
   circuitName,
 }) {
   const { t, i18n } = useTranslation();
-  console.log("LocalStorage ltp_user:", localStorage.getItem("ltp_user"));
   const user = JSON.parse(localStorage.getItem("ltp_user"));
 
   const [name, setName] = useState(""); // inicializamos vacío
@@ -29,9 +28,7 @@ export default function InterestModal({
         setEmail(storedUser.email || "");
         setUserId(storedUser.id || null); // si quieres guardarlo en estado también
       }
-    } catch (e) {
-      console.warn("No hay usuario en localStorage o es inválido");
-    }
+    } catch (e) {}
   }, []);
 
   if (!visible) return null;
