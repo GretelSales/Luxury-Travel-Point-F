@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // ✅ agregamos useEffect
 import "./InterestModal.css";
 import { useTranslation } from "react-i18next";
 import { sendServiceInterest } from "./apiServiceInterest";
 import { toast } from "react-toastify";
 
-export default function InterestModal({ visible, onClose, service, language }) {
-  const { t } = useTranslation();
+export default function InterestModal({
+  visible,
+  onClose,
+  serviceType,
+  serviceName,
+  circuitName,
+}) {
+  const { t, i18n } = useTranslation();
 
-  // 🔹 Obtener usuario autenticado desde localStorage
   const user = JSON.parse(localStorage.getItem("ltp_user"));
 
-  // 🔹 Estados para los campos
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState(""); // inicializamos vacío
+  const [email, setEmail] = useState(""); // inicializamos vacío
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Autocompletar campos si hay usuario
+  // 🔹 autocompletar nombre y email si hay usuario
   useEffect(() => {
     if (user) {
       setName(user.full_name || "");
@@ -31,23 +35,23 @@ export default function InterestModal({ visible, onClose, service, language }) {
       setLoading(true);
 
       await sendServiceInterest({
-        service_type: service?.type || "service",
-        service_name: service?.name || "",
-        circuit_id: service?.circuitId || null, // incluir circuito si aplica
+        service_type: serviceType,
+        service_name: serviceName,
+        circuit_name: circuitName || null,
         message,
-        language,
+        language: i18n.language,
         user_name: name,
         user_email: email,
-        user_id: user?.id || null, // 🔹 enviamos el userId si existe
+        user_id: user?.id || null, // ✅ enviamos el id del usuario
       });
 
       toast.success(t("interest.success"));
       setMessage("");
-      onClose();
     } catch (e) {
       toast.error(t("interest.error"));
     } finally {
       setLoading(false);
+      onClose(); // cerramos siempre al finalizar
     }
   };
 
@@ -78,7 +82,7 @@ export default function InterestModal({ visible, onClose, service, language }) {
 
         {user && (
           <>
-            {/* Mostrar los campos pero deshabilitados para el usuario autenticado */}
+            {/* mostrar campos deshabilitados para usuarios autenticados */}
             <input value={name} disabled />
             <input value={email} disabled />
           </>
@@ -90,11 +94,7 @@ export default function InterestModal({ visible, onClose, service, language }) {
           onChange={(e) => setMessage(e.target.value)}
         />
 
-        <button
-          className="ltp-btn"
-          onClick={handleSubmit}
-          disabled={loading || !name || !email}
-        >
+        <button className="ltp-btn" onClick={handleSubmit} disabled={loading}>
           {loading ? t("interest.sending") : t("interest.send")}
         </button>
       </div>
