@@ -10,27 +10,57 @@
 
 .interest-modal {
   background: #111;
-  padding: 30px;
-  border-radius: 12px;
-  width: 400px;
+  padding: 40px; /* más espacio interno */
+  border-radius: 16px;
+  width: 420px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* 👈 separación automática entre elementos */
 }
 
-.interest-modal input,
-.interest-modal textarea {
-
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
+/* título */
+.interest-modal h2 {
+  margin: 0;
+  font-size: 22px;
 }
 
-.interest-modal textarea {
-
-  height: 100px;
-}
-
+/* subtítulo */
 .interest-subtitle {
-
   font-size: 14px;
   opacity: 0.7;
+  margin-top: -8px; /* ajusta cercanía con título */
+}
+
+/* inputs y textarea */
+.interest-modal input,
+.interest-modal textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 6px;
+}
+
+.interest-modal textarea {
+  height: 110px;
+  resize: none;
+}
+
+/* botón */
+.interest-modal .ltp-btn {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+/* botón cerrar */
+.close-btn {
+  align-self: flex-end;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  margin-bottom: -10px;
 }

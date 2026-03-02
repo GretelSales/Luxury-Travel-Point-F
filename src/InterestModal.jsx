@@ -29,29 +29,21 @@ export default function InterestModal({
 
       await sendServiceInterest({
         service_type: serviceType,
-
         service_name: serviceName,
-
         circuit_name: circuitName || null,
-
         message,
-
         language: i18n.language,
-
         user_name: name,
-
         user_email: email,
       });
 
       toast.success(t("interest.success"));
-
       setMessage("");
-
-      onClose();
     } catch (e) {
       toast.error(t("interest.error"));
     } finally {
       setLoading(false);
+      onClose(); // 👈 ahora SIEMPRE se cierra
     }
   };
 

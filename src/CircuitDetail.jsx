@@ -159,7 +159,7 @@ export default function CircuitDetailPage() {
       {/* 🔹 MODAL */}
 
       <InterestModal
-        open={interestOpen}
+        visible={interestOpen}
         onClose={handleCloseInterest}
         service={{
           name: circuit.name,
