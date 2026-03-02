@@ -161,12 +161,9 @@ export default function CircuitDetailPage() {
       <InterestModal
         visible={interestOpen}
         onClose={handleCloseInterest}
-        service={{
-          name: circuit.name,
-          type: "circuit",
-          circuitId: circuit.id,
-        }}
-        language={i18n.language}
+        serviceType="circuit"
+        serviceName={circuit.name}
+        circuitName={circuit.name}
       />
     </>
   );
