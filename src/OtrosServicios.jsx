@@ -74,7 +74,7 @@ export default function OtrosServicios() {
         setLoadingRemittances(true);
 
         const lang = i18n.language.startsWith("es") ? "es" : "en";
-        const API_URL = process.env.REACT_APP_API_URL;
+        const API_URL = import.meta.env.VITE_API_URL;
 
         const res = await axios.get(
           `${API_URL}/api/services-content?type=remittances&lang=${lang}`,
