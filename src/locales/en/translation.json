@@ -88,7 +88,9 @@
     "haveAccount": "Already have an account?",
     "errorRequired": "Please fill in all fields.",
     "errorInvalid": "Invalid credentials.",
-    "errorExists": "User already exists."
+    "errorExists": "User already exists.",
+    "guest": "Guest",
+    "logout": "Log out"
   },
   "ourCircuitsTitle": "Our Circuits",
 

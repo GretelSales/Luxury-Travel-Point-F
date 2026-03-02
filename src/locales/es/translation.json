@@ -88,7 +88,9 @@
     "haveAccount": "¿Ya tienes cuenta?",
     "errorRequired": "Completa todos los campos.",
     "errorInvalid": "Credenciales incorrectas.",
-    "errorExists": "El usuario ya existe."
+    "errorExists": "El usuario ya existe.",
+    "guest": "Invitado",
+    "logout": "Cerrar sesión"
   },
 "ourCircuitsTitle": "Nuestros Circuitos",
 
