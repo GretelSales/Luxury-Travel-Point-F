@@ -21,22 +21,24 @@ export default function Cars() {
       <TopBar />
 
       <section className="cars-page">
-        <header className="cars-header">
-          <h1>{t("cars.title")}</h1>
-          <p className="cars-subtitle">{t("cars.subtitle")}</p>
-        </header>
+        <div className="cars-container">
+          <header className="cars-header">
+            <h1>{t("cars.title")}</h1>
+            <p className="cars-subtitle">{t("cars.subtitle")}</p>
+          </header>
 
-        {loading && <p className="cars-status">{t("common.loading")}</p>}
-        {error && <p className="cars-status error">{t("common.error")}</p>}
+          {loading && <p className="cars-status">{t("common.loading")}</p>}
+          {error && <p className="cars-status error">{t("common.error")}</p>}
 
-        {!loading && cars.length === 0 && (
-          <p className="cars-status">{t("cars.noCars")}</p>
-        )}
+          {!loading && cars.length === 0 && (
+            <p className="cars-status">{t("cars.noCars")}</p>
+          )}
 
-        <div className="cars-grid">
-          {cars.map((car) => (
-            <CarCard key={car.id} car={car} isDesktop={isDesktop} />
-          ))}
+          <div className="cars-grid">
+            {cars.map((car) => (
+              <CarCard key={car.id} car={car} isDesktop={isDesktop} />
+            ))}
+          </div>
         </div>
       </section>
     </>
