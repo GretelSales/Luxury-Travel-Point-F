@@ -79,7 +79,7 @@ export default function OtrosServicios() {
         const API_URL = import.meta.env.VITE_API_URL;
 
         const res = await axios.get(
-          `${API_URL}/api/services-content?type=remittances&lang=${lang}`,
+          `https://luxury-travel-point-frontend.onrender.com/api/services-content?type=remittances&lang=${lang}`,
         );
 
         setRemittancesData(res.data);
@@ -98,7 +98,6 @@ export default function OtrosServicios() {
       try {
         setLoadingBanner(true);
         const lang = i18n.language.startsWith("es") ? "es" : "en";
-        const API_URL = import.meta.env.VITE_API_URL;
 
         const url = await axios.get(
           `https://luxury-travel-point-frontend.onrender.com/api/banner?lang=${lang}`,
