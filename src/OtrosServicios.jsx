@@ -123,6 +123,7 @@ export default function OtrosServicios() {
   console.log("RENDERED BLOCKS:", renderedBlocks);
   console.log("PROMO BANNER:", promoBanner);
   console.log("LANG:", i18n.language);
+  console.log("API URL:", import.meta.env.VITE_API_URL);
   return (
     <>
       <TopBar darkMode={true} />
