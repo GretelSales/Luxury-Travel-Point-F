@@ -76,7 +76,6 @@ export default function OtrosServicios() {
         setLoadingRemittances(true);
 
         const lang = i18n.language.startsWith("es") ? "es" : "en";
-        const API_URL = import.meta.env.VITE_API_URL;
 
         const res = await axios.get(
           `https://luxury-travel-point-frontend.onrender.com/api/services-content?type=remittances&lang=${lang}`,
@@ -97,14 +96,15 @@ export default function OtrosServicios() {
     const fetchBanner = async () => {
       try {
         setLoadingBanner(true);
+
         const lang = i18n.language.startsWith("es") ? "es" : "en";
 
-        const url = await axios.get(
+        const res = await axios.get(
           `https://luxury-travel-point-frontend.onrender.com/api/banner?lang=${lang}`,
         );
-        console.log("FETCHING:", url);
 
-        const res = await axios.get(url);
+        console.log("FETCHING:", res.data);
+
         setPromoBanner(res.data);
       } catch (error) {
         console.error("Error loading promo banner", error);
