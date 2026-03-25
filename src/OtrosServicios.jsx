@@ -97,11 +97,12 @@ export default function OtrosServicios() {
     const fetchBanner = async () => {
       try {
         setLoadingBanner(true);
-
         const lang = i18n.language.startsWith("es") ? "es" : "en";
         const API_URL = import.meta.env.VITE_API_URL;
 
-        const url = await axios.get(`${API_URL}/api/banner?lang=${lang}`);
+        const url = await axios.get(
+          `https://luxury-travel-point-frontend.onrender.com/api/banner?lang=${lang}`,
+        );
         console.log("FETCHING:", url);
 
         const res = await axios.get(url);
