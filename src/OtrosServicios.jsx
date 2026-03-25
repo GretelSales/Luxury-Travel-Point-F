@@ -119,6 +119,8 @@ export default function OtrosServicios() {
     ? [...otherBlocks, { ...remittancesData, type: "remittances" }]
     : [...otherBlocks];
   console.log("RENDERED BLOCKS:", renderedBlocks);
+  console.log("PROMO BANNER:", promoBanner);
+  console.log("LANG:", i18n.language);
   return (
     <>
       <TopBar darkMode={true} />
