@@ -101,7 +101,7 @@ export default function OtrosServicios() {
         const lang = i18n.language.startsWith("es") ? "es" : "en";
         const API_URL = import.meta.env.VITE_API_URL;
 
-        const res = await axios.get(`${API_URL}/api/promo-banner?lang=${lang}`);
+        const res = await axios.get(`${API_URL}/api/banner?lang=${lang}`);
 
         setPromoBanner(res.data);
       } catch (error) {
