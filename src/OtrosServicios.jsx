@@ -10,7 +10,9 @@ export default function OtrosServicios() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
-  // 🔹 interest modal state
+  const [promoBanner, setPromoBanner] = useState(null);
+  const [loadingBanner, setLoadingBanner] = useState(true);
+
   const [interestOpen, setInterestOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
 
@@ -91,6 +93,27 @@ export default function OtrosServicios() {
     fetchRemittances();
   }, [i18n.language]);
 
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        setLoadingBanner(true);
+
+        const lang = i18n.language.startsWith("es") ? "es" : "en";
+        const API_URL = import.meta.env.VITE_API_URL;
+
+        const res = await axios.get(`${API_URL}/api/promo-banner?lang=${lang}`);
+
+        setPromoBanner(res.data);
+      } catch (error) {
+        console.error("Error loading promo banner", error);
+      } finally {
+        setLoadingBanner(false);
+      }
+    };
+
+    fetchBanner();
+  }, [i18n.language]);
+
   // 🔹 Combinar bloques
   const renderedBlocks = remittancesData
     ? [...otherBlocks, { ...remittancesData, type: "remittances" }]
@@ -105,7 +128,15 @@ export default function OtrosServicios() {
           <h1>{t("services.title")}</h1>
           <p className="services-subtitle">{t("services.subtitle")}</p>
         </header>
-
+        {!loadingBanner && promoBanner && (
+          <div className="promo-banner-container">
+            <img
+              src={promoBanner.image_url}
+              alt={promoBanner.title || "promo"}
+              className="promo-banner-image"
+            />
+          </div>
+        )}
         <div className="services-grid">
           {renderedBlocks.map((block, idx) => {
             const isRemittances = block.type === "remittances";
