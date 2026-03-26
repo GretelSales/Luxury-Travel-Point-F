@@ -42,11 +42,14 @@
 }
 .promo-banner-container {
   width: 75%;              /* 👈 1/4 más pequeño aprox */
-  max-width: 500px;        /* 👈 evita que sea gigante en desktop */
+  max-width: 250px;        /* 👈 evita que sea gigante en desktop */
   aspect-ratio: 1 / 1;     /* 👈 cuadrado perfecto */
   margin: 0 auto 30px;     /* 👈 centrado + espacio abajo */
   border-radius: 20px;
   overflow: hidden;
+  height: 75%;
+  max-height: 250px;       /* 👈 limita altura para mantener proporción */
+
 }
 
 .promo-banner-image {
