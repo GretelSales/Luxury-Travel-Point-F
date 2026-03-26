@@ -48,7 +48,7 @@
   border-radius: 20px;
   overflow: hidden;
   height: 75%;
-  max-height: 500px;       /* 👈 limita altura para mantener proporción */
+  max-height: 600px;       /* 👈 limita altura para mantener proporción */
 
 }
 
