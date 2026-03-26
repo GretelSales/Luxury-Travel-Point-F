@@ -46,6 +46,8 @@
   height: 220px; /* 👈 importante para consistencia */
   object-fit: cover;
   display: block;
+  height: clamp(260px, 35vw, 420px);
+  object-fit: cover;
 }
 
 /* overlay elegante como tu background */
