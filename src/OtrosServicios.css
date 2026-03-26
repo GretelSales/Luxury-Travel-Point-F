@@ -41,12 +41,8 @@
     0 14px 35px rgba(0,0,0,0.3);
 }
 
-.promo-banner-image {
-  width: 60%;
-  object-fit: cover;
-  display: block;
-  height: clamp(300px, 40vh, 400px);
-  object-fit: cover;
+.promo-banner-container {
+  height: clamp(300px, 40vh, 500px);
 }
 
 .promo-banner-image {
