@@ -41,13 +41,13 @@
     0 14px 35px rgba(0,0,0,0.3);
 }
 .promo-banner-container {
-  width: 75%;              /* 👈 1/4 más pequeño aprox */
+  width: 50%;              /* 👈 1/2 más pequeño aprox */
   max-width: 350px;        /* 👈 evita que sea gigante en desktop */
   aspect-ratio: 1 / 1;     /* 👈 cuadrado perfecto */
   margin: 0 auto 30px;     /* 👈 centrado + espacio abajo */
   border-radius: 20px;
   overflow: hidden;
-  height: 75%;
+  height: 50%;
   max-height: 600px;       /* 👈 limita altura para mantener proporción */
 
 }
