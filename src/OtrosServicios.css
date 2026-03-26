@@ -42,10 +42,10 @@
 }
 
 .promo-banner-image {
-  width: 80%;
+  width: 60%;
   object-fit: cover;
   display: block;
-  height: clamp(300px, 40vh, 500px);
+  height: clamp(300px, 40vh, 400px);
   object-fit: cover;
 }
 
