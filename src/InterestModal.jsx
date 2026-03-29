@@ -13,7 +13,7 @@ export default function InterestModal({
 }) {
   const { t, i18n } = useTranslation();
   const user = JSON.parse(localStorage.getItem("ltp_user"));
-
+  const [phone, setPhone] = useState("");
   const [name, setName] = useState(""); // inicializamos vacío
   const [email, setEmail] = useState(""); // inicializamos vacío
   const [message, setMessage] = useState("");
@@ -26,6 +26,7 @@ export default function InterestModal({
       if (storedUser) {
         setName(storedUser.full_name || "");
         setEmail(storedUser.email || "");
+        setPhone(storedUser.phone || "");
         setUserId(storedUser.id || null); // si quieres guardarlo en estado también
       }
     } catch (e) {}
@@ -45,6 +46,7 @@ export default function InterestModal({
         language: i18n.language,
         user_name: name,
         user_email: email,
+        user_phone: phone,
         user_id: user?.id || null, // ✅ enviamos el id del usuario
       });
 
@@ -79,6 +81,11 @@ export default function InterestModal({
               placeholder={t("interest.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              placeholder={t("interest.phone")} // <-- nuevo
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
           </>
         )}

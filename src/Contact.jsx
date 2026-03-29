@@ -62,7 +62,15 @@ export default function Contact() {
 
         {/* Map section */}
         <div className="contact-map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d17969.286881697044!2d-81.70346808662316!3d26.662620964067877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88db71e2f63703e7%3A0x50504ab2ff72dc9!2s3418%2051st%20St%20W%2C%20Lehigh%20Acres%2C%20FL%2033971!5e0!3m2!1ses-419!2sus!4v1765844730944!5m2!1ses-419!2sus"></iframe>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3565.5678422915344!2d-81.6919037239048!3d26.662315870805145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88db71007fe3ff89%3A0x2d95c1a567dc5f65!2sLuxury%20Travel%20Point!5e0!3m2!1ses-419!2sus!4v1774802927874!5m2!1ses-419!2sus"
+            width="600"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </div>
     </div>
