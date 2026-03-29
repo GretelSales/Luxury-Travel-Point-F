@@ -32,9 +32,6 @@ export default function App() {
   const [monthYear, setMonthYear] = useState("");
   const [langOpen, setLangOpen] = useState(false);
   const uiRef = useRef(null);
-  const [authOpen, setAuthOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [resetKey, setResetKey] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -69,38 +66,6 @@ export default function App() {
 
     fetchCountries();
   }, [t]); // <- Se vuelve a traducir si cambia idioma
-
-  useEffect(() => {
-    const token = localStorage.getItem("ltp_token");
-    if (token) {
-      // pedir endpoint /api/auth/me
-      fetch("https://luxury-travel-point-frontend.onrender.com/api/auth/me", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((res) => res.json())
-        .then((j) => {
-          if (j.user) setUser(j.user);
-          else localStorage.removeItem("ltp_token");
-        })
-        .catch(() => localStorage.removeItem("ltp_token"));
-    }
-  }, []);
-
-  const handleIconClick = () => {
-    if (user) setDropdownOpen((s) => !s);
-    else setAuthOpen(true);
-  };
-
-  const handleAuthSuccess = (userData, token) => {
-    setUser(userData);
-    setDropdownOpen(false);
-  };
-
-  const logout = () => {
-    localStorage.removeItem("ltp_token");
-    setUser(null);
-    setDropdownOpen(false);
-  };
 
   const handleFilterByCountry = () => {
     if (!selectedCountry) {

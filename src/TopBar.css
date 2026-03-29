@@ -267,3 +267,7 @@
 .social-icons .social-icon:hover svg {
   color: #e0b84c; /* dorado más claro al hover */
 }
+
+.social-icon.whatsapp:hover {
+  color: #1ebe5d;
+}

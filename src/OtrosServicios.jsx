@@ -6,7 +6,7 @@ import TopBar from "./TopBar.jsx";
 import "./OtrosServicios.css";
 import InterestModal from "./InterestModal";
 
-export default function OtrosServicios() {
+export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
@@ -126,8 +126,11 @@ export default function OtrosServicios() {
   console.log("API URL:", import.meta.env.VITE_API_URL);
   return (
     <>
-      <TopBar darkMode={true} />
-
+      <TopBar
+        user={user}
+        logout={logout}
+        handleAuthSuccess={handleAuthSuccess}
+      />
       <section className="services-page">
         <header className="services-header">
           <h1>{t("services.title")}</h1>

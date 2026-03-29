@@ -155,9 +155,9 @@
 
 "subtitle": "Te contactaremos pronto",
 
-"name": "Tu nombre",
+"name": "Tu nombre/empresa",
 
-"email": "Tu correo",
+"email": "Tu correo electrónico",
 
 "message": "Mensaje (opcional)",
 
@@ -228,6 +228,11 @@
 "badge": "Desde casa",
 "summary": "Gestión completa sin salir de su hogar",
 "details": [
+  "Renovación de pasaporte",
+  "Pasaporte por primera vez",
+  "visa electrónica",
+  "solicitud de ciudadanía cubana",
+  "Documentos de viaje temporal DVT",
 "Pasaporte para adultos: $250",
 "Pasaporte para niños: $210"
 ]

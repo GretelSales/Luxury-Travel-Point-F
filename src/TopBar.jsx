@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import {
   faUser,
   faGlobe,
@@ -148,9 +149,18 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         )}
 
         {/* Social icons desktop */}
+        <a
+          href="https://wa.me/12392657294"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="social-icon whatsapp"
+          title="WhatsApp"
+        >
+          <FontAwesomeIcon icon={faWhatsapp} />
+        </a>
         <div className="social-icons">
           <a
-            href="https://www.facebook.com/yourpage"
+            href="https://www.facebook.com/chare/1EjE5oAU7L/?mibextid=wwXlfr"
             target="_blank"
             rel="noopener noreferrer"
             className="social-icon"
@@ -159,7 +169,7 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
             <FontAwesomeIcon icon={faFacebookF} />
           </a>
           <a
-            href="https://www.instagram.com/yourpage"
+            href="https://www.instagram.com/luxurytravelpoint?igsh=NDZybGU1cXk1b2Fj"
             target="_blank"
             rel="noopener noreferrer"
             className="social-icon"
@@ -168,7 +178,7 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
             <FontAwesomeIcon icon={faInstagram} />
           </a>
           <a
-            href="https://www.tiktok.com/@yourpage"
+            href="https://www.tiktok.com/@luxurytravelpoint?_r=1&_t=ZT-93wrlEwlAkP"
             target="_blank"
             rel="noopener noreferrer"
             className="social-icon"
