@@ -41,7 +41,7 @@
   overflow: hidden;
   flex: 1;
 
-  padding: 12px 0; /* 👈 espacio arriba y abajo */
+  padding: 25px; 
 }
 
 /* Card */
