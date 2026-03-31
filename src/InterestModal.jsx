@@ -70,41 +70,29 @@ export default function InterestModal({
         <h2>{t("interest.title")}</h2>
         <p className="interest-subtitle">{t("interest.subtitle")}</p>
 
-        {!user && (
-          <>
-            {/* Nombre */}
-            <input
-              placeholder={t("interest.name")}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              disabled={!!user} // deshabilitado si hay usuario
-            />
+        {/* Nombre */}
+        <input
+          placeholder={t("interest.name")}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          disabled={!!user}
+        />
 
-            {/* Email */}
-            <input
-              placeholder={t("interest.email")}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={!!user} // deshabilitado si hay usuario
-            />
+        {/* Email */}
+        <input
+          placeholder={t("interest.email")}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={!!user}
+        />
 
-            {/* Teléfono */}
-            <input
-              placeholder={t("interest.phone")}
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              disabled={!!user} // deshabilitado si hay usuario
-            />
-          </>
-        )}
-
-        {user && (
-          <>
-            {/* mostrar campos deshabilitados para usuarios autenticados */}
-            <input value={name} disabled />
-            <input value={email} disabled />
-          </>
-        )}
+        {/* Teléfono */}
+        <input
+          placeholder={t("interest.phone")}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          disabled={!!user}
+        />
 
         <textarea
           placeholder={t("interest.message")}
