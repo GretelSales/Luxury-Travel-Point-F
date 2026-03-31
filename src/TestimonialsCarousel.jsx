@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./TestimonialsCarousel.css";
 import { useTranslation } from "react-i18next";
 
