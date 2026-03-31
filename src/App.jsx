@@ -5,6 +5,7 @@ import AuthModal from "./AuthModal";
 import MonthYearPicker from "./MonthYearPicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SocialIcons from "./SocialIcons.jsx";
+import TestimonialsCarousel from "./TestimonialsCarousel.jsx";
 import {
   faUser,
   faGlobe,
