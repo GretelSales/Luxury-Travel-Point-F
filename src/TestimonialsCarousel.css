@@ -3,22 +3,30 @@
   align-items: center;
   gap: 10px;
   position: relative;
+
+  padding: 10px 0; /* 👈 espacio extra */
 }
 
-/* Botones */
 .carousel-btn {
   width: 36px;
   height: 36px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  font-size: 20px;
+
+  display: flex;              /* 👈 clave */
+  align-items: center;        /* 👈 centra vertical */
+  justify-content: center;    /* 👈 centra horizontal */
+
+  font-size: 22px;            /* 👈 ajusta tamaño visual */
+  line-height: 1;             /* 👈 evita desbalance vertical */
 
   background: rgba(255,255,255,0.25);
   backdrop-filter: blur(8px);
   color: #0b2545;
 
   transition: 0.25s;
+  transform: translateY(-1px); /* 👈 micro ajuste visual */
 }
 
 .carousel-btn:hover {
@@ -32,23 +40,27 @@
   gap: 12px;
   overflow: hidden;
   flex: 1;
+
+  padding: 12px 0; /* 👈 espacio arriba y abajo */
 }
 
 /* Card */
 .testimonial-card {
   min-width: 85%;
-  padding: 16px;
+  padding: 18px; /* un poco más */
   border-radius: 16px;
 
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(10px);
 
-  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.15); /* 👈 sombra más grande */
   transition: 0.25s;
+
+  margin: 4px 0; /* 👈 evita corte */
 }
 
 .testimonial-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px); /* más elegante */
 }
 
 /* Texto */
