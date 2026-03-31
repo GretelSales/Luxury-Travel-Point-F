@@ -9,16 +9,27 @@ export default function TestimonialsCarousel({ testimonials = [] }) {
   const visibleCount = 3;
 
   const next = () => {
-    if (index + visibleCount < testimonials.length) {
-      setIndex(index + 1);
-    }
+    setIndex((prev) => Math.min(prev + 1, testimonials.length - itemsPerView));
   };
 
   const prev = () => {
-    if (index > 0) {
-      setIndex(index - 1);
-    }
+    setIndex((prev) => Math.max(prev - 1, 0));
   };
+
+  const [itemsPerView, setItemsPerView] = useState(1);
+
+  useEffect(() => {
+    const updateItems = () => {
+      if (window.innerWidth >= 1024) setItemsPerView(3);
+      else if (window.innerWidth >= 600) setItemsPerView(2);
+      else setItemsPerView(1);
+    };
+
+    updateItems(); // inicial
+    window.addEventListener("resize", updateItems);
+
+    return () => window.removeEventListener("resize", updateItems);
+  }, []);
 
   const visibleItems = testimonials.slice(index, index + visibleCount);
 
