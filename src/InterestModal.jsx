@@ -72,20 +72,28 @@ export default function InterestModal({
 
         {!user && (
           <>
+            {/* Nombre */}
             <input
               placeholder={t("interest.name")}
               value={name}
               onChange={(e) => setName(e.target.value)}
+              disabled={!!user} // deshabilitado si hay usuario
             />
+
+            {/* Email */}
             <input
               placeholder={t("interest.email")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={!!user} // deshabilitado si hay usuario
             />
+
+            {/* Teléfono */}
             <input
-              placeholder={t("interest.phone")} // <-- nuevo
+              placeholder={t("interest.phone")}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              disabled={!!user} // deshabilitado si hay usuario
             />
           </>
         )}
