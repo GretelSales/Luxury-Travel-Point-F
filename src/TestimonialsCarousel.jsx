@@ -24,10 +24,6 @@ export default function TestimonialsCarousel({ testimonials = [] }) {
 
   return (
     <section className="ltp-testimonials ltp-section ltp-section-narrow">
-      <h2 className="testimonials-title">
-        {i18n.language === "es" ? "Opiniones" : "Reviews"}
-      </h2>
-
       <div className="carousel-container">
         <button className="carousel-btn left" onClick={prev}>
           ‹

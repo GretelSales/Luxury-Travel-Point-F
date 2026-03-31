@@ -391,7 +391,10 @@ export default function App() {
         </div>
 
         {/* Opiniones */}
-        <TestimonialsCarousel testimonials={testimonials} />
+        <section className="ltp-testimonials ltp-section ltp-section-narrow">
+          <h2 className="testimonials-title">{t("reviewsTitle")}</h2>
+          <TestimonialsCarousel testimonials={testimonials} />
+        </section>
       </div>
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
       <footer>
