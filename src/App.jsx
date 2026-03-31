@@ -44,6 +44,23 @@ export default function App() {
     setDropdownOpen(false);
   };
 
+  const [testimonials, setTestimonials] = useState([]);
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await axios.get(
+          "https://luxury-travel-point-frontend.onrender.com/api/testimonials",
+        );
+        setTestimonials(res.data);
+      } catch (err) {
+        console.error("Error loading testimonials", err);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
   // 🟦 Obtener países del backend una sola vez
   useEffect(() => {
     const fetchCountries = async () => {
@@ -373,35 +390,7 @@ export default function App() {
         </div>
 
         {/* Opiniones */}
-        <section className="ltp-testimonials ltp-section ltp-section-narrow">
-          <h2 className="testimonials-title">{t("reviewsTitle")}</h2>
-
-          <div className="testimonials-wrapper">
-            <div className="testimonial-card">
-              <p className="testimonial-text">{t("review1Text")}</p>
-              <div className="testimonial-author">
-                <span className="name">{t("review1Name")}</span>
-                <span className="stars">★★★★★</span>
-              </div>
-            </div>
-
-            <div className="testimonial-card">
-              <p className="testimonial-text">{t("review2Text")}</p>
-              <div className="testimonial-author">
-                <span className="name">{t("review2Name")}</span>
-                <span className="stars">★★★★★</span>
-              </div>
-            </div>
-
-            <div className="testimonial-card">
-              <p className="testimonial-text">{t("review3Text")}</p>
-              <div className="testimonial-author">
-                <span className="name">{t("review3Name")}</span>
-                <span className="stars">★★★★★</span>
-              </div>
-            </div>
-          </div>
-        </section>
+        <TestimonialsCarousel testimonials={testimonials} />
       </div>
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
       <footer>

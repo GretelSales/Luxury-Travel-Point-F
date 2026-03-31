@@ -1,0 +1,89 @@
+.carousel-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+}
+
+/* Botones */
+.carousel-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  color: #0b2545;
+
+  transition: 0.25s;
+}
+
+.carousel-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255,255,255,0.4);
+}
+
+/* Wrapper */
+.testimonials-wrapper {
+  display: flex;
+  gap: 12px;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* Card */
+.testimonial-card {
+  min-width: 85%;
+  padding: 16px;
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  transition: 0.25s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Texto */
+.testimonial-text {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #000b1b;
+  margin-bottom: 12px;
+}
+
+/* Autor */
+.testimonial-author {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.stars {
+  color: #e0b84c;
+  font-size: 14px;
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+  .testimonial-card {
+    min-width: calc(33.33% - 8px);
+  }
+
+  .carousel-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
