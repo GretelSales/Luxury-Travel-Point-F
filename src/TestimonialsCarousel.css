@@ -37,16 +37,17 @@
 /* WRAPPER */
 .testimonials-wrapper {
   display: flex;
-  gap: 12px;
+  gap: 12px; /* 👈 SOLO AQUÍ manejamos espacios */
   overflow: hidden;
   flex: 1;
 
-  padding: 20px 6px; /* 👈 mobile reducido */
+  padding: 20px 6px;
+  scroll-behavior: smooth;
 }
 
 /* CARD */
 .testimonial-card {
-  min-width: 100%; /* 👈 MOBILE: 1 card */
+  min-width: 100%;
   padding: 16px;
   border-radius: 16px;
 
@@ -56,7 +57,7 @@
   box-shadow: 0 12px 28px rgba(0,0,0,0.12);
   transition: 0.25s;
 
-  margin: 12px;
+  margin: 0; /* 👈 IMPORTANTE */
 }
 
 .testimonial-card:hover {
@@ -91,7 +92,7 @@
 /* ===== TABLET ===== */
 @media (min-width: 600px) {
   .testimonial-card {
-    min-width: calc(50% - 6px); /* 👈 2 cards */
+    min-width: calc(50% - 6px);
   }
 
   .carousel-btn {
@@ -100,18 +101,14 @@
   }
 }
 
-.testimonials-wrapper {
-  scroll-behavior: smooth;
-}
-
 /* ===== DESKTOP ===== */
 @media (min-width: 1024px) {
   .testimonial-card {
-    min-width: calc(33.33% - 8px); /* 👈 3 cards */
+    min-width: calc(33.33% - 8px);
   }
 
   .testimonials-wrapper {
-    padding: 40px 30px; /* 👈 más aire */
+    padding: 40px 30px;
   }
 
   .carousel-btn {
