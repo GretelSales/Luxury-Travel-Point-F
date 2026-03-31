@@ -31,15 +31,6 @@ export default function TestimonialsCarousel({ testimonials = [] }) {
     return () => window.removeEventListener("resize", updateItems);
   }, []);
 
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      const res = await fetch("/api/testimonials");
-      const data = await res.json();
-      setTestimonials(data); // solo vienen los visibles
-    };
-    fetchTestimonials();
-  }, []);
-
   const visibleItems = testimonials.slice(index, index + visibleCount);
 
   return (
