@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Contact.css";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,29 +10,51 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Contact() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/company");
+        const json = await res.json();
+        setData(json);
+      } catch (err) {
+        console.error("Error loading company info", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (!data) return null;
+
+  const isES = i18n.language.startsWith("es");
 
   return (
     <div className="contact-container">
       <div className="contact-inner">
-        {/* Info section */}
+        {/* Info */}
         <div className="contact-info">
           <h2 className="contact-title">{t("contact.title")}</h2>
 
+          {/* PHONE */}
           <div className="contact-card">
             <h3 className="contact-subtitle">
               <FontAwesomeIcon icon={faPhone} /> {t("contact.phoneTitle")}
             </h3>
-            <p className="contact-text">{t("contact.phone")}</p>
+            <p className="contact-text">{data.phone}</p>
           </div>
 
+          {/* EMAIL */}
           <div className="contact-card">
             <h3 className="contact-subtitle">
               <FontAwesomeIcon icon={faEnvelope} /> {t("contact.emailTitle")}
             </h3>
-            <p className="contact-text">{t("contact.email")}</p>
+            <p className="contact-text">{data.email}</p>
           </div>
 
+          {/* ADDRESS */}
           <div className="contact-card">
             <h3 className="contact-subtitle">
               <FontAwesomeIcon icon={faMapMarkerAlt} />{" "}
@@ -40,29 +62,36 @@ export default function Contact() {
             </h3>
 
             <a
-              href="https://maps.app.goo.gl/k6HnPFpBgfqXh1NKA"
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                isES ? data.address_es : data.address_en,
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="contact-address-link"
             >
-              {t("contact.address")}
+              {isES ? data.address_es : data.address_en}
             </a>
           </div>
 
+          {/* HOURS */}
           <div className="contact-card">
             <h3 className="contact-subtitle">
               <FontAwesomeIcon icon={faClock} /> {t("contact.hoursTitle")}
             </h3>
 
-            <p className="contact-text">{t("contact.hoursRegular")}</p>
+            <p className="contact-text">
+              {isES ? data.hours_regular_es : data.hours_regular_en}
+            </p>
 
-            <p className="contact-text">{t("contact.hoursAppointment")}</p>
+            <p className="contact-text">
+              {isES ? data.hours_appointment_es : data.hours_appointment_en}
+            </p>
           </div>
         </div>
 
-        {/* Map section */}
+        {/* MAP */}
         <div className="contact-map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3565.5678422915344!2d-81.6919037239048!3d26.662315870805145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88db71007fe3ff89%3A0x2d95c1a567dc5f65!2sLuxury%20Travel%20Point!5e0!3m2!1ses-419!2sus!4v1774802927874!5m2!1ses-419!2sus"></iframe>
+          <iframe src={data.map_embed_url} loading="lazy"></iframe>
         </div>
       </div>
     </div>
