@@ -10,6 +10,9 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
+  const [services, setServices] = useState([]);
+  const [loadingServices, setLoadingServices] = useState(true);
+
   const [promoBanner, setPromoBanner] = useState(null);
   const [loadingBanner, setLoadingBanner] = useState(true);
 
@@ -18,19 +21,14 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
 
   const [open, setOpen] = useState(null);
 
-  // 🔥 TODOS LOS SERVICIOS desde backend
-  const [services, setServices] = useState([]);
-  const [loadingServices, setLoadingServices] = useState(true);
-
   const toggle = (idx) => {
     setOpen(open === idx ? null : idx);
   };
 
-  // 🔹 abrir modal interés
-  const handleInterestClick = (service) => {
+  const handleInterestClick = (block) => {
     setSelectedService({
-      name: service.title,
-      type: service.type || "service",
+      name: block.title,
+      type: "service",
     });
 
     setInterestOpen(true);
@@ -41,7 +39,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
     setSelectedService(null);
   };
 
-  // idioma inicial (solo una vez)
+  // idioma inicial
   useEffect(() => {
     const alreadyInitialized = localStorage.getItem(
       "otherServicesLangInitialized",
@@ -58,7 +56,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
     return () => document.body.classList.remove("dark-hero");
   }, []);
 
-  // 🔥 FETCH TODOS LOS SERVICIOS
+  // 🔹 FETCH SERVICIOS DESDE BACKEND
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -67,10 +65,10 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
         const lang = i18n.language.startsWith("es") ? "es" : "en";
 
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/services-content/all?lang=${lang}`,
+          `https://luxury-travel-point-backend.onrender.com/api/services-content?lang=${lang}`,
         );
 
-        setServices(res.data || []);
+        setServices(res.data);
       } catch (error) {
         console.error("Error loading services", error);
       } finally {
@@ -81,7 +79,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
     fetchServices();
   }, [i18n.language]);
 
-  // 🔹 Banner
+  // 🔹 FETCH BANNER
   useEffect(() => {
     const fetchBanner = async () => {
       try {
@@ -90,7 +88,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
         const lang = i18n.language.startsWith("es") ? "es" : "en";
 
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/banner?lang=${lang}`,
+          `https://luxury-travel-point-backend.onrender.com/api/banner?lang=${lang}`,
         );
 
         setPromoBanner(res.data);
@@ -118,7 +116,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
           <p className="services-subtitle">{t("services.subtitle")}</p>
         </header>
 
-        {/* 🔹 Banner */}
+        {/* BANNER */}
         {!loadingBanner && promoBanner && (
           <div className="promo-banner-container">
             <img
@@ -129,12 +127,12 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
           </div>
         )}
 
-        {/* 🔹 SERVICES */}
+        {/* SERVICIOS */}
         <div className="services-grid">
           {!loadingServices &&
-            services.map((service, idx) => (
+            services.map((block, idx) => (
               <div
-                key={service.id}
+                key={block.id}
                 className={`service-card ${open === idx ? "open" : ""}`}
               >
                 {/* HEADER */}
@@ -142,42 +140,31 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                   className="service-card-header"
                   onClick={() => toggle(idx)}
                 >
-                  <h2>{service.title}</h2>
+                  <h2>{block.title}</h2>
 
-                  {/* 🔥 BADGE solo si existe */}
-                  {service.badge && service.badge.trim() !== "" && (
-                    <span className="service-badge">{service.badge}</span>
+                  {/* 🔥 BADGE SOLO SI EXISTE */}
+                  {block.badge && block.badge.trim() !== "" && (
+                    <span className="service-badge">{block.badge}</span>
                   )}
                 </div>
 
                 {/* SUMMARY */}
-                {service.summary && (
-                  <p className="service-summary">{service.summary}</p>
+                {block.summary && (
+                  <p className="service-summary">{block.summary}</p>
                 )}
 
                 {/* DETAILS */}
-                {open === idx && service.details && (
+                {open === idx && block.details && (
                   <div className="service-details">
                     <ul>
-                      {service.details.map((item, i) => (
+                      {block.details.map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
 
-                    {/* 🔹 acción especial */}
-                    {service.type === "car-rental" && (
-                      <button
-                        className="service-primary-action"
-                        onClick={() => navigate("/cars")}
-                      >
-                        {t("services.viewCars")}
-                      </button>
-                    )}
-
-                    {/* 🔹 INTEREST */}
                     <button
                       className="service-interest-button"
-                      onClick={() => handleInterestClick(service)}
+                      onClick={() => handleInterestClick(block)}
                     >
                       {t("services.interestButton")}
                     </button>
@@ -185,7 +172,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                 )}
 
                 {/* TOGGLE */}
-                {service.details && (
+                {block.details && (
                   <button
                     className="service-toggle"
                     onClick={() => toggle(idx)}
@@ -194,11 +181,11 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                   </button>
                 )}
 
-                {/* 🔹 botón colapsado */}
+                {/* BOTÓN COLAPSADO */}
                 {open !== idx && (
                   <button
                     className="service-interest-button collapsed"
-                    onClick={() => handleInterestClick(service)}
+                    onClick={() => handleInterestClick(block)}
                   >
                     {t("services.interestButton")}
                   </button>
@@ -208,7 +195,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
         </div>
       </section>
 
-      {/* 🔹 MODAL */}
+      {/* MODAL */}
       <InterestModal
         visible={interestOpen}
         onClose={handleCloseInterest}
