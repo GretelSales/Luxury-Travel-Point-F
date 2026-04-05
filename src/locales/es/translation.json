@@ -173,6 +173,13 @@
 
 "button": "Me interesa"
 
-}
+},
+"services": {
+"viewCars": "Ver autos disponibles",  
+"title": "Otros servicios",
+"subtitle": "Soluciones integrales diseñadas para acompañarte en cada etapa",
+"more": "Ver más",
+"less": "Ver menos",
+"interestButton": "Estoy interesado"}
 }
 
