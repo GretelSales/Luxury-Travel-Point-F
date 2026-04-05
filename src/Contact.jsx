@@ -16,7 +16,9 @@ export default function Contact() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/company");
+        const res = await fetch(
+          "https://luxury-travel-point-frontend.onrender.com/api/company",
+        );
         const json = await res.json();
         setData(json);
       } catch (err) {
