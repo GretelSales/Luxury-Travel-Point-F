@@ -17,22 +17,20 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
   const [selectedService, setSelectedService] = useState(null);
 
   const [open, setOpen] = useState(null);
-  const [remittancesData, setRemittancesData] = useState(null);
-  const [loadingRemittances, setLoadingRemittances] = useState(true);
-  const [otherBlocks, setOtherBlocks] = useState([]);
+
+  // 🔥 TODOS LOS SERVICIOS desde backend
+  const [services, setServices] = useState([]);
+  const [loadingServices, setLoadingServices] = useState(true);
 
   const toggle = (idx) => {
     setOpen(open === idx ? null : idx);
   };
 
   // 🔹 abrir modal interés
-  const handleInterestClick = (block) => {
-    console.log("CLICK");
-    console.log("Servicio seleccionado:", block);
-
+  const handleInterestClick = (service) => {
     setSelectedService({
-      name: block.title,
-      type: block.type || "service",
+      name: service.title,
+      type: service.type || "service",
     });
 
     setInterestOpen(true);
@@ -43,7 +41,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
     setSelectedService(null);
   };
 
-  // idioma inicial
+  // idioma inicial (solo una vez)
   useEffect(() => {
     const alreadyInitialized = localStorage.getItem(
       "otherServicesLangInitialized",
@@ -54,44 +52,36 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
     }
   }, [i18n]);
 
-  // efecto visual existente
+  // efecto visual
   useEffect(() => {
     document.body.classList.add("dark-hero");
     return () => document.body.classList.remove("dark-hero");
   }, []);
 
-  // 🔹 Filtrar bloques i18n sin remesas
+  // 🔥 FETCH TODOS LOS SERVICIOS
   useEffect(() => {
-    const allBlocks = t("services.blocks", { returnObjects: true }) || [];
-    const filtered = allBlocks.filter((b) => b.type !== "remittances");
-    setOtherBlocks(filtered);
-    console.log("ALL BLOCKS:", allBlocks);
-    console.log("FILTERED BLOCKS:", filtered);
-  }, [i18n.language, t]);
-
-  // 🔹 Fetch backend para remesas
-  useEffect(() => {
-    const fetchRemittances = async () => {
+    const fetchServices = async () => {
       try {
-        setLoadingRemittances(true);
+        setLoadingServices(true);
 
         const lang = i18n.language.startsWith("es") ? "es" : "en";
 
         const res = await axios.get(
-          `https://luxury-travel-point-frontend.onrender.com/api/services-content?type=remittances&lang=${lang}`,
+          `${import.meta.env.VITE_API_URL}/api/services-content/all?lang=${lang}`,
         );
 
-        setRemittancesData(res.data);
+        setServices(res.data || []);
       } catch (error) {
-        console.error("Error loading remittances content", error);
+        console.error("Error loading services", error);
       } finally {
-        setLoadingRemittances(false);
+        setLoadingServices(false);
       }
     };
 
-    fetchRemittances();
+    fetchServices();
   }, [i18n.language]);
 
+  // 🔹 Banner
   useEffect(() => {
     const fetchBanner = async () => {
       try {
@@ -100,10 +90,8 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
         const lang = i18n.language.startsWith("es") ? "es" : "en";
 
         const res = await axios.get(
-          `https://luxury-travel-point-frontend.onrender.com/api/banner?lang=${lang}`,
+          `${import.meta.env.VITE_API_URL}/api/banner?lang=${lang}`,
         );
-
-        console.log("FETCHING:", res.data);
 
         setPromoBanner(res.data);
       } catch (error) {
@@ -116,14 +104,6 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
     fetchBanner();
   }, [i18n.language]);
 
-  // 🔹 Combinar bloques
-  const renderedBlocks = remittancesData
-    ? [...otherBlocks, { ...remittancesData, type: "remittances" }]
-    : [...otherBlocks];
-  console.log("RENDERED BLOCKS:", renderedBlocks);
-  console.log("PROMO BANNER:", promoBanner);
-  console.log("LANG:", i18n.language);
-  console.log("API URL:", import.meta.env.VITE_API_URL);
   return (
     <>
       <TopBar
@@ -131,11 +111,14 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
         logout={logout}
         handleAuthSuccess={handleAuthSuccess}
       />
+
       <section className="services-page">
         <header className="services-header">
           <h1>{t("services.title")}</h1>
           <p className="services-subtitle">{t("services.subtitle")}</p>
         </header>
+
+        {/* 🔹 Banner */}
         {!loadingBanner && promoBanner && (
           <div className="promo-banner-container">
             <img
@@ -145,42 +128,44 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
             />
           </div>
         )}
+
+        {/* 🔹 SERVICES */}
         <div className="services-grid">
-          {renderedBlocks.map((block, idx) => {
-            const isRemittances = block.type === "remittances";
-
-            if (isRemittances && loadingRemittances) return null;
-
-            return (
+          {!loadingServices &&
+            services.map((service, idx) => (
               <div
-                key={idx}
+                key={service.id}
                 className={`service-card ${open === idx ? "open" : ""}`}
               >
+                {/* HEADER */}
                 <div
                   className="service-card-header"
                   onClick={() => toggle(idx)}
                 >
-                  <h2>{block.title}</h2>
+                  <h2>{service.title}</h2>
 
-                  {block.badge && (
-                    <span className="service-badge">{block.badge}</span>
+                  {/* 🔥 BADGE solo si existe */}
+                  {service.badge && service.badge.trim() !== "" && (
+                    <span className="service-badge">{service.badge}</span>
                   )}
                 </div>
 
-                {block.summary && (
-                  <p className="service-summary">{block.summary}</p>
+                {/* SUMMARY */}
+                {service.summary && (
+                  <p className="service-summary">{service.summary}</p>
                 )}
 
-                {open === idx && block.details && (
+                {/* DETAILS */}
+                {open === idx && service.details && (
                   <div className="service-details">
                     <ul>
-                      {block.details.map((item, i) => (
+                      {service.details.map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
 
-                    {/* botón existente */}
-                    {block.type === "car-rental" && (
+                    {/* 🔹 acción especial */}
+                    {service.type === "car-rental" && (
                       <button
                         className="service-primary-action"
                         onClick={() => navigate("/cars")}
@@ -189,17 +174,18 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                       </button>
                     )}
 
-                    {/* 🔹 NUEVO BOTÓN ME INTERESA */}
+                    {/* 🔹 INTEREST */}
                     <button
                       className="service-interest-button"
-                      onClick={() => handleInterestClick(block)}
+                      onClick={() => handleInterestClick(service)}
                     >
                       {t("services.interestButton")}
                     </button>
                   </div>
                 )}
 
-                {block.details && (
+                {/* TOGGLE */}
+                {service.details && (
                   <button
                     className="service-toggle"
                     onClick={() => toggle(idx)}
@@ -208,22 +194,21 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                   </button>
                 )}
 
-                {/* 🔹 botón visible también cuando está cerrado */}
+                {/* 🔹 botón colapsado */}
                 {open !== idx && (
                   <button
                     className="service-interest-button collapsed"
-                    onClick={() => handleInterestClick(block)}
+                    onClick={() => handleInterestClick(service)}
                   >
                     {t("services.interestButton")}
                   </button>
                 )}
               </div>
-            );
-          })}
+            ))}
         </div>
       </section>
 
-      {/* 🔹 MODAL INTERÉS */}
+      {/* 🔹 MODAL */}
       <InterestModal
         visible={interestOpen}
         onClose={handleCloseInterest}

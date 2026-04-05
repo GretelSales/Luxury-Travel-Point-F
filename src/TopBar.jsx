@@ -160,7 +160,7 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         </a>
         <div className="social-icons">
           <a
-            href="https://www.facebook.com/chare/1EjE5oAU7L/?mibextid=wwXlfr"
+            href="https://www.facebook.com/share/1EjE5oAU7L/?mibextid=wwXlfr"
             target="_blank"
             rel="noopener noreferrer"
             className="social-icon"
