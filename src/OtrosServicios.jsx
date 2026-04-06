@@ -135,6 +135,12 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                 key={block.id}
                 className={`service-card ${open === idx ? "open" : ""}`}
               >
+                {/* 🖼️ IMAGEN */}
+                {block.image && (
+                  <div className="service-image">
+                    <img src={block.image} alt={block.title} />
+                  </div>
+                )}
                 {/* HEADER */}
                 <div
                   className="service-card-header"
