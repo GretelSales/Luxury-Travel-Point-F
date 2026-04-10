@@ -20,22 +20,19 @@ import { useTranslation } from "react-i18next";
 
 export default function TopBar({ user, logout, handleAuthSuccess }) {
   const { t, i18n } = useTranslation();
-  const [langOpen, setLangOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [authOpen, setAuthOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const [activeMenu, setActiveMenu] = useState(null);
+
   const topbarRef = useRef(null);
+  const [authOpen, setAuthOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
   const closeAllMenus = () => {
-    setLangOpen(false);
-    setDropdownOpen(false);
-    setMobileMenuOpen(false);
+    setActiveMenu(null);
   };
 
-  const handleIconClick = () => {
-    closeAllMenus();
-    setDropdownOpen((prev) => !prev);
+  const toggleMenu = (menu) => {
+    setActiveMenu((prev) => (prev === menu ? null : menu));
   };
 
   const changeLanguage = (lang) => i18n.changeLanguage(lang);
@@ -90,10 +87,10 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         <div className="ltp-icon" title={t("lang.title")}>
           <FontAwesomeIcon
             icon={faGlobe}
-            onClick={() => setLangOpen((prev) => !prev)}
+            onClick={() => toggleMenu("lang")}
             style={{ cursor: "pointer" }}
           />
-          {langOpen && (
+          {activeMenu === "lang" && (
             <div className="user-dropdown language-menu">
               <button
                 onClick={() => {
@@ -118,13 +115,13 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         </div>
 
         {/* User auth */}
-        <div className="user-icon" onClick={handleIconClick}>
+        <div className="user-icon" onClick={() => toggleMenu("user")}>
           <div className="ltp-user">
             <FontAwesomeIcon icon={faUser} />
           </div>
         </div>
 
-        {dropdownOpen && (
+        {activeMenu === "user" && (
           <div className={`user-dropdown ${darkMode ? "dark-dropdown" : ""}`}>
             <div className="user-dropdown-header">
               {user ? user.full_name || user.email : t("auth.guest")}
@@ -189,12 +186,9 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         </div>
 
         {/* Mobile menu */}
-        <div
-          className="mobile-menu"
-          onClick={() => setMobileMenuOpen((prev) => !prev)}
-        >
+        <div className="mobile-menu" onClick={() => toggleMenu("mobile")}>
           <FontAwesomeIcon icon={faBars} size="lg" />
-          {mobileMenuOpen && (
+          {activeMenu === "mobile" && (
             <div className="mobile-dropdown">
               <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
                 {t("nav.contact")}
