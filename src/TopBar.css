@@ -36,6 +36,19 @@
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
   border: 1px solid rgba(11,37,69,0.08);
   z-index: 1000;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  transition: 
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  pointer-events: none;
+}
+
+.dropdown-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .mobile-dropdown a {
@@ -139,6 +152,12 @@
 
 .language-selector {
   position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.language-selector:hover .language-menu {
+  display: flex;
 }
 
 .ltp-icon:hover {
@@ -164,6 +183,9 @@
   box-shadow: 0 12px 28px rgba(0,0,0,0.16);
   border: 1px solid rgba(11,37,69,0.08);
   z-index: 1000;
+
+  min-width: 120px;
+  white-space: nowrap;
 }
 
 .language-menu button {
@@ -280,4 +302,31 @@
   transform: scale(1.1); /* crece como los demás */
   color: #1ebe5d;        /* sigue verde al hover */
   text-shadow: 0 0 8px #1ebe5d; /* opcional: brillo sutil como los otros */
+}
+
+
+/* estado oculto */
+.language-menu,
+.user-dropdown,
+.mobile-dropdown {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  transition: 
+    opacity 0.18s ease,
+    transform 0.18s ease;
+  pointer-events: none;
+
+  /* 🔥 CLAVE */
+  visibility: hidden;
+}
+
+/* estado visible */
+.dropdown-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+
+  /* 🔥 CLAVE */
+  visibility: visible;
 }

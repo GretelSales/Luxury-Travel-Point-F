@@ -31,6 +31,8 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
     setActiveMenu(null);
   };
 
+  const closeTimeout = useRef(null);
+
   const toggleMenu = (menu) => {
     setActiveMenu((prev) => (prev === menu ? null : menu));
   };
@@ -84,34 +86,46 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         </Link>
 
         {/* Language selector */}
-        <div className="ltp-icon" title={t("lang.title")}>
-          <FontAwesomeIcon
-            icon={faGlobe}
-            onClick={() => toggleMenu("lang")}
-            style={{ cursor: "pointer" }}
-          />
-          {activeMenu === "lang" && (
-            <div className="user-dropdown language-menu">
-              <button
-                onClick={() => {
-                  changeLanguage("es");
-                  setLangOpen(false);
-                }}
-                className={i18n.language === "es" ? "active" : ""}
-              >
-                {t("lang.es")}
-              </button>
-              <button
-                onClick={() => {
-                  changeLanguage("en");
-                  setLangOpen(false);
-                }}
-                className={i18n.language === "en" ? "active" : ""}
-              >
-                {t("lang.en")}
-              </button>
-            </div>
-          )}
+        <div
+          className="language-selector"
+          onMouseEnter={() => {
+            clearTimeout(closeTimeout.current);
+            setActiveMenu("lang");
+          }}
+          onMouseLeave={() => {
+            closeTimeout.current = setTimeout(() => {
+              setActiveMenu(null);
+            }, 150);
+          }}
+        >
+          <div className="ltp-icon" title={t("lang.title")}>
+            <FontAwesomeIcon icon={faGlobe} />
+          </div>
+
+          <div
+            className={`language-menu ${
+              activeMenu === "lang" ? "dropdown-open" : ""
+            }`}
+          >
+            <button
+              onClick={() => {
+                changeLanguage("es");
+                setActiveMenu(null);
+              }}
+              className={i18n.language === "es" ? "active" : ""}
+            >
+              {t("lang.es")}
+            </button>
+            <button
+              onClick={() => {
+                changeLanguage("en");
+                setActiveMenu(null);
+              }}
+              className={i18n.language === "en" ? "active" : ""}
+            >
+              {t("lang.en")}
+            </button>
+          </div>
         </div>
 
         {/* User auth */}
@@ -121,29 +135,31 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
           </div>
         </div>
 
-        {activeMenu === "user" && (
-          <div className={`user-dropdown ${darkMode ? "dark-dropdown" : ""}`}>
-            <div className="user-dropdown-header">
-              {user ? user.full_name || user.email : t("auth.guest")}
-            </div>
-            {!user && (
-              <div
-                className="user-dropdown-item"
-                onClick={() => {
-                  setAuthOpen(true);
-                  setDropdownOpen(false);
-                }}
-              >
-                {t("auth.loginTitle")}
-              </div>
-            )}
-            {user && (
-              <div className="user-dropdown-item" onClick={logout}>
-                {t("auth.logout")}
-              </div>
-            )}
+        <div
+          className={`user-dropdown ${
+            activeMenu === "user" ? "dropdown-open" : ""
+          } ${darkMode ? "dark-dropdown" : ""}`}
+        >
+          <div className="user-dropdown-header">
+            {user ? user.full_name || user.email : t("auth.guest")}
           </div>
-        )}
+          {!user && (
+            <div
+              className="user-dropdown-item"
+              onClick={() => {
+                setAuthOpen(true);
+                setActiveMenu(null);
+              }}
+            >
+              {t("auth.loginTitle")}
+            </div>
+          )}
+          {user && (
+            <div className="user-dropdown-item" onClick={logout}>
+              {t("auth.logout")}
+            </div>
+          )}
+        </div>
 
         {/* Social icons desktop */}
         <a
@@ -155,6 +171,7 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         >
           <FontAwesomeIcon icon={faWhatsapp} />
         </a>
+
         <div className="social-icons">
           <a
             href="https://www.facebook.com/share/1EjE5oAU7L/?mibextid=wwXlfr"
@@ -188,19 +205,19 @@ export default function TopBar({ user, logout, handleAuthSuccess }) {
         {/* Mobile menu */}
         <div className="mobile-menu" onClick={() => toggleMenu("mobile")}>
           <FontAwesomeIcon icon={faBars} size="lg" />
-          {activeMenu === "mobile" && (
-            <div className="mobile-dropdown">
-              <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
-                {t("nav.contact")}
-              </Link>
-              <Link
-                to="/other-services"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {t("nav.services")}
-              </Link>
-            </div>
-          )}
+
+          <div
+            className={`mobile-dropdown ${
+              activeMenu === "mobile" ? "dropdown-open" : ""
+            }`}
+          >
+            <Link to="/contact" onClick={() => setActiveMenu(null)}>
+              {t("nav.contact")}
+            </Link>
+            <Link to="/other-services" onClick={() => setActiveMenu(null)}>
+              {t("nav.services")}
+            </Link>
+          </div>
         </div>
 
         <AuthModal
