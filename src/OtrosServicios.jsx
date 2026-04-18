@@ -162,6 +162,16 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                 {/* DETAILS */}
                 {open === idx && block.details && (
                   <div className="service-details">
+                    {(block.title?.toLowerCase().includes("auto") ||
+                      block.title?.toLowerCase().includes("car")) && (
+                      <button
+                        className="service-interest-button"
+                        style={{ marginBottom: "10px" }}
+                        onClick={() => navigate("/cars")}
+                      >
+                        {t("services.viewOffers")}
+                      </button>
+                    )}
                     <ul>
                       {block.details.map((item, i) => (
                         <li key={i}>{item}</li>
