@@ -141,6 +141,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                     <img src={block.image} alt={block.title} />
                   </div>
                 )}
+
                 {/* HEADER */}
                 <div
                   className="service-card-header"
@@ -159,19 +160,21 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
                   <p className="service-summary">{block.summary}</p>
                 )}
 
+                {/* 🚗 BOTÓN VER OFERTAS (SIEMPRE visible en renta de autos) */}
+                {(block.title?.toLowerCase().includes("auto") ||
+                  block.title?.toLowerCase().includes("car")) && (
+                  <button
+                    className="service-interest-button"
+                    style={{ marginBottom: "8px" }}
+                    onClick={() => navigate("/cars")}
+                  >
+                    {t("services.viewOffers")}
+                  </button>
+                )}
+
                 {/* DETAILS */}
                 {open === idx && block.details && (
                   <div className="service-details">
-                    {(block.title?.toLowerCase().includes("auto") ||
-                      block.title?.toLowerCase().includes("car")) && (
-                      <button
-                        className="service-interest-button"
-                        style={{ marginBottom: "10px" }}
-                        onClick={() => navigate("/cars")}
-                      >
-                        {t("services.viewOffers")}
-                      </button>
-                    )}
                     <ul>
                       {block.details.map((item, i) => (
                         <li key={i}>{item}</li>
