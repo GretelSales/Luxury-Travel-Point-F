@@ -51,7 +51,7 @@ export default function App() {
     const fetchTestimonials = async () => {
       try {
         const res = await axios.get(
-          "https://luxury-travel-point-frontend.onrender.com/api/testimonials",
+          "https://Luxury-Travel-Point-B.onrender.com/api/testimonials",
         );
         setTestimonials(res.data);
       } catch (err) {
@@ -67,7 +67,7 @@ export default function App() {
     const fetchCountries = async () => {
       try {
         const res = await axios.get(
-          "https://luxury-travel-point-frontend.onrender.com/api/cities/countries",
+          "https://Luxury-Travel-Point-B.onrender.com/api/cities/countries",
         );
 
         // Si existe traducción, úsala; sino, muestra tal cual
@@ -204,7 +204,7 @@ export default function App() {
       try {
         setIsLoading(true); // 🔹 Inicio carga
         const res = await axios.get(
-          "https://luxury-travel-point-frontend.onrender.com/api/circuits/full",
+          "https://Luxury-Travel-Point-B.onrender.com/api/circuits/full",
           { params: { langCode: i18n.language } },
         );
         setCircuits(res.data);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CircuitsGrid from "./CircuitsGrid"; // ajustar ruta si es necesaria
 
-const API_URL = "https://luxury-travel-point-frontend.onrender.com/api/circuits/full";
+const API_URL = "https://Luxury-Travel-Point-B.onrender.com/api/circuits/full";
 
 export default function CircuitsPage() {
   const [allCircuits, setAllCircuits] = useState([]); // todos los circuitos sin filtrar
@@ -27,7 +27,7 @@ export default function CircuitsPage() {
         // Debug: volcar la respuesta cruda (pega primeras líneas en la conversación si sigue fallando)
         console.log(
           "DEBUG: respuesta raw / tipo:",
-          Array.isArray(data) ? "array" : "object"
+          Array.isArray(data) ? "array" : "object",
         );
         if (Array.isArray(data)) {
           console.log("DEBUG: primeros 2 items (array):", data.slice(0, 2));
@@ -36,7 +36,7 @@ export default function CircuitsPage() {
           if (Array.isArray(data.circuits))
             console.log(
               "DEBUG: primeros 2 circuits:",
-              data.circuits.slice(0, 2)
+              data.circuits.slice(0, 2),
             );
           if (Array.isArray(data.countries))
             console.log("DEBUG: countries from backend:", data.countries);
@@ -63,7 +63,7 @@ export default function CircuitsPage() {
           setCountries(backendCountries);
           console.log(
             "DEBUG: usando countries provistos por backend:",
-            backendCountries
+            backendCountries,
           );
         } else {
           // 2) si no, extraemos de daysData de cada circuito
@@ -86,7 +86,7 @@ export default function CircuitsPage() {
           setCountries(derived);
           console.log(
             "DEBUG: countries derivados desde daysData/c.countries:",
-            derived
+            derived,
           );
         }
 
@@ -127,7 +127,7 @@ export default function CircuitsPage() {
 
     console.log(
       `DEBUG: filtro aplicado para "${selectedCountry}", resultados:`,
-      filtered.length
+      filtered.length,
     );
     setCircuits(filtered);
   };

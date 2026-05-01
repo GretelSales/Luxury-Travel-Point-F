@@ -17,7 +17,7 @@ export default function Contact() {
     const fetchData = async () => {
       try {
         const res = await fetch(
-          "https://luxury-travel-point-frontend.onrender.com/api/company",
+          "https://Luxury-Travel-Point-B.onrender.com/api/company",
         );
         const json = await res.json();
         setData(json);

@@ -26,7 +26,7 @@ export default function AuthModal({
     setError("");
     try {
       const res = await axios.post(
-        "https://luxury-travel-point-frontend.onrender.com/api/auth/login",
+        "https://Luxury-Travel-Point-B.onrender.com/api/auth/login",
         {
           email,
           password,

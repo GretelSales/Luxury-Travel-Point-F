@@ -65,7 +65,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
         const lang = i18n.language.startsWith("es") ? "es" : "en";
 
         const res = await axios.get(
-          `https://luxury-travel-point-frontend.onrender.com/api/services-content?lang=${lang}`,
+          `https://Luxury-Travel-Point-B.onrender.com/api/services-content?lang=${lang}`,
         );
 
         setServices(res.data);
@@ -88,7 +88,7 @@ export default function OtrosServicios({ user, logout, handleAuthSuccess }) {
         const lang = i18n.language.startsWith("es") ? "es" : "en";
 
         const res = await axios.get(
-          `https://luxury-travel-point-frontend.onrender.com/api/banner?lang=${lang}`,
+          `https://Luxury-Travel-Point-B.onrender.com/api/banner?lang=${lang}`,
         );
 
         setPromoBanner(res.data);

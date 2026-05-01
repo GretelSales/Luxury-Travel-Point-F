@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 import InterestModal from "./InterestModal";
 import "./CircuitDetail.css";
 
-const API_URL =
-  "https://luxury-travel-point-frontend.onrender.com/api/circuits";
+const API_URL = "https://Luxury-Travel-Point-B.onrender.com/api/circuits";
 
 export default function CircuitDetailPage() {
   const { id } = useParams();
