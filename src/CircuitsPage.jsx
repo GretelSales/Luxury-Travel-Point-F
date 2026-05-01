@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CircuitsGrid from "./CircuitsGrid"; // ajustar ruta si es necesaria
 
-const API_URL = "https://Luxury-Travel-Point-B.onrender.com/api/circuits/full";
+const API_URL =
+  "https://luxury-travel-point-b-oiyb.onrender.com/api/circuits/full";
 
 export default function CircuitsPage() {
   const [allCircuits, setAllCircuits] = useState([]); // todos los circuitos sin filtrar

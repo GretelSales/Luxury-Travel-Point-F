@@ -16,7 +16,7 @@ export function useCars() {
         setError(null);
 
         const res = await fetch(
-          "https://Luxury-Travel-Point-B.onrender.com/api/cars",
+          "https://luxury-travel-point-b-oiyb.onrender.com/api/cars",
         );
 
         if (!res.ok) {
