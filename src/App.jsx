@@ -397,9 +397,6 @@ export default function App() {
         </section>
       </div>
       {showAuth && <AuthModal onClose={() => setShowAuth(false)} />}
-      <footer>
-        <SocialIcons />
-      </footer>
       <ToastContainer
         position="top-right"
         autoClose={4000}
